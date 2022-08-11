@@ -1,17 +1,48 @@
 <!DOCTYPE html>
-<html lang="">
+<html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
+    <link rel="apple-touch-icon" href="<%= BASE_URL %>img/icon-maskable.png" />
+    <meta name="apple-mobile-web-app-title" content="<%= htmlWebpackPlugin.options.title %>" />
     <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
   <body>
     <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+      <strong>很抱歉，<%= htmlWebpackPlugin.options.title %>需要 JavaScript 才能正常工作。请在浏览器的设置中<strong>启用 JavaScript</strong> 以继续。</strong>
     </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->
+    <script>
+      // 禁止 iOS 缩放
+      window.onload = function () {
+        document.addEventListener('touchstart', function (event) {
+          if (event.touches.length > 1) {
+            event.preventDefault()
+          }
+        })
+
+        var lastTouchEnd = 0
+
+        document.addEventListener(
+          'touchend',
+          function (event) {
+            var now = new Date().getTime()
+            if (now - lastTouchEnd <= 300) {
+              event.preventDefault()
+            }
+            lastTouchEnd = now
+          },
+          false
+        )
+
+        document.addEventListener('gesturestart', function (event) {
+          event.preventDefault()
+        })
+      }
+    </script>
   </body>
 </html>

@@ -1,0 +1,26 @@
+{
+  "metachars": [
+    ["_", "\\", ".", "\\R", "\\a", "[\\b]", "\\c_", "\\d", "\\D", "\\e", "\\f", "\\h", "\\H", "\\n", "\\r", "\\s", "\\S", "\\t", "\\v", "\\V", "\\w", "\\W", "\\0", "\\x_", "\\u_", "\\u{_}", "\\p{_}", "\\P{_}", "\\N{}", "\\X"],
+    ["^", "\\A", "$", "\\Z", "\\z", "(?=_)", "(?!_)", "(?<=_)", "(?<!_)", "\\b", "\\b{g}", "\\B", "\\G"],
+    ["(_)", "(?:_)", "(?>_)", "(?<_>_)", "(?P<_>_)", "|", "&&", "[_]", "[^_]", "\\_", "\\k<_>", "(?P=_)", "(?(_)_|_)", "(?#_)", "\\Q", "\\E"],
+    ["*", "+", "?", "{_}", "{_,_}"]
+  ],
+  "metacharsLang": [
+    [[], [], [], ["java"], ["python", "java"], [], [], [], [], ["python", "java"], [], ["java"], ["java"], [], [], [], [], [], [], ["java"], [], [], [], [], [], [], ["javascript", "java"], ["javascript", "java"], ["python", "java"], ["java"]],
+    [[], ["python", "java"], [], ["python", "java"], ["java"], [], [], [], [], [], ["java"], [], ["java"]],
+    [[], [], ["java"], ["javascript", "java"], ["python"], [], ["java"], [], [], [], ["javascript", "java"], ["python"], ["python"], ["python"], ["java"], ["java"]],
+    [[], [], [], [], []]
+  ],
+  "inlineFlags": {
+    "aLu": ["", "a", "L", "u"],
+    "idmsuxU": ["i", "d", "m", "s", "u", "x", "U"]
+  },
+  "flags": {
+    "javascript": ["d", "g", "i", "m", "s", "u", "y", "", "", "", "", "", "", "", "", "", ""],
+    "python": ["", "", "re.IGNORECASE", "re.MULTILINE", "re.DOTALL", "", "", "re.ASCII", "re.LOCALE", "re.UNICODE", "re.DEBUG", "re.VERBOSE", "", "", "", "", ""],
+    "py": ["", "", "re.I", "re.M", "re.S", "", "", "re.A", "re.L", "re.U", "re.DEBUG", "re.X", "", "", "", "", ""],
+    "java": ["", "", "Pattern.CASE_INSENSITIVE", "Pattern.MULTILINE", "Pattern.DOTALL", "", "", "", "", "", "", "Pattern.COMMENTS", "Pattern.CANON_EQ", "Pattern.UNICODE_CASE", "Pattern.UNICODE_CHARACTER_CLASS", "Pattern.LITERAL", "Pattern.UNIX_LINES"],
+    "inline": ["", "", "i", "m", "s", "", "", "a", "L", "u", "", "x", "", "u", "U", "", "d"]
+  },
+  "copyTypesLang": ["javascript", "null", "inline", "python", "python", "java"]
+}

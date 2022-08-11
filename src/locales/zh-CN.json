@@ -1,0 +1,78 @@
+{
+  "app": {
+    "name": "神必工具箱"
+  },
+  "route": {
+    "home": "首页",
+    "editor": {
+      "_": "编辑器",
+      "regexp": "正则编辑器"
+    }
+  },
+  "_": {
+    "confirm": "确认",
+    "here": "此处",
+    "hint": "提示",
+    "settings": "设置",
+    "insert": "插入"
+  },
+  "settings": {
+    "locale": "语言",
+    "theme": "主题",
+    "themes": {
+      "light": "浅色",
+      "dark": "深色",
+      "system": "跟随系统"
+    },
+    "palette": "配色",
+    "clearLocalStorage": "清空本地储存",
+    "version": "最近更新时间：{0}"
+  },
+  "editor": {
+    "cursor": "移动光标",
+    "placeholder": "选中最近的占位符",
+    "selection": "选择文字范围"
+  },
+  "clipboard": {
+    "tooltip": "复制到剪切板",
+    "success": "复制成功。",
+    "error": "复制失败，请手动复制。"
+  },
+  "regexp": {
+    "name": "正则表达式",
+    "metachar": "元字符",
+    "metachars": [
+      ["占位符", "转义符", "非行终止符", "Unicode 行终止符", "", "退格符", "控制符", "数字", "", "", "", "横向空白符", "", "", "", "空白符", "", "", "纵向空白符", "", "基础拉丁字符", "", "NULL", "2 位 HEX", "UTF-16", "Unicode 码", "Unicode 属性", "", "Unicode 字符名", "Unicode 扩展字符集"],
+      ["开头", "", "结尾", "", "", "先行断言", "", "后行断言", "", "单词边界", "Unicode 扩展", "", "上次搜索结尾"],
+      ["捕获组", "非捕获组", "独立非捕获组", "具名捕获组", "", "析取", "合取", "字符类", "", "引用", "具名引用", "", "条件", "注释", "引用开始", "引用结束"],
+      ["零或多次", "一或多次", "零或一次", "出现次数", ""]
+    ],
+    "cates": ["字符类", "断言", "分组", "量词"],
+    "inlineFlag": {
+      "name": "内联标志",
+      "aLu": ["无", "@:regexp.flags.7", "@:regexp.flags.8", "@:regexp.flags.9"],
+      "idmsuxU": ["@:regexp.flags.2", "@:regexp.flags.16", "@:regexp.flags.3", "@:regexp.flags.4", "@:regexp.flags.13", "@:regexp.flags.11", "@:regexp.flags.14"]
+    },
+    "inlineFlagGroup": "作为非捕获组插入",
+    "metacharTips": "显示元字符含义",
+    "copyType": "复制内容",
+    "copyTypeHint": "编辑器中「@:(clipboard.tooltip)」按钮复制的实际内容。请确认您只选择了和右侧图标与目标语言相匹配的标志。",
+    "copyTypes": ["JavaScript RegExp 字面量", "输入框内原文", "Python / Java 字符串字面量", "Python re.compile()", "Python re.compile() 简写", "Java Pattern.compile()"],
+    "flag": "标志",
+    "flags": ["生成子串索引", "全局搜索", "大小写不敏感", "多行搜索", "[.] 可匹配换行符", "Unicode 码", "粘性搜索", "仅匹配 ASCII", "依赖语言区域设置", "匹配 Unicode", "显示调试信息", "冗余模式", "Unicode 规范等价", "Unicode 大小写折叠", "Unicode 字符类", "禁用元字符", "Unix 行模式"],
+    "flagTips": ["ECMAScript 2022", "", "", "[^] [$] 将匹配行的开头和结尾", "ECMAScript 2018", "启用 [\\u]", "", "", "", "[Python] 已默认启用，保留以向前兼容", "", "允许空格与注释", "", "", "[Java] 此标志蕴含 [@:(regexp.flags.13)]", "", "ECMAScript 2018；启用 [\\p{}] [\\P{}]", "", "仅 \\n 被认为是行终结符"],
+    "tutorials": [
+      ["MDN Web Docs: 正则表达式", "https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_Expressions"],
+      ["Python 3 标准库: re", "https://docs.python.org/zh-cn/3/library/re.html"],
+      ["Java SE 18 & JDK 18: Pattern", "https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/regex/Pattern.html"]
+    ]
+  },
+  "pwa": {
+    "cached": "资源缓存完成，可供离线使用。",
+    "updatefound": "检查到更新，正在下载新内容…",
+    "updated": "更新成功，点击刷新页面缓存。"
+  },
+  "tips": {
+    "lightandnight": "如果您想访问「光夜小工具」，请点击 {0} 进入。"
+  }
+}

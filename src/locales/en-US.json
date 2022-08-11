@@ -1,0 +1,78 @@
+{
+  "app": {
+    "name": "Mysbery Toolbox"
+  },
+  "route": {
+    "home": "Home",
+    "editor": {
+      "_": "Editor",
+      "regexp": "RegExp Editor"
+    }
+  },
+  "_": {
+    "confirm": "OK",
+    "here": "here",
+    "hint": "Hint",
+    "settings": "Settings",
+    "insert": "Insert"
+  },
+  "settings": {
+    "locale": "Language",
+    "theme": "Theme",
+    "themes": {
+      "light": "Light",
+      "dark": "Dark",
+      "system": "System"
+    },
+    "palette": "Palette",
+    "clearLocalStorage": "Clean localStorage",
+    "version": "Last updated: {0}"
+  },
+  "editor": {
+    "cursor": "Move cursor",
+    "placeholder": "Select the nearest placeholder",
+    "selection": "Select a range"
+  },
+  "clipboard": {
+    "tooltip": "Copy to clipboard",
+    "success": "Copied successfully.",
+    "error": "Failed to copy. Please copy manually."
+  },
+  "regexp": {
+    "name": "Regular Expression",
+    "metachar": "Metachars",
+    "metachars": [
+      ["Placeholder", "Escape char", "Non-line terminator", "Unicode line terminator", "", "Backspace", "Control char", "Digits", "", "", "", "Horizontal whitespace", "", "", "", "Whitespace", "", "", "Vertical whitespace", "", "Basic Latin", "", "NULL", "2-digits HEX", "UTF-16", "Unicode code", "Unicode property", "", "Unicode char name", "Unicode extended grapheme cluster"],
+      ["Beginning", "", "End", "", "", "Lookahead assertion", "", "Lookbehind assertion", "", "Word boundary", "Unicode extended", "", "End of previous match"],
+      ["Capture group", "Non-capture group", "Independent non-capture group", "Named capture group", "", "Disjunction", "Conjunction", "Char class", "", "Back reference", "Named back reference", "", "Conditional", "Comment", "Quote starts", "Quote ends"],
+      ["0+ times", "1+ times", "0/1 times", "Occurrences", ""]
+    ],
+    "cates": ["Char Classes", "Assertions", "Groups", "Quantifiers"],
+    "inlineFlag": {
+      "name": "Inline Flags",
+      "aLu": ["None", "@:regexp.flags.7", "@:regexp.flags.8", "@:regexp.flags.9"],
+      "idmsuxU": ["@:regexp.flags.2", "@:regexp.flags.16", "@:regexp.flags.3", "@:regexp.flags.4", "@:regexp.flags.13", "@:regexp.flags.11", "@:regexp.flags.14"]
+    },
+    "inlineFlagGroup": "As Non-capture Group",
+    "metacharTips": "Show the meaning of metachars",
+    "copyType": "Format of Copied Text",
+    "copyTypeHint": "Format of copied text of the \"@:(clipboard.tooltip)\" button. Please confirm that you have selected only the flags that matches both the icon on the right and the target language.",
+    "copyTypes": ["JavaScript RegExp literal", "Original text in the textfield", "Python / Java String literal", "Python re.compile()", "Python re.compile() (simplified)", "Java Pattern.compile()"],
+    "flag": "Flags",
+    "flags": ["Generate indices for matches", "Global search", "Case-insensitive search", "Multi-line search", "[.] matches all", "Unicode code points", "Sticky search", "ASCII-only matching", "Dependent on the current locale", "Unicode matching", "Display debug information", "Verbose mode", "Unicode canonical equivalence", "Unicode-aware case folding", "Unicode predefined char classes", "Literal parsing", "Unix lines mode"],
+    "flagTips": ["ECMAScript 2022", "", "", "[^] [$] will match the beginning and end of lines", "ECMAScript 2018", "Enables [\\u]", "", "", "", "Default behavior of [Python] and is reserved just for backward compatibility", "", "Allows spaces and comments", "", "", "Implies [@:(regexp.flags.13)] in [Java]", "", "ECMAScript 2018; enables [\\p{}] [\\P{}]", "", "Only \\n is recognized as line terminators"],
+    "tutorials": [
+      ["MDN Web Docs: Regular Expressions", "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions"],
+      ["Python 3 Standard Library: re", "https://docs.python.org/3/library/re.html"],
+      ["Java SE 18 & JDK 18: Pattern", "https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/regex/Pattern.html"]
+    ]
+  },
+  "pwa": {
+    "cached": "Content has been cached for offline use.",
+    "updatefound": "New content is downloading...",
+    "updated": "New content is available; click to refresh."
+  },
+  "tips": {
+    "lightandnight": "Please visit {0} if you want to use \"Light and Night Toolbox\"."
+  }
+}
