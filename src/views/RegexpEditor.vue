@@ -21,6 +21,7 @@
             {{ $t('regexp.metachar') }}
           </v-btn>
         </template>
+
         <v-card class="pa-4">
           <v-tabs class="ml-0" v-model="metacharCate" center-active show-arrows>
             <v-tab v-for="(cate, i) in metachars" :key="i">
@@ -43,7 +44,7 @@
                     v-if="metacharTips"
                     v-text="$t(`regexp.metachars[${i}][${j}]`)"
                   />
-                  <pre class="ml-1 mr-1"><code v-text="metachar" /></pre>
+                  <pre class="mx-1"><code v-text="metachar" /></pre>
                   <v-icon
                     v-for="lang in metacharsLang[i][j]"
                     :key="lang"

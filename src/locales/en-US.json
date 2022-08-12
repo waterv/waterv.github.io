@@ -25,7 +25,7 @@
       "system": "System"
     },
     "palette": "Palette",
-    "clearLocalStorage": "Clean localStorage",
+    "clearLocalStorage": "Clear localStorage",
     "version": "Last updated: {0}"
   },
   "editor": {
