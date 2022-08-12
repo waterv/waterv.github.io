@@ -15,6 +15,11 @@ const routes = [
     name: 'RegexpEditor',
     component: () => import('../views/RegexpEditor.vue'),
   },
+  {
+    path: '/editor/ipa',
+    name: 'IpaEditor',
+    component: () => import('../views/IpaEditor.vue'),
+  },
 ]
 
 const router = new VueRouter({

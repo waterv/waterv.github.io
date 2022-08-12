@@ -79,6 +79,52 @@
             ])
           "
         />
+
+        <v-menu offset-y>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn icon v-bind="attrs" v-on="on">
+              <v-icon v-text="'mdi-translate'" />
+            </v-btn>
+          </template>
+          <v-list nav dense>
+            <v-list-item
+              v-for="lang in locales"
+              :key="lang.text"
+              :input-value="locale == lang.value"
+              color="primary"
+              @click="locale = lang.value"
+            >
+              <v-list-item-title v-text="lang.text" />
+            </v-list-item>
+          </v-list>
+        </v-menu>
+
+        <v-menu offset-y>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn icon v-bind="attrs" v-on="on">
+              <v-icon
+                v-text="
+                  $root.selectTheme == 'system'
+                    ? 'mdi-brightness-auto'
+                    : $root.selectTheme == 'light'
+                    ? 'mdi-white-balance-sunny'
+                    : 'mdi-weather-night'
+                "
+              />
+            </v-btn>
+          </template>
+          <v-list nav dense>
+            <v-list-item
+              v-for="theme in themes"
+              :key="theme.text"
+              :input-value="$root.selectTheme == theme.value"
+              color="primary"
+              @click="$root.selectTheme = theme.value"
+            >
+              <v-list-item-title v-text="theme.text" />
+            </v-list-item>
+          </v-list>
+        </v-menu>
       </v-list>
     </v-navigation-drawer>
   </v-app>
@@ -92,17 +138,42 @@ export default {
     dayjs: require('dayjs'),
     version: require('@/data/time.json'),
     drawer: false,
-    items: [
-      { icon: 'mdi-home', name: 'home', to: '/' },
-      { name: 'editor', children: [{ icon: 'mdi-regex', name: 'regexp' }] },
-    ],
     slogan,
     sloganNo: 0,
+    items: [
+      { icon: 'mdi-home', name: 'home', to: '/' },
+      {
+        name: 'editor',
+        children: [
+          { icon: 'mdi-regex', name: 'regexp' },
+          { icon: 'mdi-slash-forward-box', name: 'ipa' },
+        ],
+      },
+    ],
+    locales: [
+      { text: '简体中文', value: 'zh-CN' },
+      { text: 'English', value: 'en-US' },
+    ],
   }),
   computed: {
     title() {
       if (this.$route.fullPath == '/') return this.$t('app.name')
       return this.$t('route' + this.$route.fullPath.replaceAll('/', '.'))
+    },
+    locale: {
+      get() {
+        return this.$i18n.locale
+      },
+      set(v) {
+        this.$i18n.locale = v
+        localStorage.setItem('locale', v)
+      },
+    },
+    themes() {
+      return ['system', 'light', 'dark'].map(value => ({
+        text: this.$t(`settings.themes.${value}`),
+        value,
+      }))
     },
   },
   mounted() {

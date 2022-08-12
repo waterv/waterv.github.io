@@ -9,28 +9,20 @@
       allow-select
       allow-copy
       :copy="copyValue"
-    >
-      <v-menu
-        v-model="metacharMenu"
-        :close-on-content-click="false"
-        max-width="90%"
-        offset-y
-      >
-        <template #activator="{ on, attrs }">
-          <v-btn class="mr-2" color="primary" dark v-bind="attrs" v-on="on">
-            {{ $t('regexp.metachar') }}
-          </v-btn>
-        </template>
+      @focus="focused = true"
+    />
 
-        <v-card class="pa-4">
-          <v-tabs class="ml-0" v-model="metacharCate" center-active show-arrows>
+    <v-expand-transition>
+      <v-card v-show="focused" class="elevation-2">
+        <v-card-text>
+          <v-tabs v-model="tab" center-active show-arrows>
             <v-tab v-for="(cate, i) in metachars" :key="i">
               {{ $t(`regexp.cates[${i}]`) }}
             </v-tab>
             <v-tab v-text="$t('regexp.inlineFlag.name')" />
           </v-tabs>
 
-          <v-tabs-items v-model="metacharCate">
+          <v-tabs-items v-model="tab">
             <!-- Metachars -->
             <v-tab-item v-for="(cate, i) in metachars" :key="i">
               <v-chip-group column>
@@ -38,13 +30,15 @@
                   v-for="(metachar, j) in cate"
                   :key="metachar"
                   label
+                  outlined
                   @click="append(metachar)"
                 >
                   <span
-                    v-if="metacharTips"
+                    v-show="tips && $t(`regexp.metachars[${i}][${j}]`)"
+                    class="mr-1"
                     v-text="$t(`regexp.metachars[${i}][${j}]`)"
                   />
-                  <pre class="mx-1"><code v-text="metachar" /></pre>
+                  <pre><code v-text="metachar" /></pre>
                   <v-icon
                     v-for="lang in metacharsLang[i][j]"
                     :key="lang"
@@ -91,7 +85,7 @@
             </v-tab-item>
           </v-tabs-items>
 
-          <v-card-actions v-if="metacharCate == metachars.length">
+          <v-card-actions v-if="tab == metachars.length">
             <v-btn color="primary" text @click="appendInlineFlag">
               {{ $t('_.insert') }}
             </v-btn>
@@ -99,16 +93,16 @@
               {{ $t('regexp.inlineFlagGroup') }}
             </v-btn>
           </v-card-actions>
-        </v-card>
-      </v-menu>
-    </v-editor>
+        </v-card-text>
+      </v-card>
+    </v-expand-transition>
 
     <v-expansion-panels v-model="panel" class="mt-2">
       <!-- Settings -->
       <v-expansion-panel>
         <v-expansion-panel-header v-text="$t('_.settings')" />
         <v-expansion-panel-content>
-          <v-switch v-model="metacharTips" :label="$t('regexp.metacharTips')" />
+          <v-switch v-model="tips" :label="$t('regexp.tips')" />
           <v-select
             v-bind="selector"
             v-model="copyType"
@@ -168,7 +162,7 @@
     <v-divider class="mt-4 mb-4" />
 
     <ul>
-      <li v-for="i in range(3)" :key="i">
+      <li v-for="i in $range(3)" :key="i">
         <v-link
           :href="$t(`regexp.tutorials[${i}][1]`)"
           target="_blank"
@@ -196,23 +190,20 @@ export default {
     return {
       ...regexp,
       value: '',
+      focused: false,
 
-      metacharMenu: false,
-      metacharTips: true,
-      metacharCate: null,
+      tab: null,
+      panel: 0,
+
+      tips: true,
+      copyType: 0,
 
       inlineFlagAlu: '',
       inlineFlagIdmsuxu: [],
       inlineFlagIdmsuxuNeg: [],
       flagsSelected: [],
-      copyType: 0,
-      copyTypes: this.range(6).map(value => ({
-        text: this.$t(`regexp.copyTypes[${value}]`),
-        value,
-      })),
-      langs: ['javascript', 'python', 'java', 'inline'],
-      panel: 0,
 
+      langs: ['javascript', 'python', 'java', 'inline'],
       selector: {
         class: 'mt-4',
         outlined: true,
@@ -232,6 +223,12 @@ export default {
       return regexp.inlineFlags.idmsuxU.map((flag, i) => ({
         text: `[${flag}] ${this.$t(`regexp.inlineFlag.idmsuxU[${i}]`)}`,
         value: flag,
+      }))
+    },
+    copyTypes() {
+      return this.$range(6).map(value => ({
+        text: this.$t(`regexp.copyTypes[${value}]`),
+        value,
       }))
     },
     copyValue() {
@@ -270,19 +267,13 @@ export default {
     },
   },
   methods: {
-    range(cnt) {
-      let arr = []
-      for (let i = 0; i < cnt; i++) arr.push(i)
-      return arr
-    },
     metacharChip(i, j) {
-      return `${
-        this.metacharTips ? this.$t(`regexp.metachars[${i}][${j}]`) : ''
-      } ${this.metachars[i][j]}`
+      return `${this.tips ? this.$t(`regexp.metachars[${i}][${j}]`) : ''} ${
+        this.metachars[i][j]
+      }`
     },
     append(str) {
-      this.$refs.editor.append(str, '_')
-      this.metacharMenu = false
+      this.$refs.editor.replace(str, '_')
     },
     appendInlineFlag(inlineFlagGroup) {
       let str = '(?'
@@ -292,7 +283,6 @@ export default {
       if (inlineFlagGroup) str += ':_'
       str += ')'
       this.$refs.editor.append(str, '_')
-      this.metacharMenu = false
     },
   },
 }

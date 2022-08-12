@@ -10,6 +10,11 @@ import '@mdi/font/css/materialdesignicons.css'
 
 Vue.config.productionTip = false
 Vue.use(VueClipboard)
+Vue.prototype.$range = cnt => {
+  let arr = []
+  for (let i = 0; i < cnt; i++) arr.push(i)
+  return arr
+}
 
 new Vue({
   router,

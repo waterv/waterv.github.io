@@ -8,20 +8,6 @@
       </i18n>
     </v-alert>
 
-    <v-select
-      v-model="locale"
-      :items="locales"
-      :label="$t('settings.locale')"
-      outlined
-    />
-
-    <v-select
-      v-model="$root.selectTheme"
-      :items="themes"
-      :label="$t('settings.theme')"
-      outlined
-    />
-
     <v-menu v-model="paletteMenu" :close-on-content-click="false" offset-y>
       <template #activator="{ on, attrs }">
         <v-btn color="primary" dark v-bind="attrs" v-on="on">
@@ -72,10 +58,6 @@ export default {
   },
   data() {
     return {
-      locales: [
-        { text: '简体中文', value: 'zh-CN' },
-        { text: 'English', value: 'en-US' },
-      ],
       paletteMenu: false,
       paletteValue: this.$root.primaryColor + 'FF',
       paletteMode: 'rgba',
@@ -83,27 +65,12 @@ export default {
     }
   },
   computed: {
-    themes() {
-      return ['system', 'light', 'dark'].map(value => ({
-        text: this.$t(`settings.themes.${value}`),
-        value,
-      }))
-    },
     showLightandnight: {
       get() {
         return !(localStorage?.getItem('showLightandnight') === 'false')
       },
       set(v) {
         localStorage?.setItem('showLightandnight', !!v)
-      },
-    },
-    locale: {
-      get() {
-        return this.$i18n.locale
-      },
-      set(v) {
-        this.$i18n.locale = v
-        localStorage.setItem('locale', v)
       },
     },
   },

@@ -1,0 +1,28 @@
+@font-face {
+  font-family: CharisSIL;
+  src: url(../fonts/CharisSIL-Regular.woff2);
+}
+
+@font-face {
+  font-family: CharisSIL;
+  font-style: italic;
+  src: url(../fonts/CharisSIL-Italic.woff2);
+}
+
+@font-face {
+  font-family: CharisSIL;
+  font-weight: bold;
+  src: url(../fonts/CharisSIL-Bold.woff2);
+}
+
+@font-face {
+  font-family: CharisSIL;
+  font-weight: bold;
+  font-style: italic;
+  src: url(../fonts/CharisSIL-BoldItalic.woff2);
+}
+
+.ipa,
+.ipa-editor textarea {
+  font-family: CharisSIL, sans-serif;
+}

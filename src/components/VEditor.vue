@@ -7,6 +7,7 @@
       :hint="hint"
       :persistent-hint="!!hint"
       :hide-details="!hint"
+      :readonly="readonly"
       @blur="onBlur"
       @focus="onFocus"
       @change="update"
@@ -126,6 +127,7 @@ export default {
     allowJump: { type: Boolean, default: false },
     allowSelect: { type: Boolean, default: false },
     allowCopy: { type: Boolean, default: false },
+    readonly: { type: Boolean, default: false },
     copy: { type: String, default: '' },
   },
   model: {
@@ -158,6 +160,7 @@ export default {
     },
     onFocus(e) {
       if (!this.dom) this.dom = e.target
+      this.$emit('focus')
       // 同时更改内容和光标位置的解决方法
       // https://stackoverflow.com/questions/48868075/
       this.$nextTick(() => {
@@ -169,6 +172,12 @@ export default {
           e.target.setSelectionRange(left, right)
         }
       })
+    },
+    replace(str, target) {
+      let { value, left, right } = this
+      let selection = value.slice(left, right)
+      if (selection == '' || str == target) return this.append(str, target)
+      this.append(str.replace(target, selection), target)
     },
     append(str, target) {
       let { value, left, right } = this

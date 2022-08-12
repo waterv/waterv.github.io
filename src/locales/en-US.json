@@ -6,7 +6,8 @@
     "home": "Home",
     "editor": {
       "_": "Editor",
-      "regexp": "RegExp Editor"
+      "regexp": "RegExp Editor",
+      "ipa": "IPA Editor"
     }
   },
   "_": {
@@ -40,7 +41,6 @@
   },
   "regexp": {
     "name": "Regular Expression",
-    "metachar": "Metachars",
     "metachars": [
       ["Placeholder", "Escape char", "Non-line terminator", "Unicode line terminator", "", "Backspace", "Control char", "Digits", "", "", "", "Horizontal whitespace", "", "", "", "Whitespace", "", "", "Vertical whitespace", "", "Basic Latin", "", "NULL", "2-digits HEX", "UTF-16", "Unicode code", "Unicode property", "", "Unicode char name", "Unicode extended grapheme cluster"],
       ["Beginning", "", "End", "", "", "Lookahead assertion", "", "Lookbehind assertion", "", "Word boundary", "Unicode extended", "", "End of previous match"],
@@ -54,7 +54,7 @@
       "idmsuxU": ["@:regexp.flags.2", "@:regexp.flags.16", "@:regexp.flags.3", "@:regexp.flags.4", "@:regexp.flags.13", "@:regexp.flags.11", "@:regexp.flags.14"]
     },
     "inlineFlagGroup": "As Non-capture Group",
-    "metacharTips": "Show the meaning of metachars",
+    "tips": "Show the meaning of metachars",
     "copyType": "Format of Copied Text",
     "copyTypeHint": "Format of copied text of the \"@:(clipboard.tooltip)\" button. Please confirm that you have selected only the flags that matches both the icon on the right and the target language.",
     "copyTypes": ["JavaScript RegExp literal", "Original text in the textfield", "Python / Java String literal", "Python re.compile()", "Python re.compile() (simplified)", "Java Pattern.compile()"],
@@ -66,6 +66,29 @@
       ["Python 3 Standard Library: re", "https://docs.python.org/3/library/re.html"],
       ["Java SE 18 & JDK 18: Pattern", "https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/regex/Pattern.html"]
     ]
+  },
+  "ipa": {
+    "name": "International Phonetic Alphabet",
+    "readonly": "Readonly: to disable mobile phone input methods",
+    "consonant": "Pulmonics",
+    "consonantRow": ["Nasal", "Plosive", "Sibilant fricative", "Non-sibilant fricative", "Approximant", "Flap", "Trill", "Lateral fricative", "Lateral approximant", "Lateral flap"],
+    "consonantCol": ["Bi­labial", "Labio­dental", "Dental", "Alveolar", "Post­alveolar", "Retro­flex", "Alveolopalatal", "Palatal", "Velar", "Uvular", "Epi­glottal", "Glottal", "Glottal"],
+    "nonpulmonic": "Consonants",
+    "nonpulmonics": ["Non-pulmonic", "Click", "Bi­labial", "Dental", "(Post)­alveolar", "Palatoalveolar", "Alveolar lateral", "Voiced Implosive", "Bi­labial", "Dental / Alveolar", "Retro­flex", "Palatal", "Velar", "Uvular", "Ejective", "", "Affricate", "Tie bar", "", "Co-articulated", "Voiceless labial-velar fricative", "Voiced labial-velar approximant", "Voiced labial-palatal approximant", "Sj-sound"],
+    "vowel": "Vowels",
+    "vowelRow": ["Close", "Near-close", "Close-mid", "Mid", "Open-mid", "Near-open", "Open"],
+    "vowelCol": ["Front", "", "Central", "", "Back"],
+    "diacritic": "Diacritics",
+    "diacritics": ["Placeholder", "Syllabicity", "Syllabic", "", "Non-syllabic", "", "Consonant-release", "Aspirated", "Nasal release", "Lateral release", "No audible release", "Phonation", "Voiceless", "", "Voiced", "", "Breathy voiced", "Creaky voiced", "Articulation", "Dental", "Linguolabial", "Apical", "Laminal", "Advanced", "", "Retracted", "", "Centralized", "Mid-centralized", "Raised", "", "Lowered", "", "Co-articulation", "More rounded", "", "Less rounded", "", "Labialized", "Palatalized", "Velarized", "Pharyngealized", "Velarized / Pharyngealized", "Advanced tongue root", "Retracted tongue root", "Nasalized", "Rhoticity"],
+    "suprasegmental": "Suprasegmentals",
+    "suprasegmentals": ["Length & Stress", "Primary stress", "Secondary stress", "Long", "Half-long", "Extra-short", "Syllable break", "Linking", "Intonation", "Minor / Foot break", "Major / Intonation break", "Global rise", "Global fall", "Tone", "Level", "Extra high", "", "High", "", "Mid", "", "Low", "", "Extra low", "", "Downstep", "Upstep", "Contour", "Rising", "", "Falling", "", "High rising", "", "Low rising", "", "Rising-falling", ""],
+    "extIpaConsonant": "Consonants (extIPA)",
+    "extIpaConsonantRow": ["Plosive", "Nasal", "Trill", "Median fricative", "Lateral fricative", "Med. & lat. fricative", "Nasal fricative", "Lateral approximant", "Percussive"],
+    "extIpaConsonantCol": ["Bibial", "Labiodental", "Labioalveolar", "Dentolabial", "Bidental", "Linguolabial", "Interdental", "Alveolar", "Retro­flex", "Palatal", "Velar", "Velopharyngeal", "Upper pharyngeal"],
+    "extIpaDiacritic": "Diacritics (extIPA)",
+    "extIpaDiacritics": ["Airstream", "Ingressive airflow", "Egreessive airflow", "Phonation", "Pre-aspiration", "Unaspirated", "Nasalization", "Nareal fricative", "Velopharyngeal friction", "Denasal", "Articulatory Strength", "Strong articulation", "Weak articulation", "Articulation", "Dentolabial", "Bidental / Interdental", "Alveolar", "Labial spreading", "Whistled", "Bunched", "Offset to left", "Offset to right", "Timing", "Slurred / Sliding", "Reiterated", "Voicing", "Partial voicing", "Initial", "Final", "Pre-/Post- voiced"],
+    "extIpaOther": "Others (extIPA)",
+    "extIpaOthers": ["Loud speech", "Quiet speech", "Pause / Silent articulation / Indeterminate", "Phonation / Prosodic", "Extraneous noice", "Unidentifiable", "Segment", "Consonant", "Fricative", "Glide / Approximant", "Click", "Liquid / Lateral", "Nasal", "Plosive", "Rhotic / Resonant", "Sibilant", "Tone / Accent / Stress", "Vowel"]
   },
   "pwa": {
     "cached": "Content has been cached for offline use.",
