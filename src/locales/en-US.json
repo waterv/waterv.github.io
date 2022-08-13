@@ -7,19 +7,19 @@
     "editor": {
       "_": "Editor",
       "regexp": "RegExp Editor",
+      "tex": "TeX Formula Editor",
       "ipa": "IPA Editor"
     }
   },
   "_": {
-    "confirm": "OK",
     "here": "here",
-    "hint": "Hint",
     "settings": "Settings",
-    "insert": "Insert"
+    "add": "Add",
+    "insert": "Insert",
+    "save": "Save",
+    "confirm": "OK"
   },
   "settings": {
-    "locale": "Language",
-    "theme": "Theme",
     "themes": {
       "light": "Light",
       "dark": "Dark",
@@ -29,10 +29,15 @@
     "clearLocalStorage": "Clear localStorage",
     "version": "Last updated: {0}"
   },
+  "dice": {
+    "min": "Minimum",
+    "max": "Maximum"
+  },
   "editor": {
     "cursor": "Move cursor",
     "placeholder": "Select the nearest placeholder",
-    "selection": "Select a range"
+    "selection": "Select a range",
+    "selectAll": "Select all"
   },
   "clipboard": {
     "tooltip": "Copy to clipboard",
@@ -60,12 +65,20 @@
     "copyTypes": ["JavaScript RegExp literal", "Original text in the textfield", "Python / Java String literal", "Python re.compile()", "Python re.compile() (simplified)", "Java Pattern.compile()"],
     "flag": "Flags",
     "flags": ["Generate indices for matches", "Global search", "Case-insensitive search", "Multi-line search", "[.] matches all", "Unicode code points", "Sticky search", "ASCII-only matching", "Dependent on the current locale", "Unicode matching", "Display debug information", "Verbose mode", "Unicode canonical equivalence", "Unicode-aware case folding", "Unicode predefined char classes", "Literal parsing", "Unix lines mode"],
-    "flagTips": ["ECMAScript 2022", "", "", "[^] [$] will match the beginning and end of lines", "ECMAScript 2018", "Enables [\\u]", "", "", "", "Default behavior of [Python] and is reserved just for backward compatibility", "", "Allows spaces and comments", "", "", "Implies [@:(regexp.flags.13)] in [Java]", "", "ECMAScript 2018; enables [\\p{}] [\\P{}]", "", "Only \\n is recognized as line terminators"],
-    "tutorials": [
-      ["MDN Web Docs: Regular Expressions", "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions"],
-      ["Python 3 Standard Library: re", "https://docs.python.org/3/library/re.html"],
-      ["Java SE 18 & JDK 18: Pattern", "https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/regex/Pattern.html"]
-    ]
+    "flagTips": ["ECMAScript 2022", "", "", "[^] [$] will match the beginning and end of lines", "ECMAScript 2018", "Enables [\\u]", "", "", "", "Default behavior of [Python] and is reserved just for backward compatibility", "", "Allows spaces and comments", "", "", "Implies [@:(regexp.flags.13)] in [Java]", "", "ECMAScript 2018; enables [\\p{}] [\\P{}]", "", "Only \\n is recognized as line terminators"]
+  },
+  "tex": {
+    "name": "TeX Math Formula",
+    "search": "Search",
+    "frequent": "Frequent",
+    "environment": "Environment",
+    "font": "Font",
+    "greek": "Greek",
+    "result": "KaTeX Render Result",
+    "macro": "Macro",
+    "definition": "Definition",
+    "displayMode": "Display mode",
+    "recentMax": "Maximum number of search records"
   },
   "ipa": {
     "name": "International Phonetic Alphabet",

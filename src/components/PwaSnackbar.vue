@@ -1,6 +1,6 @@
 <template>
-  <v-app>
-    <v-snackbar v-model="value">
+  <v-app style="position: fixed; left: 0; top: 0">
+    <v-snackbar v-model="value" class="safe-bottom">
       {{ $t(message) }}
       <template #action="{ attrs }">
         <v-btn

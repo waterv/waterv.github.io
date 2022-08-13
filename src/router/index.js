@@ -16,6 +16,11 @@ const routes = [
     component: () => import('../views/RegexpEditor.vue'),
   },
   {
+    path: '/editor/tex',
+    name: 'TexEditor',
+    component: () => import('../views/TexEditor.vue'),
+  },
+  {
     path: '/editor/ipa',
     name: 'IpaEditor',
     component: () => import('../views/IpaEditor.vue'),

@@ -5,11 +5,8 @@
       ref="editor"
       class="ipa-editor"
       :label="$t('ipa.name')"
-      allow-move
-      allow-jump
-      allow-select
-      allow-copy
       :readonly="readonly"
+      placeholder="◌"
       @focus="focused = true"
     >
       <v-tooltip top>
@@ -34,12 +31,12 @@
             />
           </v-tabs>
 
-          <v-tabs-items v-show="focused" v-model="tab" touchless>
+          <v-tabs-items v-model="tab" touchless>
             <v-tab-item v-for="(cate, i) in cates" :key="cate">
               <v-simple-table
                 v-if="catesType[i] == 'table'"
                 dense
-                style="user-select: none"
+                class="no-select"
               >
                 <thead>
                   <tr>
@@ -47,8 +44,7 @@
                     <th
                       v-for="i in $range($data[cate][0].length / 2)"
                       :key="i"
-                      class="text-center"
-                      style="white-space: nowrap"
+                      class="text-center no-wrap"
                       colspan="2"
                     >
                       {{ $t(`ipa.${cate}Col[${i}]`) }}
@@ -57,7 +53,7 @@
                 </thead>
                 <tbody>
                   <tr v-for="i in $range($data[cate].length)" :key="i">
-                    <th style="white-space: nowrap">
+                    <th class="no-wrap">
                       {{ $t(`ipa.${cate}Row[${i}]`) }}
                     </th>
                     <template v-for="(char, j) in $data[cate][i]">
@@ -88,7 +84,7 @@
                 </tbody>
               </v-simple-table>
 
-              <v-chip-group v-else column>
+              <v-chip-group v-else column mandatory>
                 <v-chip
                   v-for="(char, i) in $data[cate]"
                   :key="i"
@@ -109,53 +105,44 @@
       </v-card>
     </v-expand-transition>
 
-    <v-expansion-panels v-model="panel" class="mt-2">
+    <v-expansion-panels v-model="panel" class="mt-4">
       <!-- Settings -->
       <v-expansion-panel>
-        <v-expansion-panel-header v-text="$t('_.settings')" />
+        <v-expansion-panel-header>
+          {{ $t('_.settings') }}
+        </v-expansion-panel-header>
         <v-expansion-panel-content>
           <v-switch v-model="tips" :label="$t('ipa.tips')" />
         </v-expansion-panel-content>
       </v-expansion-panel>
     </v-expansion-panels>
-
-    <v-divider class="mt-4 mb-4" />
-
-    <ul>
-      <li>
-        <v-link :href="tutorial[1]" target="_blank" external>
-          {{ tutorial[0] }}
-        </v-link>
-      </li>
-    </ul>
+    <tutorial-list :tutorials="tutorials" />
   </div>
 </template>
 
 <script>
-import VLink from '@/components/VLink.vue'
 import VEditor from '@/components/VEditor.vue'
+import TutorialList from '@/components/TutorialList.vue'
 let ipa = require('@/data/ipa.json')
 
 export default {
   name: 'IpaEditor',
   components: {
-    VLink,
     VEditor,
+    TutorialList,
   },
-  data() {
-    return {
-      ...ipa,
-      value: '',
+  data: () => ({
+    ...ipa,
+    value: '',
 
-      focused: false,
-      readonly: false,
+    focused: false,
+    readonly: false,
 
-      tab: 0,
-      panel: 0,
+    tab: 0,
+    panel: 0,
 
-      tips: true,
-    }
-  },
+    tips: true,
+  }),
   methods: {
     unicodeLength(str) {
       /* eslint-disable */
@@ -170,3 +157,10 @@ export default {
   },
 }
 </script>
+
+<style>
+.ipa,
+.ipa-editor textarea {
+  font-family: CharisSIL, sans-serif;
+}
+</style>

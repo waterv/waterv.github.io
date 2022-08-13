@@ -1,0 +1,16 @@
+.safe-bottom {
+  margin-bottom: constant(safe-area-inset-bottom);
+  margin-bottom: env(safe-area-inset-bottom);
+}
+
+.no-select {
+  user-select: none;
+}
+
+.monospace {
+  font-family: monospace;
+}
+
+.no-wrap {
+  white-space: nowrap;
+}

@@ -22,5 +22,13 @@
     "java": ["", "", "Pattern.CASE_INSENSITIVE", "Pattern.MULTILINE", "Pattern.DOTALL", "", "", "", "", "", "", "Pattern.COMMENTS", "Pattern.CANON_EQ", "Pattern.UNICODE_CASE", "Pattern.UNICODE_CHARACTER_CLASS", "Pattern.LITERAL", "Pattern.UNIX_LINES"],
     "inline": ["", "", "i", "m", "s", "", "", "a", "L", "u", "", "x", "", "u", "U", "", "d"]
   },
-  "copyTypesLang": ["javascript", "null", "inline", "python", "python", "java"]
+  "copyTypesLang": ["javascript", "null", "inline", "python", "python", "java"],
+  "tutorials": [
+    ["MDN Web Docs > 正则表达式", "https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_Expressions", "zh-CN"],
+    ["MDN Web Docs > Regular Expressions", "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions", "en-US"],
+    ["Python 3 标准库 > re", "https://docs.python.org/zh-cn/3/library/re.html", "zh-CN"],
+    ["Python 3 Standard Library > re", "https://docs.python.org/3/library/re.html", "en-US"],
+    ["Java SE 18 & JDK 18 > Pattern [ENG]", "https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/regex/Pattern.html", "zh-CN"],
+    ["Java SE 18 & JDK 18 > Pattern", "https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/regex/Pattern.html", "en-US"]
+  ]
 }

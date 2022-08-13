@@ -7,6 +7,7 @@ import i18n from './i18n'
 import VueClipboard from 'vue-clipboard2'
 
 import '@mdi/font/css/materialdesignicons.css'
+import 'katex/dist/katex.min.css'
 
 Vue.config.productionTip = false
 Vue.use(VueClipboard)
@@ -25,6 +26,8 @@ new Vue({
     systemTheme: window.matchMedia('(prefers-color-scheme: dark)').matches,
     selectTheme: localStorage.getItem('theme') || 'system',
     primaryColor: localStorage.getItem('primary') || '#1976D2',
+    copyError: false,
+    copySuccess: false,
   }),
   computed: {
     theme() {
@@ -69,6 +72,16 @@ new Vue({
       this.$vuetify.theme.dark = this.theme
       this.$vuetify.theme.themes.light.primary =
         this.$vuetify.theme.themes.dark.primary = this.primaryColor
+    },
+    doCopy(text) {
+      console.log('[clipboard]', text)
+      this.$copyText(text)
+        .then(() => {
+          this.copySuccess = true
+        })
+        .catch(() => {
+          this.copyError = true
+        })
     },
   },
 }).$mount('#app')

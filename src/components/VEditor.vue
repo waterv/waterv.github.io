@@ -17,14 +17,10 @@
       </template>
     </v-textarea>
     <v-expand-transition>
-      <div
-        class="mt-2 pb-2 overflow-x-auto"
-        v-show="dom"
-        style="white-space: nowrap"
-      >
+      <div class="mt-2 pb-2 overflow-x-auto no-wrap" v-show="dom">
         <slot />
 
-        <template v-if="allowMove">
+        <template v-if="!noMove">
           <v-btn icon @click="moveBy(-1)">
             <v-icon v-text="'mdi-arrow-left-thick'" />
           </v-btn>
@@ -41,7 +37,7 @@
           </v-btn>
         </template>
 
-        <template v-if="allowJump">
+        <template v-if="!noJump">
           <v-btn icon @click="previous(placeholder)">
             <v-icon v-text="'mdi-arrow-left-thick'" />
           </v-btn>
@@ -58,7 +54,7 @@
           </v-btn>
         </template>
 
-        <template v-if="allowSelect">
+        <template v-if="!noSelect">
           <v-btn
             icon
             @click="selectMoveBy(-1)"
@@ -70,7 +66,7 @@
             <template #activator="{ on, attrs }">
               <v-btn
                 icon
-                :color="selectionSource !== null ? 'primary' : 'grey'"
+                :color="selectionSource !== null ? 'primary' : ''"
                 @click="toggleSelect(false)"
                 v-bind="attrs"
                 v-on="on"
@@ -88,14 +84,13 @@
             <v-icon v-text="'mdi-arrow-right-thick'" />
           </v-btn>
         </template>
+
         <v-tooltip top>
           <template #activator="{ on, attrs }">
             <v-btn
-              v-if="allowCopy"
+              v-if="!noCopy"
               icon
-              v-clipboard:copy="copy || value"
-              v-clipboard:success="() => (copySuccess = true)"
-              v-clipboard:error="() => (copyError = true)"
+              @click="$root.doCopy(copyValue)"
               v-bind="attrs"
               v-on="on"
             >
@@ -104,14 +99,23 @@
           </template>
           <span v-text="$t('clipboard.tooltip')" />
         </v-tooltip>
+
+        <v-tooltip top>
+          <template #activator="{ on, attrs }">
+            <v-btn
+              v-if="!noSelectAll"
+              icon
+              @click="selectAll()"
+              v-bind="attrs"
+              v-on="on"
+            >
+              <v-icon v-text="'mdi-select-all'" />
+            </v-btn>
+          </template>
+          <span v-text="$t('editor.selectAll')" />
+        </v-tooltip>
       </div>
     </v-expand-transition>
-    <v-snackbar v-model="copySuccess">
-      {{ $t('clipboard.success') }}
-    </v-snackbar>
-    <v-snackbar v-model="copyError">
-      {{ $t('clipboard.error') }}
-    </v-snackbar>
   </div>
 </template>
 
@@ -123,10 +127,11 @@ export default {
     hint: { type: String, default: '' },
     value: String,
     placeholder: { type: String, default: '_' },
-    allowMove: { type: Boolean, default: false },
-    allowJump: { type: Boolean, default: false },
-    allowSelect: { type: Boolean, default: false },
-    allowCopy: { type: Boolean, default: false },
+    noMove: { type: Boolean, default: false },
+    noJump: { type: Boolean, default: false },
+    noSelect: { type: Boolean, default: false },
+    noCopy: { type: Boolean, default: false },
+    noSelectAll: { type: Boolean, default: false },
     readonly: { type: Boolean, default: false },
     copy: { type: String, default: '' },
   },
@@ -141,8 +146,6 @@ export default {
       selectionSource: null,
       selectionSink: null,
       dom: undefined,
-      copySuccess: false,
-      copyError: false,
     }
   },
   computed: {
@@ -151,6 +154,11 @@ export default {
     },
     right() {
       return Math.max(this.selectionStart, this.selectionEnd)
+    },
+    copyValue() {
+      let { value, left, right } = this
+      let selection = value.slice(left, right)
+      return this.copy || selection || this.value
     },
   },
   methods: {
@@ -228,6 +236,11 @@ export default {
       } else if (fromTail) return this.dom.focus()
       else this.previous(target, true)
     },
+    selectAll() {
+      this.selectionStart = 0
+      this.selectionEnd = this.value.length
+      this.dom.focus()
+    },
     update(str) {
       this.toggleSelect(true)
       this.$emit('updateValue', str)
@@ -235,3 +248,9 @@ export default {
   },
 }
 </script>
+
+<style>
+.editor textarea {
+  font-family: monospace;
+}
+</style>

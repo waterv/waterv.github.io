@@ -7,19 +7,19 @@
     "editor": {
       "_": "编辑器",
       "regexp": "正则编辑器",
+      "tex": "TeX 公式编辑器",
       "ipa": "国际音标编辑器"
     }
   },
   "_": {
-    "confirm": "确认",
     "here": "此处",
-    "hint": "提示",
     "settings": "设置",
-    "insert": "插入"
+    "add": "添加",
+    "insert": "插入",
+    "save": "保存",
+    "confirm": "确认"
   },
   "settings": {
-    "locale": "语言",
-    "theme": "主题",
     "themes": {
       "light": "浅色",
       "dark": "深色",
@@ -29,10 +29,15 @@
     "clearLocalStorage": "清空本地储存",
     "version": "最近更新时间：{0}"
   },
+  "dice": {
+    "min": "最小值",
+    "max": "最大值"
+  },
   "editor": {
     "cursor": "移动光标",
     "placeholder": "选中最近的占位符",
-    "selection": "选择文字范围"
+    "selection": "选择文字范围",
+    "selectAll": "全选"
   },
   "clipboard": {
     "tooltip": "复制到剪切板",
@@ -60,12 +65,20 @@
     "copyTypes": ["JavaScript RegExp 字面量", "输入框内原文", "Python / Java 字符串字面量", "Python re.compile()", "Python re.compile() 简写", "Java Pattern.compile()"],
     "flag": "标志",
     "flags": ["生成子串索引", "全局搜索", "大小写不敏感", "多行搜索", "[.] 可匹配换行符", "Unicode 码", "粘性搜索", "仅匹配 ASCII", "依赖语言区域设置", "匹配 Unicode", "显示调试信息", "冗余模式", "Unicode 规范等价", "Unicode 大小写折叠", "Unicode 字符类", "禁用元字符", "Unix 行模式"],
-    "flagTips": ["ECMAScript 2022", "", "", "[^] [$] 将匹配行的开头和结尾", "ECMAScript 2018", "启用 [\\u]", "", "", "", "[Python] 已默认启用，保留以向前兼容", "", "允许空格与注释", "", "", "[Java] 此标志蕴含 [@:(regexp.flags.13)]", "", "ECMAScript 2018；启用 [\\p{}] [\\P{}]", "", "仅 \\n 被认为是行终结符"],
-    "tutorials": [
-      ["MDN Web Docs: 正则表达式", "https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_Expressions"],
-      ["Python 3 标准库: re", "https://docs.python.org/zh-cn/3/library/re.html"],
-      ["Java SE 18 & JDK 18: Pattern", "https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/regex/Pattern.html"]
-    ]
+    "flagTips": ["ECMAScript 2022", "", "", "[^] [$] 将匹配行的开头和结尾", "ECMAScript 2018", "启用 [\\u]", "", "", "", "[Python] 已默认启用，保留以向前兼容", "", "允许空格与注释", "", "", "[Java] 此标志蕴含 [@:(regexp.flags.13)]", "", "ECMAScript 2018；启用 [\\p{}] [\\P{}]", "", "仅 \\n 被认为是行终结符"]
+  },
+  "tex": {
+    "name": "TeX 数学公式",
+    "search": "搜索",
+    "frequent": "常用",
+    "environment": "环境",
+    "font": "字体",
+    "greek": "希腊",
+    "result": "KaTeX 渲染结果",
+    "macro": "宏",
+    "definition": "定义",
+    "displayMode": "块级显示模式",
+    "recentMax": "搜索记录最大数目"
   },
   "ipa": {
     "name": "国际音标",

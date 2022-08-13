@@ -38,5 +38,10 @@
   "extIpaOther": ["𝑓", "𝑝", "(◌)", "{◌}", "⸨◌⸩", "", "◯", "Ⓒ", "Ⓕ", "Ⓖ", "Ⓚ", "Ⓛ", "Ⓝ", "Ⓟ", "Ⓡ", "Ⓢ", "Ⓣ", "Ⓥ"],
   "cates": ["consonant", "nonpulmonic", "vowel", "diacritic", "suprasegmental", "extIpaConsonant", "extIpaDiacritic", "extIpaOther"],
   "catesType": ["table", "chip", "table", "chip", "chip", "table", "chip", "chip"],
-  "tutorial": ["The International Phonetic Alphabet and the IPA Chart", "https://www.internationalphoneticassociation.org/content/ipa-chart"]
+  "tutorials": [
+    ["国际语音学会 > 国际音标与国际音标表 [ENG]", "https://www.internationalphoneticassociation.org/content/ipa-chart", "zh-CN"],
+    ["IPA > The International Phonetic Alphabet and the IPA Chart", "https://www.internationalphoneticassociation.org/content/ipa-chart", "en-US"],
+    ["国际临床语音学及语言学协会 > 期刊和出版物 [ENG]", "https://www.icpla.info/journal-publications", "zh-CN"],
+    ["ICPLA > Journal & Publications", "https://www.icpla.info/journal-publications", "en-US"]
+  ]
 }

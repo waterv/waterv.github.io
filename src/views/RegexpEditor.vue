@@ -4,10 +4,6 @@
       v-model="value"
       ref="editor"
       :label="$t('regexp.name')"
-      allow-move
-      allow-jump
-      allow-select
-      allow-copy
       :copy="copyValue"
       @focus="focused = true"
     />
@@ -25,7 +21,7 @@
           <v-tabs-items v-model="tab">
             <!-- Metachars -->
             <v-tab-item v-for="(cate, i) in metachars" :key="i">
-              <v-chip-group column>
+              <v-chip-group column mandatory>
                 <v-chip
                   v-for="(metachar, j) in cate"
                   :key="metachar"
@@ -97,10 +93,12 @@
       </v-card>
     </v-expand-transition>
 
-    <v-expansion-panels v-model="panel" class="mt-2">
+    <v-expansion-panels v-model="panel" class="mt-4">
       <!-- Settings -->
       <v-expansion-panel>
-        <v-expansion-panel-header v-text="$t('_.settings')" />
+        <v-expansion-panel-header>
+          {{ $t('_.settings') }}
+        </v-expansion-panel-header>
         <v-expansion-panel-content>
           <v-switch v-model="tips" :label="$t('regexp.tips')" />
           <v-select
@@ -118,7 +116,9 @@
 
       <!-- Flags -->
       <v-expansion-panel>
-        <v-expansion-panel-header v-text="$t('regexp.flag')" />
+        <v-expansion-panel-header>
+          {{ $t('regexp.flag') }}
+        </v-expansion-panel-header>
         <v-expansion-panel-content>
           <v-row no-gutters>
             <v-col v-for="(v, i) in flags.py" :key="i" cols="12" sm="6" lg="4">
@@ -158,59 +158,44 @@
         </v-expansion-panel-content>
       </v-expansion-panel>
     </v-expansion-panels>
-
-    <v-divider class="mt-4 mb-4" />
-
-    <ul>
-      <li v-for="i in $range(3)" :key="i">
-        <v-link
-          :href="$t(`regexp.tutorials[${i}][1]`)"
-          target="_blank"
-          external
-        >
-          {{ $t(`regexp.tutorials[${i}][0]`) }}
-        </v-link>
-      </li>
-    </ul>
+    <tutorial-list :tutorials="tutorials" />
   </div>
 </template>
 
 <script>
-import VLink from '@/components/VLink.vue'
 import VEditor from '@/components/VEditor.vue'
+import TutorialList from '@/components/TutorialList.vue'
 let regexp = require('@/data/regexp.json')
 
 export default {
   name: 'RegexpEditor',
   components: {
-    VLink,
     VEditor,
+    TutorialList,
   },
-  data() {
-    return {
-      ...regexp,
-      value: '',
-      focused: false,
+  data: () => ({
+    ...regexp,
+    value: '',
+    focused: false,
 
-      tab: null,
-      panel: 0,
+    tab: null,
+    panel: 0,
 
-      tips: true,
-      copyType: 0,
+    tips: true,
+    copyType: 0,
 
-      inlineFlagAlu: '',
-      inlineFlagIdmsuxu: [],
-      inlineFlagIdmsuxuNeg: [],
-      flagsSelected: [],
+    inlineFlagAlu: '',
+    inlineFlagIdmsuxu: [],
+    inlineFlagIdmsuxuNeg: [],
+    flagsSelected: [],
 
-      langs: ['javascript', 'python', 'java', 'inline'],
-      selector: {
-        class: 'mt-4',
-        outlined: true,
-        'hide-details': true,
-      },
-    }
-  },
+    langs: ['javascript', 'python', 'java', 'inline'],
+    selector: {
+      class: 'mt-4',
+      outlined: true,
+      'hide-details': true,
+    },
+  }),
   computed: {
     aLu() {
       return regexp.inlineFlags.aLu.map((flag, i) => ({
