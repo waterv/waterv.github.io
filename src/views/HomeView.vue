@@ -81,7 +81,8 @@ export default {
     },
     clearLocalStorage() {
       localStorage.clear()
-      this.locale = 'zh-CN'
+      this.$root.locale = 'zh-CN'
+      this.$root.selectTheme = 'system'
       this.paletteValue = '#1976D2'
       this.setPrimaryColor()
     },

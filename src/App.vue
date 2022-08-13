@@ -90,9 +90,9 @@
             <v-list-item
               v-for="lang in locales"
               :key="lang.text"
-              :input-value="locale == lang.value"
+              :input-value="$root.locale == lang.value"
               color="primary"
-              @click="locale = lang.value"
+              @click="$root.locale = lang.value"
             >
               <v-list-item-title v-text="lang.text" />
             </v-list-item>
@@ -159,15 +159,6 @@ export default {
     title() {
       if (this.$route.fullPath == '/') return this.$t('app.name')
       return this.$t('route' + this.$route.fullPath.replaceAll('/', '.'))
-    },
-    locale: {
-      get() {
-        return this.$i18n.locale
-      },
-      set(v) {
-        this.$i18n.locale = v
-        localStorage.setItem('locale', v)
-      },
     },
     themes() {
       return ['system', 'light', 'dark'].map(value => ({

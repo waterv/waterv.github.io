@@ -32,6 +32,15 @@ new Vue({
         ? this.systemTheme
         : this.selectTheme == 'dark'
     },
+    locale: {
+      get() {
+        return this.$i18n.locale
+      },
+      set(v) {
+        this.$i18n.locale = v
+        localStorage.setItem('locale', v)
+      },
+    },
   },
   watch: {
     systemTheme() {

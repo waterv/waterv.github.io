@@ -88,7 +88,8 @@
     "extIpaDiacritic": "Diacritics (extIPA)",
     "extIpaDiacritics": ["Airstream", "Ingressive airflow", "Egreessive airflow", "Phonation", "Pre-aspiration", "Unaspirated", "Nasalization", "Nareal fricative", "Velopharyngeal friction", "Denasal", "Articulatory Strength", "Strong articulation", "Weak articulation", "Articulation", "Dentolabial", "Bidental / Interdental", "Alveolar", "Labial spreading", "Whistled", "Bunched", "Offset to left", "Offset to right", "Timing", "Slurred / Sliding", "Reiterated", "Voicing", "Partial voicing", "Initial", "Final", "Pre-/Post- voiced"],
     "extIpaOther": "Others (extIPA)",
-    "extIpaOthers": ["Loud speech", "Quiet speech", "Pause / Silent articulation / Indeterminate", "Phonation / Prosodic", "Extraneous noice", "Unidentifiable", "Segment", "Consonant", "Fricative", "Glide / Approximant", "Click", "Liquid / Lateral", "Nasal", "Plosive", "Rhotic / Resonant", "Sibilant", "Tone / Accent / Stress", "Vowel"]
+    "extIpaOthers": ["Loud speech", "Quiet speech", "Pause / Silent articulation / Indeterminate", "Phonation / Prosodic", "Extraneous noice", "Unidentifiable", "Segment", "Consonant", "Fricative", "Glide / Approximant", "Click", "Liquid / Lateral", "Nasal", "Plosive", "Rhotic / Resonant", "Sibilant", "Tone / Accent / Stress", "Vowel"],
+    "tips": "Show the meaning of symbols"
   },
   "pwa": {
     "cached": "Content has been cached for offline use.",

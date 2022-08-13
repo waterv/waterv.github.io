@@ -97,7 +97,9 @@
                   :color="char ? '' : 'primary'"
                   @click="append(char)"
                 >
-                  {{ $t(`ipa.${cate}s[${i}]`) }}
+                  <span v-show="tips || !char">
+                    {{ $t(`ipa.${cate}s[${i}]`) }}
+                  </span>
                   <span v-show="char" class="ipa ml-1" v-text="char" />
                 </v-chip>
               </v-chip-group>
