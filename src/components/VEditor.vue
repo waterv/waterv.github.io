@@ -11,6 +11,7 @@
       @blur="onBlur"
       @focus="onFocus"
       @change="update"
+      @input="update"
     >
       <template #append>
         <slot name="append" />
@@ -258,9 +259,3 @@ export default {
   },
 }
 </script>
-
-<style>
-.editor textarea {
-  font-family: monospace;
-}
-</style>

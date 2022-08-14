@@ -1,5 +1,5 @@
 <template>
-  <v-app id="v-app" class="safe-top padding-safe-bottom">
+  <v-app id="v-app" class="safe-top">
     <v-app-bar
       class="app-bar padding-safe-left"
       color="primary"
@@ -11,7 +11,7 @@
       <v-toolbar-title>{{ title }}</v-toolbar-title>
     </v-app-bar>
 
-    <v-main class="padding-safe-left padding-safe-right">
+    <v-main class="app-main">
       <v-container>
         <router-view />
       </v-container>
@@ -318,12 +318,3 @@ export default {
   },
 }
 </script>
-
-<style>
-body,
-body .v-application {
-  font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Helvetica Neue',
-    Helvetica, 'Segoe UI', Arial, Roboto, 'PingFang SC', miui,
-    'Hiragino Sans GB', 'Microsoft Yahei', sans-serif;
-}
-</style>

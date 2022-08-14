@@ -58,6 +58,7 @@ export default {
   },
   data() {
     return {
+      test: '',
       paletteMenu: false,
       paletteValue: this.$root.primaryColor + 'FF',
       paletteMode: 'rgba',
