@@ -229,6 +229,10 @@ export default {
           { icon: 'mdi-code-array', name: 'ipa' },
         ],
       },
+      {
+        name: 'converter',
+        children: [{ icon: 'mdi-format-font', name: 'font' }],
+      },
     ],
     locales: [
       { text: '简体中文', value: 'zh-CN' },

@@ -25,6 +25,11 @@ const routes = [
     name: 'IpaEditor',
     component: () => import('../views/IpaEditor.vue'),
   },
+  {
+    path: '/converter/font',
+    name: 'FontConverter',
+    component: () => import('../views/FontConverter.vue'),
+  },
 ]
 
 const router = new VueRouter({

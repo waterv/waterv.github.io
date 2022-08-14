@@ -150,7 +150,7 @@ import katex from 'katex'
 let tex = require('@/data/tex.json')
 
 export default {
-  name: 'IpaEditor',
+  name: 'TexEditor',
   components: {
     VEditor,
     TutorialList,

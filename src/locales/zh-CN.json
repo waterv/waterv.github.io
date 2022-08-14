@@ -9,6 +9,10 @@
       "regexp": "正则编辑器",
       "tex": "TeX 公式编辑器",
       "ipa": "国际音标编辑器"
+    },
+    "converter": {
+      "_": "转换器",
+      "font": "字体转换器"
     }
   },
   "_": {
@@ -104,6 +108,16 @@
     "extIpaOther": "其他符号 (extIPA)",
     "extIpaOthers": ["高音", "静音", "暂停 / 不发音 / 不确定", "发音 / 韵律", "无关噪音", "不确定音", "音段", "辅音", "擦音", "半元音 / 近音", "吸着音", "流音 / 边音", "鼻音", "塞音", "R 音 / 响音", "咝音", "声调 / 词重调 / 重音", "元音"],
     "tips": "显示符号含义"
+  },
+  "font": {
+    "source": "原文本",
+    "convert": "转换",
+    "result": "转换结果",
+    "latins": ["基本", "粗体", "斜体", "粗斜体", "手写体", "手写粗体", "尖角体", "粗尖角体", "双线", "无衬线", "无衬线粗体", "无衬线斜体", "无衬线粗斜体", "等宽", "斜体 (无点)", "全角", "带圈", "带圈反白", "带括号", "带框", "带框反白", "区域指示符", "小型大写字母", "上标"],
+    "greeks": ["基本", "粗体", "斜体", "粗斜体", "无衬线粗体", "无衬线粗斜体"],
+    "digits": ["基本", "粗体", "双线", "无衬线", "无衬线粗体", "等宽", "上标", "下标", "全角", "带圈", "无衬线带圈", "带双圈", "带圈反白", "无衬线带圈反白", "括号", "带句号", "带逗号", "Coptic Epact", "Meroitic Cursive", "Hanifi Rohingya [RTL]", "Brahmi", "Sora Sompeng", "Chakma", "Sharada", "Sinhala Archaic", "Khudawadi", "Newa", "Warang Citi", "Tirhuta", "Dives Akuru", "Bhaiksuki", "Masaram Gondi", "Gunjala Gondi", "Mro", "Pahawh Hmong", "Medefaidrin", "Medefaidrin (变体)", "结绳", "Nyiakeng Puachue Hmong", "Wancho", "Mende Kikakui", "Adlam", "小写汉字", "大写汉字", "带括号汉字", "带圈汉字", "麻将万子", "麻将索子", "麻将筒子", "扑克黑桃", "扑克红桃", "扑克方块", "扑克梅花", "分段"],
+    "capital": "该字体只包含大写字母",
+    "without": "该字体缺少 {0}"
   },
   "pwa": {
     "cached": "资源缓存完成，可供离线使用。",
