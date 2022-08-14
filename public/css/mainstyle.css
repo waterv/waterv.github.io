@@ -1,6 +1,43 @@
+.padding-safe-top {
+  padding-top: constant(safe-area-inset-top);
+  padding-top: env(safe-area-inset-top);
+}
+
+.padding-safe-bottom {
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.padding-safe-left {
+  padding-left: constant(safe-area-inset-left) !important;
+  padding-left: env(safe-area-inset-left) !important;
+}
+
+.padding-safe-right {
+  padding-right: constant(safe-area-inset-right) !important;
+  padding-right: env(safe-area-inset-right) !important;
+}
+
+.safe-top {
+  margin-top: constant(safe-area-inset-top) !important;
+  margin-top: env(safe-area-inset-top) !important;
+}
+
 .safe-bottom {
   margin-bottom: constant(safe-area-inset-bottom);
   margin-bottom: env(safe-area-inset-bottom);
+}
+
+.app-bar {
+  height: calc(constant(safe-area-inset-top) + 56px) !important;
+  height: calc(env(safe-area-inset-top) + 56px) !important;
+  padding-top: constant(safe-area-inset-top);
+  padding-top: env(safe-area-inset-top);
+}
+
+.random-slogan {
+  padding-top: calc(constant(safe-area-inset-top) + 32px) !important;
+  padding-top: calc(env(safe-area-inset-top) + 32px) !important;
 }
 
 .no-select {

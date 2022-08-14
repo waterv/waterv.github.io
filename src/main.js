@@ -49,13 +49,13 @@ new Vue({
     systemTheme() {
       this.refreshTheme()
     },
-    selectTheme(n) {
+    selectTheme(v) {
       this.refreshTheme()
-      localStorage.setItem('theme', n)
+      localStorage.setItem('theme', v)
     },
-    primaryColor(n) {
+    primaryColor(v) {
       this.refreshTheme()
-      localStorage.setItem('primary', n)
+      localStorage.setItem('primary', v)
     },
   },
   mounted() {
@@ -70,8 +70,10 @@ new Vue({
   methods: {
     refreshTheme() {
       this.$vuetify.theme.dark = this.theme
-      this.$vuetify.theme.themes.light.primary =
-        this.$vuetify.theme.themes.dark.primary = this.primaryColor
+      document.body.style.backgroundColor =
+        this.$vuetify.theme.themes.light.primary =
+        this.$vuetify.theme.themes.dark.primary =
+          this.primaryColor
     },
     doCopy(text) {
       console.log('[clipboard]', text)

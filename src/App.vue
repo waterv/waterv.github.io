@@ -1,11 +1,17 @@
 <template>
-  <v-app id="v-app">
-    <v-app-bar app clipped-left color="primary" dark>
+  <v-app id="v-app" class="safe-top padding-safe-bottom">
+    <v-app-bar
+      class="app-bar padding-safe-left"
+      color="primary"
+      clipped-left
+      app
+      dark
+    >
       <v-app-bar-nav-icon @click="drawer = !drawer" />
       <v-toolbar-title>{{ title }}</v-toolbar-title>
     </v-app-bar>
 
-    <v-main>
+    <v-main class="padding-safe-left padding-safe-right">
       <v-container>
         <router-view />
       </v-container>
@@ -22,9 +28,14 @@
       </v-btn>
     </v-fab-transition>
 
-    <v-navigation-drawer v-model="drawer" app clipped class="no-select">
+    <v-navigation-drawer
+      v-model="drawer"
+      app
+      clipped
+      class="no-select padding-safe-left"
+    >
       <!-- Random Slogan -->
-      <v-list-item class="pt-8" three-line @click="randomSlogan">
+      <v-list-item class="random-slogan" three-line @click="randomSlogan">
         <v-list-item-content>
           <v-list-item-title class="text-h6">
             <v-icon v-text="'mdi-wrench'" />

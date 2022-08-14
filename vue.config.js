@@ -14,9 +14,10 @@ module.exports = defineConfig({
   pwa: {
     workboxPluginMode: 'GenerateSW',
     name: '神必工具箱',
-    themeColor: '#212121',
+    themeColor: undefined,
     msTileColor: '#212121',
-    appleMobileWebAppStatusBarStyle: 'black',
+    appleMobileWebAppCapable: 'yes',
+    appleMobileWebAppStatusBarStyle: 'black-translucent',
     iconPaths: {
       favicon32: 'img/icons/favicon-32x32.png',
       favicon16: 'img/icons/favicon-16x16.png',
@@ -24,10 +25,11 @@ module.exports = defineConfig({
       msTileImage: 'img/icons/msapplication-icon-144x144.png',
     },
     manifestOptions: {
-      startUrl: './',
+      start_url: './',
       scope: './',
       dir: 'ltr',
-      backgroundColor: '#212121',
+      background_color: '#212121',
+      display: 'fullscreen',
       icons: [
         {
           src: 'img/icons/android-chrome-192x192.png',
