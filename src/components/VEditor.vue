@@ -20,6 +20,15 @@
       <div class="mt-2 pb-2 overflow-x-auto no-wrap" v-show="dom">
         <slot />
 
+        <v-tooltip top v-if="!noReadonly">
+          <template #activator="{ on, attrs }">
+            <v-btn icon @click="readonly = !readonly" v-on="on" v-bind="attrs">
+              <v-icon v-text="`mdi-keyboard${readonly ? '-off' : ''}`" />
+            </v-btn>
+          </template>
+          {{ $t('editor.readonly') }}
+        </v-tooltip>
+
         <template v-if="!noMove">
           <v-btn icon @click="moveBy(-1)">
             <v-icon v-text="'mdi-arrow-left-thick'" />
@@ -127,12 +136,12 @@ export default {
     hint: { type: String, default: '' },
     value: String,
     placeholder: { type: String, default: '_' },
+    noReadonly: { type: Boolean, default: false },
     noMove: { type: Boolean, default: false },
     noJump: { type: Boolean, default: false },
     noSelect: { type: Boolean, default: false },
     noCopy: { type: Boolean, default: false },
     noSelectAll: { type: Boolean, default: false },
-    readonly: { type: Boolean, default: false },
     copy: { type: String, default: '' },
   },
   model: {
@@ -146,6 +155,7 @@ export default {
       selectionSource: null,
       selectionSink: null,
       dom: undefined,
+      readonly: false,
     }
   },
   computed: {

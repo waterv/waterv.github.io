@@ -85,7 +85,7 @@
       <!-- Macros -->
       <v-expansion-panel>
         <v-expansion-panel-header>
-          {{ $t('tex.macro') }}
+          {{ $t('tex.macros') }}
         </v-expansion-panel-header>
         <v-expansion-panel-content>
           <v-simple-table fixed-header height="300px">

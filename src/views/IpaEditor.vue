@@ -5,20 +5,9 @@
       ref="editor"
       class="ipa-editor"
       :label="$t('ipa.name')"
-      :readonly="readonly"
       placeholder="◌"
       @focus="focused = true"
-    >
-      <v-tooltip top>
-        <template #activator="{ on, attrs }">
-          <v-btn icon @click="readonly = !readonly" v-on="on" v-bind="attrs">
-            <v-icon v-if="readonly" v-text="'mdi-keyboard-off'" />
-            <v-icon v-else v-text="'mdi-keyboard'" />
-          </v-btn>
-        </template>
-        {{ $t('ipa.readonly') }}
-      </v-tooltip>
-    </v-editor>
+    />
 
     <v-expand-transition>
       <v-card v-show="focused" class="elevation-2">

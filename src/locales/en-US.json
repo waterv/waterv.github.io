@@ -34,6 +34,7 @@
     "max": "Maximum"
   },
   "editor": {
+    "readonly": "Readonly (disable mobile phone input methods)",
     "cursor": "Move cursor",
     "placeholder": "Select the nearest placeholder",
     "selection": "Select a range",
@@ -62,7 +63,7 @@
     "tips": "Show the meaning of metachars",
     "copyType": "Format of Copied Text",
     "copyTypeHint": "Format of copied text of the \"@:(clipboard.tooltip)\" button. Please confirm that you have selected only the flags that matches both the icon on the right and the target language.",
-    "copyTypes": ["JavaScript RegExp literal", "Original text in the textfield", "Python / Java String literal", "Python re.compile()", "Python re.compile() (simplified)", "Java Pattern.compile()"],
+    "copyTypes": ["JavaScript RegExp literal", "Original text in the textarea", "Python / Java String literal", "Python re.compile()", "Python re.compile() (simplified)", "Java Pattern.compile()"],
     "flag": "Flags",
     "flags": ["Generate indices for matches", "Global search", "Case-insensitive search", "Multi-line search", "[.] matches all", "Unicode code points", "Sticky search", "ASCII-only matching", "Dependent on the current locale", "Unicode matching", "Display debug information", "Verbose mode", "Unicode canonical equivalence", "Unicode-aware case folding", "Unicode predefined char classes", "Literal parsing", "Unix lines mode"],
     "flagTips": ["ECMAScript 2022", "", "", "[^] [$] will match the beginning and end of lines", "ECMAScript 2018", "Enables [\\u]", "", "", "", "Default behavior of [Python] and is reserved just for backward compatibility", "", "Allows spaces and comments", "", "", "Implies [@:(regexp.flags.13)] in [Java]", "", "ECMAScript 2018; enables [\\p{}] [\\P{}]", "", "Only \\n is recognized as line terminators"]
@@ -71,18 +72,18 @@
     "name": "TeX Math Formula",
     "search": "Search",
     "frequent": "Frequent",
-    "environment": "Environment",
-    "font": "Font",
+    "environment": "Environments",
+    "font": "Fonts",
     "greek": "Greek",
     "result": "KaTeX Render Result",
     "macro": "Macro",
+    "macros": "Macros",
     "definition": "Definition",
     "displayMode": "Display mode",
     "recentMax": "Maximum number of search records"
   },
   "ipa": {
     "name": "International Phonetic Alphabet",
-    "readonly": "Readonly: to disable mobile phone input methods",
     "consonant": "Pulmonics",
     "consonantRow": ["Nasal", "Plosive", "Sibilant fricative", "Non-sibilant fricative", "Approximant", "Flap", "Trill", "Lateral fricative", "Lateral approximant", "Lateral flap"],
     "consonantCol": ["Bi­labial", "Labio­dental", "Dental", "Alveolar", "Post­alveolar", "Retro­flex", "Alveolopalatal", "Palatal", "Velar", "Uvular", "Epi­glottal", "Glottal", "Glottal"],
