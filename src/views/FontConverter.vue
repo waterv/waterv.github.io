@@ -136,6 +136,7 @@ export default {
       let font = this[key][index]
       let info = font[font.length - 1]
       if (info.capital) hint.push(this.$t('font.capital'))
+      if (info.rtl) hint.push(this.$t('font.rtl'))
       if (info.without) hint.push(this.$t('font.without', [info.without]))
       return hint.join(' / ')
     },

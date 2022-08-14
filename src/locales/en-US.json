@@ -115,9 +115,10 @@
     "result": "Convert Result",
     "latins": ["Basic", "Bold", "Italic", "Bold Italic", "Script", "Script Bold", "Fraktur", "Fraktur Bold", "Double-struck", "Sans-serif", "Sans-serif Bold", "Sans-serif Italic", "Sans-serif Bold Italic", "Monospaced", "Italic (Dotless)", "Fullwidth", "Circled", "Negative Circled", "Parenthesized", "Squared", "Negative Squared", "Regional Indicator", "Small Capital", "Superscript"],
     "greeks": ["Basic", "Bold", "Italic", "Bold Italic", "Sans-Serif Bold", "Sans-Serif Bold Italic"],
-    "digits": ["Basic", "Bold", "Double-Struck", "Sans-Serif", "Sans-Serif Bold", "Monospaced", "Superscript", "Subscript", "Fullwidth", "Circled", "Circled Sans-Serif", "Double Circled", "Negative Circled", "Negative Circled Sans-Serif", "Parenthesized", "With Full Stop", "With Comma", "Coptic Epact", "Meroitic Cursive", "Hanifi Rohingya [RTL]", "Brahmi", "Sora Sompeng", "Chakma", "Sharada", "Sinhala Archaic", "Khudawadi", "Newa", "Warang Citi", "Tirhuta", "Dives Akuru", "Bhaiksuki", "Masaram Gondi", "Gunjala Gondi", "Mro", "Pahawh Hmong", "Medefaidrin", "Medefaidrin (Alternate form)", "Counting Rod", "Nyiakeng Puachue Hmong", "Wancho", "Mende Kikakui", "Adlam", "Chinese (Ordinary)", "Chinese (Capital)", "Chinese Parenthesized", "Chinese Circled", "Mahjong Wan", "Mahjong Bamboo", "Mahjong Circle", "Card Spades", "Card Hearts", "Card Diamonds", "Card Clubs", "Segmented"],
-    "capital": "Capital only",
-    "without": "Without {0}"
+    "digits": ["Basic", "Bold", "Double-Struck", "Sans-Serif", "Sans-Serif Bold", "Monospaced", "Superscript", "Subscript", "Fullwidth", "Circled", "Circled Sans-Serif", "Double Circled", "Negative Circled", "Negative Circled Sans-Serif", "Parenthesized", "With Full Stop", "With Comma", "Coptic Epact", "Meroitic Cursive", "Hanifi Rohingya", "Brahmi", "Sora Sompeng", "Chakma", "Sharada", "Sinhala Archaic", "Khudawadi", "Newa", "Warang Citi", "Tirhuta", "Dives Akuru", "Bhaiksuki", "Masaram Gondi", "Gunjala Gondi", "Mro", "Pahawh Hmong", "Medefaidrin", "Medefaidrin (Alternate form)", "Counting Rod", "Nyiakeng Puachue Hmong", "Wancho", "Mende Kikakui", "Adlam", "Chinese (Ordinary)", "Chinese (Capital)", "Chinese Parenthesized", "Chinese Circled", "Mahjong Wan", "Mahjong Bamboo", "Mahjong Circle", "Card Spades", "Card Hearts", "Card Diamonds", "Card Clubs", "Segmented"],
+    "capital": "The font has only capital letters",
+    "rtl": "The language is RTL",
+    "without": "The font doesn't have {0}"
   },
   "pwa": {
     "cached": "Content has been cached for offline use.",
