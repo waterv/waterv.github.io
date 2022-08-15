@@ -49,6 +49,19 @@
     "success": "Copied successfully.",
     "error": "Failed to copy. Please copy manually."
   },
+  "home": {
+    "name": "Nowhere to put so just put it here",
+    "unicode": "Unicode",
+    "codePoint": "Unicode Code Point",
+    "rule": {
+      "long": "The range of Unicode Code Point is 0x0000 ~ 0x10FFFF",
+      "nothex": "Not a legal HEX value"
+    },
+    "idc": "IDC",
+    "control": "Control",
+    "controls": ["En Space", "Em Space", "1/3 Em Space", "1/4 Em Space", "1/6 Em Space", "Figure Space", "Punctuation Space", "Thin Space", "Hair Space", "4/18 Em Space", "LTR Override", "RTL Override", "Pop Directional Formatting"],
+    "braille": "Braille"
+  },
   "regexp": {
     "name": "Regular Expression",
     "metachars": [

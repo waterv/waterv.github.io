@@ -1,5 +1,5 @@
 <template>
-  <div class="editor">
+  <div :class="{ editor: !noMonospaced }">
     <v-textarea
       outlined
       :label="label"
@@ -137,6 +137,7 @@ export default {
     hint: { type: String, default: '' },
     value: String,
     placeholder: { type: String, default: '_' },
+    noMonospaced: { type: Boolean, default: false },
     noReadonly: { type: Boolean, default: false },
     noMove: { type: Boolean, default: false },
     noJump: { type: Boolean, default: false },
