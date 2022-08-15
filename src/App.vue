@@ -11,7 +11,11 @@
       <v-toolbar-title>{{ title }}</v-toolbar-title>
     </v-app-bar>
 
-    <v-main class="app-main">
+    <v-main
+      :class="{
+        'app-main': 'xsmd'.indexOf($vuetify.breakpoint.name) != -1,
+      }"
+    >
       <v-container>
         <router-view />
       </v-container>
