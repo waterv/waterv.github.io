@@ -1,5 +1,5 @@
 <template>
-  <div class="string">
+  <div class="tex-editor">
     <v-card class="mb-4 elevation-2">
       <v-card-subtitle v-text="$t('tex.result')" />
       <v-card-text>

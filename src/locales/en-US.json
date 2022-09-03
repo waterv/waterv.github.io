@@ -13,6 +13,11 @@
     "converter": {
       "_": "Converters",
       "font": "Font Converter"
+    },
+    "helper": {
+      "_": "Helpers",
+      "keeptalking": "Defuse Helper",
+      "keeptalking_": "v. 1 (241)"
     }
   },
   "_": {
@@ -132,6 +137,17 @@
     "capital": "The font has only capital letters",
     "rtl": "The language is RTL",
     "without": "The font doesn't have {0}"
+  },
+  "kt": {
+    "password": "Subject of Passwords",
+    "chars": "Available Letters",
+    "charsHint": "Available letters (case-insentive) of each position (starting from the leftest) separated by space, e.g. \"AbCdE fGhIj\".",
+    "rule": {
+      "notchar": "Only letters / spaces are allowed."
+    },
+    "maze": "Subject of Mazes",
+    "pos": ["Circular Marking 1", "Circular Marking 2", "White Light", "Red Triangle"],
+    "posHint": ["To find the maze", "To find the maze", "Starting point", "End point"]
   },
   "pwa": {
     "cached": "Content has been cached for offline use.",

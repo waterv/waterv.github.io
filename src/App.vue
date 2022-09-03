@@ -1,5 +1,5 @@
 <template>
-  <v-app id="v-app" class="safe-top">
+  <v-app id="v-app" class="safe-top" @touchstart.stop.prevent>
     <v-app-bar
       class="app-bar padding-safe-left"
       color="primary"
@@ -91,6 +91,9 @@
               <v-list-item-title>
                 {{ $t(`route.${item.name}.${child.name}`) }}
               </v-list-item-title>
+              <v-list-item-subtitle v-if="child.desc">
+                {{ $t(`route.${item.name}.${child.name}_`) }}
+              </v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
         </template>
@@ -236,6 +239,10 @@ export default {
       {
         name: 'converter',
         children: [{ icon: 'mdi-format-font', name: 'font' }],
+      },
+      {
+        name: 'helper',
+        children: [{ icon: 'mdi-bomb', name: 'keeptalking', desc: true }],
       },
     ],
     locales: [

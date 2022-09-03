@@ -30,6 +30,11 @@ const routes = [
     name: 'FontConverter',
     component: () => import('../views/FontConverter.vue'),
   },
+  {
+    path: '/helper/keeptalking',
+    name: 'KeepTalking',
+    component: () => import('../views/KeepTalking.vue'),
+  },
 ]
 
 const router = new VueRouter({

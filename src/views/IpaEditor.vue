@@ -1,5 +1,5 @@
 <template>
-  <div class="string">
+  <div class="ipa-editor">
     <v-editor
       v-model="value"
       ref="editor"
