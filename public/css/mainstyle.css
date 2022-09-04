@@ -21,8 +21,8 @@ body .v-application {
 }
 
 .app-bar {
-  height: calc(constant(safe-area-inset-top) + 56px) !important;
-  height: calc(env(safe-area-inset-top) + 56px) !important;
+  height: calc(constant(safe-area-inset-top) + 64px) !important;
+  height: calc(env(safe-area-inset-top) + 64px) !important;
   padding-top: constant(safe-area-inset-top);
   padding-top: env(safe-area-inset-top);
 }
@@ -30,6 +30,14 @@ body .v-application {
 .random-slogan {
   padding-top: calc(constant(safe-area-inset-top) + 32px) !important;
   padding-top: calc(env(safe-area-inset-top) + 32px) !important;
+}
+
+.navigation-operations {
+  box-sizing: content-box;
+  height: 36px;
+  display: flex;
+  padding-bottom: calc(constant(safe-area-inset-bottom) + 12px) !important;
+  padding-bottom: calc(env(safe-area-inset-bottom) + 12px) !important;
 }
 
 .app-main {

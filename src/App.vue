@@ -39,19 +39,20 @@
       class="no-select padding-safe-left"
     >
       <!-- Random Slogan -->
-      <v-list-item class="random-slogan" three-line @click="randomSlogan">
-        <v-list-item-content>
-          <v-list-item-title class="text-h6">
-            <v-icon v-text="'mdi-wrench'" />
-            {{ $t('app.name') }}
-          </v-list-item-title>
-          <v-list-item-subtitle>
-            {{ slogan[sloganNo] }}
-          </v-list-item-subtitle>
-        </v-list-item-content>
-      </v-list-item>
-
-      <v-divider />
+      <template #prepend>
+        <v-list-item class="random-slogan" three-line @click="randomSlogan">
+          <v-list-item-content>
+            <v-list-item-title class="text-h6">
+              <v-icon v-text="'mdi-wrench'" />
+              {{ $t('app.name') }}
+            </v-list-item-title>
+            <v-list-item-subtitle>
+              {{ slogan[sloganNo] }}
+            </v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
+        <v-divider />
+      </template>
 
       <!-- Navigation -->
       <v-list nav dense>
@@ -98,7 +99,7 @@
           </v-list-item>
         </template>
 
-        <v-divider class="mt-auto" />
+        <v-divider />
 
         <v-subheader>
           {{
@@ -108,100 +109,119 @@
           }}
         </v-subheader>
 
-        <!-- Locale Settings -->
-        <v-menu offset-y>
-          <template v-slot:activator="{ on, attrs }">
-            <v-btn icon v-bind="attrs" v-on="on">
-              <v-icon v-text="'mdi-translate'" />
-            </v-btn>
+        <v-sparkline
+          :value="diceHistory"
+          :color="$root.primaryColor"
+          height="100"
+          stroke-linecap="round"
+          smooth
+        >
+          <template v-slot:label="item">
+            {{ item.value }}
           </template>
-          <v-list nav dense>
-            <v-list-item
-              v-for="lang in locales"
-              :key="lang.text"
-              :input-value="$root.locale == lang.value"
-              color="primary"
-              @click="$root.locale = lang.value"
-            >
-              <v-list-item-title v-text="lang.text" />
-            </v-list-item>
-          </v-list>
-        </v-menu>
-
-        <!-- Theme Settings -->
-        <v-menu offset-y>
-          <template v-slot:activator="{ on, attrs }">
-            <v-btn icon v-bind="attrs" v-on="on">
-              <v-icon v-text="themeIcon" />
-            </v-btn>
-          </template>
-          <v-list nav dense>
-            <v-list-item
-              v-for="theme in themes"
-              :key="theme.text"
-              :input-value="$root.selectTheme == theme.value"
-              color="primary"
-              @click="$root.selectTheme = theme.value"
-            >
-              <v-list-item-title v-text="theme.text" />
-            </v-list-item>
-          </v-list>
-        </v-menu>
-
-        <!-- VConsole -->
-        <v-btn icon @click="toggleVConsole">
-          <v-icon v-text="'mdi-console'" :color="vConsole ? 'primary' : ''" />
-        </v-btn>
-
-        <!-- Dice -->
-        <v-menu v-model="diceMenu" offset-y :close-on-content-click="false">
-          <template v-slot:activator="{ on, attrs }">
-            <v-btn icon v-bind="attrs" v-on="on">
-              <v-icon v-text="diceIcon" />
-            </v-btn>
-          </template>
-          <v-card>
-            <v-card-text>
-              <v-btn-toggle
-                v-model="diceToggle"
-                class="mb-8"
-                mandatory
-                rounded
-                dense
-                borderless
-              >
-                <v-btn
-                  v-for="(v, i) in [4, 6, 10, 12, 20]"
-                  :key="v"
-                  @click="diceSelect(v, i)"
-                >
-                  <v-icon v-text="`mdi-dice-d${v}`" />
-                </v-btn>
-                <v-btn @click="diceSelect(0)">
-                  <v-icon v-text="'mdi-help-circle'" />
-                </v-btn>
-              </v-btn-toggle>
-              <v-text-field
-                v-model="diceMin"
-                :disabled="!diceCustom"
-                :label="$t('dice.min')"
-                type="number"
-                dense
-              />
-              <v-text-field
-                v-model="diceMax"
-                :disabled="!diceCustom"
-                :label="$t('dice.max')"
-                type="number"
-                dense
-              />
-            </v-card-text>
-          </v-card>
-        </v-menu>
-        <v-btn text @click="random">{{ dice }}</v-btn>
+        </v-sparkline>
       </v-list>
 
-      <div id="placeholder" style="width: 100%; height: 96px" />
+      <template #append>
+        <v-divider />
+        <div
+          class="mx-4 mt-3 overflow-x-auto overflow-y-hidden navigation-operations"
+        >
+          <!-- Locale Settings -->
+          <v-menu offset-y>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn icon v-bind="attrs" v-on="on">
+                <v-icon v-text="'mdi-translate'" />
+              </v-btn>
+            </template>
+            <v-list nav dense>
+              <v-list-item
+                v-for="lang in locales"
+                :key="lang.text"
+                :input-value="$root.locale == lang.value"
+                color="primary"
+                @click="$root.locale = lang.value"
+              >
+                <v-list-item-title v-text="lang.text" />
+              </v-list-item>
+            </v-list>
+          </v-menu>
+
+          <!-- Theme Settings -->
+          <v-menu offset-y>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn icon v-bind="attrs" v-on="on">
+                <v-icon v-text="themeIcon" />
+              </v-btn>
+            </template>
+            <v-list nav dense>
+              <v-list-item
+                v-for="theme in themes"
+                :key="theme.text"
+                :input-value="$root.selectTheme == theme.value"
+                color="primary"
+                @click="$root.selectTheme = theme.value"
+              >
+                <v-list-item-title v-text="theme.text" />
+              </v-list-item>
+            </v-list>
+          </v-menu>
+
+          <!-- VConsole -->
+          <v-btn icon @click="toggleVConsole">
+            <v-icon v-text="'mdi-console'" :color="vConsole ? 'primary' : ''" />
+          </v-btn>
+
+          <!-- Dice -->
+          <v-menu v-model="diceMenu" offset-y :close-on-content-click="false">
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn icon v-bind="attrs" v-on="on">
+                <v-icon v-text="diceIcon" />
+              </v-btn>
+            </template>
+            <v-card>
+              <v-card-text>
+                <v-btn-toggle
+                  v-model="diceToggle"
+                  class="mb-8"
+                  mandatory
+                  rounded
+                  dense
+                  borderless
+                >
+                  <v-btn
+                    v-for="(v, i) in [4, 6, 10, 12, 20]"
+                    :key="v"
+                    @click="diceSelect(v, i)"
+                  >
+                    <v-icon v-text="`mdi-dice-d${v}`" />
+                  </v-btn>
+                  <v-btn @click="diceSelect(0)">
+                    <v-icon v-text="'mdi-help-circle'" />
+                  </v-btn>
+                </v-btn-toggle>
+                <v-text-field
+                  v-model="diceMin"
+                  :disabled="!diceCustom"
+                  :label="$t('dice.min')"
+                  type="number"
+                  dense
+                />
+                <v-text-field
+                  v-model="diceMax"
+                  :disabled="!diceCustom"
+                  :label="$t('dice.max')"
+                  type="number"
+                  dense
+                />
+              </v-card-text>
+            </v-card>
+          </v-menu>
+          <v-btn icon @click="random">
+            <v-icon v-text="'mdi-dice-5'" />
+          </v-btn>
+        </div>
+      </template>
     </v-navigation-drawer>
 
     <v-snackbar v-model="$root.copyError" class="safe-bottom">
@@ -254,7 +274,8 @@ export default {
     diceCustom: false,
     diceToggle: 1,
     diceMenu: false,
-    dice: Math.floor(Math.random() * 6) + 1,
+    dice: undefined,
+    diceHistory: [0],
     vConsole: undefined,
     fabButton: {
       fab: true,
@@ -327,8 +348,11 @@ export default {
     random() {
       let min = Number(this.diceMin) || 0
       let max = Number(this.diceMax) || 0
-      this.dice = Math.floor(min + Math.random() * (max - min + 1))
-      console.log('[dice]', min, max, this.dice)
+      let value = Math.floor(min + Math.random() * (max - min + 1))
+      this.dice = value
+      this.diceHistory.push(value)
+      if (this.diceHistory.length > 10) this.diceHistory.shift()
+      console.log('[dice]', min, max, value)
     },
   },
 }
