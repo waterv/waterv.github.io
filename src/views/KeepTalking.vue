@@ -7,6 +7,79 @@
 <template>
   <div class="keep-talking">
     <v-expansion-panels v-model="panel" class="mt-4">
+      <!-- Wire -->
+      <v-expansion-panel>
+        <v-expansion-panel-header>
+          {{ $t('kt.wire') }}
+        </v-expansion-panel-header>
+        <v-expansion-panel-content>
+          <v-row
+            v-for="i in $range(6)"
+            :key="i"
+            no-gutters
+            class="justify-center mb-2"
+          >
+            <v-btn-toggle v-model="wires[i]" mandatory dense borderless>
+              <v-btn v-for="j in $range(6)" :key="j" :value="wireValues[j]">
+                <v-icon :color="wireColors[j]" v-text="wireIcons[j]" />
+              </v-btn>
+            </v-btn-toggle>
+            <v-tooltip top>
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  icon
+                  class="ml-2"
+                  :disabled="!wireResult[i]"
+                  v-bind="attrs"
+                  v-on="on"
+                >
+                  <v-icon v-text="wireResult[i].icon" />
+                </v-btn>
+              </template>
+              <span v-text="wireResult[i].hint" />
+            </v-tooltip>
+          </v-row>
+        </v-expansion-panel-content>
+      </v-expansion-panel>
+
+      <!-- Memory -->
+      <v-expansion-panel>
+        <v-expansion-panel-header>
+          {{ $t('kt.memory') }}
+        </v-expansion-panel-header>
+        <v-expansion-panel-content>
+          <v-text-field
+            class="mt-2"
+            :label="$t('kt.digits')"
+            :hint="$t('kt.digitsHint')"
+            outlined
+            v-model="digits"
+            :rules="digitsRule"
+            clearable
+          />
+          <v-row
+            v-for="(v, i) in digitsResult"
+            :key="i"
+            no-gutters
+            class="justify-center mb-2"
+          >
+            <template v-if="v.button.length == 4">
+              <v-btn-toggle mandatory dense borderless>
+                <v-btn disabled>
+                  <v-icon v-text="`mdi-numeric-${v.screen + 1}-box`" />
+                </v-btn>
+                <v-btn v-for="(n, j) in v.button" :key="j">
+                  <v-icon
+                    v-text="`mdi-numeric-${n}-box-outline`"
+                    :color="v.pos == j ? 'primary' : ''"
+                  />
+                </v-btn>
+              </v-btn-toggle>
+            </template>
+          </v-row>
+        </v-expansion-panel-content>
+      </v-expansion-panel>
+
       <!-- Morse -->
       <v-expansion-panel>
         <v-expansion-panel-header>
@@ -75,7 +148,7 @@
               <span v-t="`kt.compState[${i}]`" />
             </v-tooltip>
           </v-row>
-          <v-divider />
+          <v-divider class="my-2" />
 
           <v-row no-gutters class="justify-center">
             <v-btn icon disabled />
@@ -288,6 +361,20 @@ export default {
     kt,
     panel: 0,
 
+    wires: ['red', 'red', 'red', undefined, undefined, undefined],
+    wireValues: [undefined, 'red', 'blue', 'yellow', 'white', 'black'],
+    wireIcons: [
+      'mdi-circle-off-outline',
+      'mdi-alpha-r-circle',
+      'mdi-alpha-b-circle',
+      'mdi-alpha-y-circle',
+      'mdi-alpha-w-circle-outline',
+      'mdi-alpha-b-circle',
+    ],
+    wireColors: ['', 'red', 'blue', 'orange', '', ''],
+
+    digits: '',
+
     morse: '',
 
     compState: [false, false, false, false],
@@ -302,7 +389,11 @@ export default {
     compIndices: [2, 1, 3, 0],
 
     seqState: [0, 0, 0],
-    seqIcons: ['mdi-alpha-r-circle', 'mdi-alpha-b-circle', 'mdi-circle'],
+    seqIcons: [
+      'mdi-alpha-r-circle',
+      'mdi-alpha-b-circle',
+      'mdi-alpha-b-circle',
+    ],
     seqColors: ['red', 'blue', ''],
 
     step: 1,
@@ -319,6 +410,98 @@ export default {
     this.dirs = bfsResult.dirs
   },
   computed: {
+    wireResult() {
+      let arr = this.wires.filter(v => v)
+      let [even, odd] = [false, true].map(v => this.wireResults(arr, v))
+      let result = ['', '', '', '', '', '', '']
+      let map = [...this.wires.entries()].filter(v => v[1]) // 过滤掉 falsy 值的 arr 下标到 this.wires 下标的映射
+      result[map[odd]?.[0] ?? 6] = {
+        icon: 'mdi-tag',
+        hint: this.$t('kt.wireInst[1]'),
+      }
+      result[map[even]?.[0] ?? 6] = {
+        icon: 'mdi-content-cut',
+        hint: this.$t('kt.wireInst[0]'),
+      }
+      return result
+    },
+    digitsRule() {
+      return [
+        v =>
+          Array.from(v).every(c => '1' <= c && c <= '4') ||
+          this.$t('kt.rule.notdigits'),
+        v =>
+          v
+            .match(/[1-4]{0,5}/g) // 量词会贪心, 尽可能匹配长度为 5 的子串
+            .every(
+              str =>
+                [...new Set(Array.from(str.slice(1)))].length ==
+                str.slice(1).length // 去重和不去重长度相同, 即无重复元素
+            ) || this.$t('kt.rule.notpermutation'),
+      ]
+    },
+    digitsResult() {
+      if (!this.digitsRule.every(f => f(this.digits) === true)) return {}
+      let data = this.digits.match(/[1-4]{0,5}/g).map(str => ({
+        screen: Number(str.slice(0, 1)) - 1,
+        button: str.slice(1),
+      }))
+      let choose = ({ i, num, pos, sameNumStage, samePosStage }) => {
+        Object.assign(data[i], {
+          num:
+            num ??
+            data[i].button[pos] ??
+            data[sameNumStage]?.num ??
+            data[i].button[data[samePosStage]?.pos],
+          pos:
+            (num && data[i].button.indexOf(num)) ??
+            pos ??
+            (data[sameNumStage]?.num &&
+              data[i].button.indexOf(data[sameNumStage]?.num)) ??
+            data[samePosStage]?.pos,
+        })
+      }
+      for (let [i, v] of data.entries()) {
+        if (v.button.length < 4) break
+        switch (i) {
+          case 0:
+            choose({ i, pos: [1, 1, 2, 3][v.screen] })
+            break
+          case 1:
+            switch (v.screen) {
+              case 0:
+                choose({ i, num: '4' })
+                break
+              case 2:
+                choose({ i, pos: 0 })
+                break
+              default:
+                choose({ i, samePosStage: 0 })
+                break
+            }
+            break
+          case 2:
+            switch (v.screen) {
+              case 2:
+                choose({ i, pos: 2 })
+                break
+              case 3:
+                choose({ i, num: '4' })
+                break
+              default:
+                choose({ i, sameNumStage: [1, 0][v.screen] })
+            }
+            break
+          case 3:
+            if (v.screen == 1) choose({ i, pos: 0 })
+            else choose({ i, samePosStage: [0, 0, 1, 1][v.screen] })
+            break
+          case 4:
+            choose({ i, sameNumStage: [0, 1, 3, 2][v.screen] })
+        }
+      }
+      return data
+    },
     morseRule() {
       return [
         v =>
@@ -338,16 +521,20 @@ export default {
         let morseTranslation = this.morseTranslation.toLowerCase()
         let letterCount = [...new Set(Array.from(morseTranslation))].length
         let wordResult = []
+        let matches = {}
         let matchTime = 0
         Array.from(word).forEach(char => {
           if (morseTranslation.indexOf(char) != -1) {
             wordResult.push('primary--text')
-            matchTime += 1
+            if (!matches[char]) {
+              matches[char] = true
+              matchTime += 1
+            }
           } else wordResult.push('')
         })
         result[word] = {
           value: wordResult,
-          valid: matchTime && matchTime >= letterCount,
+          valid: matchTime && matchTime == letterCount,
         }
       })
       return result
@@ -404,6 +591,33 @@ export default {
     },
   },
   methods: {
+    wireResults(arr, isOdd) {
+      let count = color => arr.filter(v => v == color).length
+      let last = color => arr[arr.length - 1] == color
+      switch (arr.length) {
+        case 3:
+          if (count('red') == 0) return 1
+          if (last('white')) return 2
+          if (count('blue') > 1) return arr.lastIndexOf('blue')
+          return 2
+        case 4:
+          if (count('red') > 1 && isOdd) return arr.lastIndexOf('red')
+          if (count('red') == 0 && last('yellow')) return 0
+          if (count('blue') == 1) return 0
+          if (count('yellow') > 1) return 3
+          return 1
+        case 5:
+          if (last('black') && isOdd) return 3
+          if (count('red') == 1 && count('yellow') > 1) return 0
+          if (count('black') == 0) return 1
+          return 0
+        case 6:
+          if (count('yellow') == 0 && isOdd) return 2
+          if (count('yellow') == 1 && count('white') > 1) return 3
+          if (count('red') == 0) return 5
+          return 3
+      }
+    },
     toggleCompState(i) {
       this.compState[this.compIndices[i]] = !this.compState[this.compIndices[i]]
       this.compStateInteger = eval('0b' + this.compState.map(Number).join(''))

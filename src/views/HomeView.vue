@@ -106,45 +106,10 @@
       </v-card>
     </v-expand-transition>
 
-    <v-divider class="my-4" />
-
-    <v-menu v-model="paletteMenu" :close-on-content-click="false" offset-y>
-      <template #activator="{ on, attrs }">
-        <v-btn color="primary" dark v-bind="attrs" v-on="on">
-          <v-icon left v-text="'mdi-palette'" />
-          {{ $t('settings.palette') }}
-        </v-btn>
-      </template>
-      <v-card>
-        <v-btn-toggle v-model="paletteMode" dense group>
-          <v-btn
-            v-for="mode in paletteModes"
-            :key="mode"
-            :value="mode"
-            v-text="mode"
-          />
-        </v-btn-toggle>
-        <v-color-picker
-          v-model="paletteValue"
-          :mode="paletteMode"
-          show-swatches
-          swatches-max-height="100"
-        />
-        <v-card-actions>
-          <v-btn
-            color="primary"
-            text
-            @click="setPrimaryColor"
-            v-text="$t('_.confirm')"
-          />
-        </v-card-actions>
-      </v-card>
-    </v-menu>
-
-    <v-btn class="ml-4" color="error" dark @click="clearLocalStorage">
+    <!-- <v-btn class="ml-4" color="error" dark @click="clearLocalStorage">
       <v-icon left v-text="'mdi-delete'" />
       {{ $t('settings.clearLocalStorage') }}
-    </v-btn>
+    </v-btn> -->
   </div>
 </template>
 
@@ -161,27 +126,20 @@ export default {
     VEditor,
     BrailleKey,
   },
-  data() {
-    return {
-      ...misc,
-      value: '',
+  data: () => ({
+    ...misc,
+    value: '',
 
-      focused: false,
-      tab: 0,
-      codePoint: '',
-      brailles: [
-        [false, false],
-        [false, false],
-        [false, false],
-        [false, false],
-      ],
-
-      paletteMenu: false,
-      paletteValue: this.$root.primaryColor + 'FF',
-      paletteMode: 'rgba',
-      paletteModes: ['rgba', 'hsla', 'hexa'],
-    }
-  },
+    focused: false,
+    tab: 0,
+    codePoint: '',
+    brailles: [
+      [false, false],
+      [false, false],
+      [false, false],
+      [false, false],
+    ],
+  }),
   computed: {
     showLightandnight: {
       get() {
@@ -231,17 +189,6 @@ export default {
         for (let j in this.brailles[i])
           result |= Number(this.brailles[i][j]) << this.braille[i][j]
       this.append(eval(`'\\u${(0x2800 + result).toString(16)}'`))
-    },
-    setPrimaryColor() {
-      this.$root.primaryColor = this.paletteValue.slice(0, 7)
-      this.paletteMenu = false
-    },
-    clearLocalStorage() {
-      localStorage.clear()
-      this.$root.locale = 'zh-CN'
-      this.$root.selectTheme = 'system'
-      this.paletteValue = '#1976D2'
-      this.setPrimaryColor()
     },
   },
 }

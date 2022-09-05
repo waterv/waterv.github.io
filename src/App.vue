@@ -125,53 +125,8 @@
       <template #append>
         <v-divider />
         <div
-          class="mx-4 mt-3 overflow-x-auto overflow-y-hidden navigation-operations"
+          class="px-4 mt-3 overflow-x-auto overflow-y-hidden navigation-operations"
         >
-          <!-- Locale Settings -->
-          <v-menu offset-y>
-            <template v-slot:activator="{ on, attrs }">
-              <v-btn icon v-bind="attrs" v-on="on">
-                <v-icon v-text="'mdi-translate'" />
-              </v-btn>
-            </template>
-            <v-list nav dense>
-              <v-list-item
-                v-for="lang in locales"
-                :key="lang.text"
-                :input-value="$root.locale == lang.value"
-                color="primary"
-                @click="$root.locale = lang.value"
-              >
-                <v-list-item-title v-text="lang.text" />
-              </v-list-item>
-            </v-list>
-          </v-menu>
-
-          <!-- Theme Settings -->
-          <v-menu offset-y>
-            <template v-slot:activator="{ on, attrs }">
-              <v-btn icon v-bind="attrs" v-on="on">
-                <v-icon v-text="themeIcon" />
-              </v-btn>
-            </template>
-            <v-list nav dense>
-              <v-list-item
-                v-for="theme in themes"
-                :key="theme.text"
-                :input-value="$root.selectTheme == theme.value"
-                color="primary"
-                @click="$root.selectTheme = theme.value"
-              >
-                <v-list-item-title v-text="theme.text" />
-              </v-list-item>
-            </v-list>
-          </v-menu>
-
-          <!-- VConsole -->
-          <v-btn icon @click="toggleVConsole">
-            <v-icon v-text="'mdi-console'" :color="vConsole ? 'primary' : ''" />
-          </v-btn>
-
           <!-- Dice -->
           <v-menu v-model="diceMenu" offset-y :close-on-content-click="false">
             <template v-slot:activator="{ on, attrs }">
@@ -215,10 +170,123 @@
                   dense
                 />
               </v-card-text>
+              <v-card-actions>
+                <v-btn
+                  color="primary"
+                  text
+                  @click="diceMenu = false"
+                  v-text="$t('_.confirm')"
+                />
+              </v-card-actions>
             </v-card>
           </v-menu>
+
           <v-btn icon @click="random">
             <v-icon v-text="'mdi-dice-5'" />
+          </v-btn>
+
+          <!-- Locale Settings -->
+          <v-menu offset-y>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn icon v-bind="attrs" v-on="on">
+                <v-icon v-text="'mdi-translate'" />
+              </v-btn>
+            </template>
+            <v-list nav dense>
+              <v-list-item
+                v-for="lang in locales"
+                :key="lang.text"
+                :input-value="$root.locale == lang.value"
+                color="primary"
+                @click="$root.locale = lang.value"
+              >
+                <v-list-item-title v-text="lang.text" />
+              </v-list-item>
+            </v-list>
+          </v-menu>
+
+          <!-- Theme Settings -->
+          <v-menu offset-y>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn icon v-bind="attrs" v-on="on">
+                <v-icon v-text="themeIcon" />
+              </v-btn>
+            </template>
+            <v-list nav dense>
+              <v-list-item
+                v-for="theme in themes"
+                :key="theme.text"
+                :input-value="$root.selectTheme == theme.value"
+                color="primary"
+                @click="$root.selectTheme = theme.value"
+              >
+                <v-list-item-title v-text="theme.text" />
+              </v-list-item>
+            </v-list>
+          </v-menu>
+
+          <!-- Palette -->
+          <v-menu
+            v-model="paletteMenu"
+            :close-on-content-click="false"
+            offset-y
+          >
+            <template #activator="{ on, attrs }">
+              <v-btn icon v-bind="attrs" v-on="on">
+                <v-icon v-text="'mdi-palette'" />
+              </v-btn>
+            </template>
+            <v-card>
+              <v-color-picker
+                v-model="paletteValue"
+                :mode="paletteMode"
+                show-swatches
+                swatches-max-height="100"
+              />
+              <v-card-actions>
+                <v-btn
+                  color="primary"
+                  text
+                  @click="setPrimaryColor"
+                  v-text="$t('_.confirm')"
+                />
+                <v-btn-toggle v-model="paletteMode" dense group>
+                  <v-btn
+                    v-for="mode in paletteModes"
+                    :key="mode"
+                    :value="mode"
+                    v-text="mode"
+                  />
+                </v-btn-toggle>
+              </v-card-actions>
+            </v-card>
+          </v-menu>
+
+          <!-- Clear LocalStorage -->
+          <v-menu v-model="localStorageMenu" offset-y>
+            <template #activator="{ on, attrs }">
+              <v-btn icon v-bind="attrs" v-on="on">
+                <v-icon v-text="'mdi-broom'" />
+              </v-btn>
+            </template>
+            <v-card>
+              <v-card-text>
+                {{ $t('settings.clearLocalStorageHint') }}
+              </v-card-text>
+              <v-card-actions>
+                <v-btn
+                  color="primary"
+                  text
+                  @click="clearLocalStorage"
+                  v-text="$t('_.confirm')"
+                />
+              </v-card-actions>
+            </v-card>
+          </v-menu>
+
+          <!-- VConsole -->
+          <v-btn icon @click="toggleVConsole">
+            <v-icon v-text="'mdi-console'" :color="vConsole ? 'primary' : ''" />
           </v-btn>
         </div>
       </template>
@@ -243,9 +311,12 @@ export default {
   data: () => ({
     dayjs: require('dayjs'),
     version: require('@/data/time.json'),
+
     drawer: false,
+
     slogan,
     sloganNo: 0,
+
     items: [
       { icon: 'mdi-home', name: 'home', to: '/' },
       {
@@ -265,10 +336,7 @@ export default {
         children: [{ icon: 'mdi-bomb', name: 'keeptalking', desc: true }],
       },
     ],
-    locales: [
-      { text: '简体中文', value: 'zh-CN' },
-      { text: 'English', value: 'en-US' },
-    ],
+
     diceMin: 1,
     diceMax: 6,
     diceCustom: false,
@@ -276,6 +344,19 @@ export default {
     diceMenu: false,
     dice: undefined,
     diceHistory: [0],
+
+    locales: [
+      { text: '简体中文', value: 'zh-CN' },
+      { text: 'English', value: 'en-US' },
+    ],
+
+    paletteMenu: false,
+    paletteValue: undefined, // mounted
+    paletteMode: 'rgba',
+    paletteModes: ['rgba', 'hsla', 'hexa'],
+
+    localStorageMenu: false,
+
     vConsole: undefined,
     fabButton: {
       fab: true,
@@ -315,21 +396,11 @@ export default {
   },
   mounted() {
     this.randomSlogan()
+    this.paletteValue = this.$root.primaryColor + 'FF'
   },
   methods: {
     randomSlogan() {
       this.sloganNo = Math.floor(Math.random() * slogan.length)
-    },
-    toggleVConsole() {
-      if (this.vConsole) {
-        this.vConsole.destroy()
-        this.vConsole = undefined
-      } else {
-        this.vConsole = new VConsole({
-          theme: this.$root.theme ? 'dark' : 'light',
-        })
-        this.vConsole.hideSwitch()
-      }
     },
     diceSelect(v, i) {
       if (!v)
@@ -342,7 +413,6 @@ export default {
         diceMax: v,
         diceCustom: false,
         diceToggle: i,
-        diceMenu: false,
       })
     },
     random() {
@@ -353,6 +423,28 @@ export default {
       this.diceHistory.push(value)
       if (this.diceHistory.length > 10) this.diceHistory.shift()
       console.log('[dice]', min, max, value)
+    },
+    setPrimaryColor() {
+      this.$root.primaryColor = this.paletteValue.slice(0, 7)
+      this.paletteMenu = false
+    },
+    toggleVConsole() {
+      if (this.vConsole) {
+        this.vConsole.destroy()
+        this.vConsole = undefined
+      } else {
+        this.vConsole = new VConsole({
+          theme: this.$root.theme ? 'dark' : 'light',
+        })
+        this.vConsole.hideSwitch()
+      }
+    },
+    clearLocalStorage() {
+      localStorage.clear()
+      this.$root.locale = 'zh-CN'
+      this.$root.selectTheme = 'system'
+      this.paletteValue = '#1976D2'
+      this.setPrimaryColor()
     },
   },
 }

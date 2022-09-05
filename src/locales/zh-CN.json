@@ -34,8 +34,7 @@
       "dark": "深色",
       "system": "跟随系统"
     },
-    "palette": "配色",
-    "clearLocalStorage": "清空本地储存",
+    "clearLocalStorageHint": "确定要清除 localStorage 吗？这将重置所有的设置项。",
     "version": "最近更新时间：{0}"
   },
   "dice": {
@@ -139,6 +138,11 @@
     "without": "该字体缺少 {0}"
   },
   "kt": {
+    "wire": "线路模块",
+    "wireInst": ["切断", "序列号末位为奇则优先切断"],
+    "memory": "记忆模块",
+    "digits": "出现的数字",
+    "digitsHint": "依次输入五个阶段出现的数字。每个阶段中，先输入显示的数字，再输入从左到右按钮上的数字。无需任何其他字符。",
     "morse": "摩斯电码",
     "morseCode": "@:kt.morse",
     "morseCodeHint": "[.] 表示 di，[-] 表示 dah，用 [/] 或空格隔开。",
@@ -151,7 +155,7 @@
       "P": "有 Parallel 端口则切断 (Parallel)",
       "B": "有复数电池则切断 (Bi-batteries)"
     },
-    "seq": "顺序电路",
+    "seq": "顺序线路",
     "maze": "迷宫模块",
     "pos": ["圆圈 1", "圆圈 2", "白色光点", "红色三角"],
     "posHint": ["用于确定迷宫", "用于确定迷宫", "起点", "终点"],
@@ -159,6 +163,8 @@
     "chars": "可用的字母",
     "charsHint": "从第一个位置起，不同位置的可用字母用空格隔开，不区分大小写。如：AbCdE fGhIj。",
     "rule": {
+      "notdigits": "只允许输入 1，2，3 和 4",
+      "notpermutation": "按钮部分存在重复数字",
       "notmorse": "只允许输入 [.]，[-]，[/] 和空格",
       "notchar": "只允许输入字母和空格"
     }

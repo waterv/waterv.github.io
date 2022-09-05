@@ -41,6 +41,7 @@ body .v-application {
 }
 
 .app-main {
+  padding-top: 64px !important;
   padding-bottom: constant(safe-area-inset-bottom) !important;
   padding-bottom: env(safe-area-inset-bottom) !important;
   padding-left: constant(safe-area-inset-left) !important;

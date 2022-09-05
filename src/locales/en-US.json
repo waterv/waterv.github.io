@@ -34,8 +34,7 @@
       "dark": "Dark",
       "system": "System"
     },
-    "palette": "Palette",
-    "clearLocalStorage": "Clear localStorage",
+    "clearLocalStorageHint": "Are you sure to clear localStorage? This will reset all the settings.",
     "version": "Last updated: {0}"
   },
   "dice": {
@@ -139,6 +138,11 @@
     "without": "The font doesn't have {0}"
   },
   "kt": {
+    "wire": "Wires",
+    "wireInst": ["Cut", "Firstly cut if the last digit of the Serial Number is odd"],
+    "memory": "Memory",
+    "digits": "Digits",
+    "digitsHint": "Enter the digits in sequence of the five stages. In each stage, first enter the display digit, and then enter the digits on the button from left to right. No other characters are required.",
     "morse": "Morse Code",
     "morseCode": "Morse Code",
     "morseCodeHint": "[.] for \"di\", [-] for \"dah\", [/] or space for splitting.",
