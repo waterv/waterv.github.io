@@ -57,6 +57,7 @@
             :rules="digitsRule"
             clearable
           />
+
           <v-row
             v-for="(v, i) in digitsResult"
             :key="i"
@@ -64,7 +65,7 @@
             class="justify-center mb-2"
           >
             <template v-if="v.button.length == 4">
-              <v-btn-toggle mandatory dense borderless>
+              <v-btn-toggle dense borderless>
                 <v-btn disabled>
                   <v-icon v-text="`mdi-numeric-${v.screen + 1}-box`" />
                 </v-btn>
@@ -95,8 +96,11 @@
             :rules="morseRule"
             clearable
           />
+
           {{ morseTranslation }}
+
           <v-divider class="my-4" />
+
           <v-row no-gutters>
             <v-col
               v-for="(freq, word) in kt.morseWords"
@@ -148,6 +152,7 @@
               <span v-t="`kt.compState[${i}]`" />
             </v-tooltip>
           </v-row>
+
           <v-divider class="my-2" />
 
           <v-row no-gutters class="justify-center">
@@ -203,7 +208,9 @@
             <v-col v-for="i in $range(3)" :key="i" cols="4">
               <v-list dense nav class="text-center">
                 <v-icon :color="seqColors[i]" v-text="seqIcons[i]" />
+
                 <v-divider class="my-2" />
+
                 <v-list-item-group v-model="seqState[i]" color="primary">
                   <v-list-item v-for="(v, j) in kt.seq[i]" :key="j">
                     <v-list-item-content>
@@ -343,6 +350,7 @@
         </v-expansion-panel-content>
       </v-expansion-panel>
     </v-expansion-panels>
+
     <tutorial-list :tutorials="kt.tutorials" />
   </div>
 </template>
@@ -401,6 +409,12 @@ export default {
     maze: kt.mazes[1263],
     path: [],
     dirs: [],
+    mazeDirs: [
+      { xOffset: 1, yOffset: 0, dir: 'right' },
+      { xOffset: 0, yOffset: 1, dir: 'down' },
+      { xOffset: -1, yOffset: 0, dir: 'left' },
+      { xOffset: 0, yOffset: -1, dir: 'up' },
+    ],
 
     chars: '',
   }),
@@ -635,14 +649,8 @@ export default {
         }))
       )
       let memos = [{ x: x0, y: y0, path: [`${x0}${y0}`], dirs: [] }]
-      let d = [
-        { xOffset: 1, yOffset: 0, dir: 'right' },
-        { xOffset: 0, yOffset: 1, dir: 'down' },
-        { xOffset: -1, yOffset: 0, dir: 'left' },
-        { xOffset: 0, yOffset: -1, dir: 'up' },
-      ]
       let pushMemo = (memo, mode) => {
-        let { xOffset, yOffset, dir } = d[mode]
+        let { xOffset, yOffset, dir } = this.mazeDirs[mode]
         let x = memo.x + xOffset
         let y = memo.y + yOffset
         if (maze[y][x].visited) return
@@ -663,7 +671,7 @@ export default {
         if (maze[y - 1]?.[x].bottom) pushMemo(memo, 3)
       }
       let result
-      while (!(result = bfs(memos.shift())));
+      for (; !result; result = bfs(memos.shift()));
       return result
     },
     setPos(x, y) {
