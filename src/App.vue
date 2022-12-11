@@ -181,9 +181,24 @@
             </v-card>
           </v-menu>
 
-          <v-btn icon @click="random">
-            <v-icon v-text="'mdi-dice-5'" />
-          </v-btn>
+          <v-tooltip top :open-on-focus="false">
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn icon v-bind="attrs" v-on="on" @click="random">
+                <v-icon v-text="'mdi-dice-5'" />
+              </v-btn>
+            </template>
+            <span v-text="dice || '-'" />
+          </v-tooltip>
+
+          <!-- Cyber Wooden Fish -->
+          <v-tooltip top :open-on-focus="false">
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn icon v-bind="attrs" v-on="on" @click="merit++">
+                <v-icon v-text="'mdi-fish'" />
+              </v-btn>
+            </template>
+            <span v-text="`${$t('tips.merit')}${merit}`" />
+          </v-tooltip>
 
           <!-- Locale Settings -->
           <v-menu offset-y>
@@ -345,6 +360,8 @@ export default {
     dice: undefined,
     diceHistory: [0],
 
+    merit: Number(localStorage.getItem('merit')) || 0,
+
     locales: [
       { text: '简体中文', value: 'zh-CN' },
       { text: 'English', value: 'en-US' },
@@ -394,6 +411,11 @@ export default {
       return `mdi-dice-d${this.diceMax}`
     },
   },
+  watch: {
+    merit(v) {
+      localStorage.setItem('merit', v)
+    },
+  },
   mounted() {
     this.randomSlogan()
     this.paletteValue = this.$root.primaryColor + 'FF'
@@ -424,6 +446,7 @@ export default {
       if (this.diceHistory.length > 10) this.diceHistory.shift()
       console.log('[dice]', min, max, value)
     },
+    increaseMerit() {},
     setPrimaryColor() {
       this.$root.primaryColor = this.paletteValue.slice(0, 7)
       this.paletteMenu = false

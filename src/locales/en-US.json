@@ -172,6 +172,7 @@
     "updated": "New content is available; click to refresh."
   },
   "tips": {
-    "lightandnight": "Please visit {0} if you want to use \"Light and Night Toolbox\"."
+    "lightandnight": "Please visit {0} if you want to use \"Light and Night Toolbox\".",
+    "merit": "Merit: "
   }
 }
