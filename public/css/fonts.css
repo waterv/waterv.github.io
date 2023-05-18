@@ -21,3 +21,18 @@
   font-style: italic;
   src: url(../fonts/CharisSIL-BoldItalic.woff2);
 }
+
+@font-face {
+  font-family: HpPrime;
+  src: url(../fonts/HPPrime.ttf);
+}
+
+@font-face {
+  font-family: CasioClassWiz;
+  src: url(../fonts/CASIO\ ClassWiz.ttf);
+}
+
+@font-face {
+  font-family: CasioClassWizCW01;
+  src: url(../fonts/CW01.ttf);
+}

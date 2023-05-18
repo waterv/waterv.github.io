@@ -62,12 +62,3 @@ body .v-application {
 .editor textarea {
   font-family: monospace;
 }
-
-.ipa,
-.ipa-editor textarea {
-  font-family: CharisSIL, sans-serif;
-}
-
-#katex .katex .accent {
-  background-color: unset !important;
-}

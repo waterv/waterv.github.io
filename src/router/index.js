@@ -26,6 +26,11 @@ const routes = [
     component: () => import('../views/IpaEditor.vue'),
   },
   {
+    path: '/editor/calc',
+    name: 'CalcEditor',
+    component: () => import('../views/CalcEditor.vue'),
+  },
+  {
     path: '/converter/font',
     name: 'FontConverter',
     component: () => import('../views/FontConverter.vue'),

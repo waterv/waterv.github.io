@@ -146,3 +146,10 @@ export default {
   },
 }
 </script>
+
+<style>
+.ipa,
+.ipa-editor textarea {
+  font-family: CharisSIL, sans-serif;
+}
+</style>

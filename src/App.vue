@@ -340,6 +340,7 @@ export default {
           { icon: 'mdi-regex', name: 'regexp' },
           { icon: 'mdi-calculator-variant', name: 'tex' },
           { icon: 'mdi-code-array', name: 'ipa' },
+          { icon: 'mdi-calculator', name: 'calc' },
         ],
       },
       {

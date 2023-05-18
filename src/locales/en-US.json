@@ -8,7 +8,8 @@
       "_": "Editors",
       "regexp": "RegExp Editor",
       "tex": "TeX Formula Editor",
-      "ipa": "IPA Editor"
+      "ipa": "IPA Editor",
+      "calc": "Calc Operation Editor"
     },
     "converter": {
       "_": "Converters",
@@ -125,6 +126,9 @@
     "extIpaOther": "Others (extIPA)",
     "extIpaOthers": ["Loud speech", "Quiet speech", "Pause / Silent articulation / Indeterminate", "Phonation / Prosodic", "Extraneous noice", "Unidentifiable", "Segment", "Consonant", "Fricative", "Glide / Approximant", "Click", "Liquid / Lateral", "Nasal", "Plosive", "Rhotic / Resonant", "Sibilant", "Tone / Accent / Stress", "Vowel"],
     "tips": "Show the meaning of symbols"
+  },
+  "calc": {
+    "name": "Calculator Operation Process"
   },
   "font": {
     "source": "Source Text",

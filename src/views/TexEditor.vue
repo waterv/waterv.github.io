@@ -240,3 +240,9 @@ export default {
   },
 }
 </script>
+
+<style>
+#katex .katex .accent {
+  background-color: unset !important;
+}
+</style>
