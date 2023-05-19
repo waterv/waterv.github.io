@@ -197,7 +197,7 @@
                 <v-icon v-text="'mdi-fish'" />
               </v-btn>
             </template>
-            <span v-text="`${$t('tips.merit')}${merit}`" />
+            <span v-text="`${$t('settings.merit')}${merit}`" />
           </v-tooltip>
 
           <!-- Locale Settings -->
@@ -350,6 +350,10 @@ export default {
       {
         name: 'helper',
         children: [{ icon: 'mdi-bomb', name: 'keeptalking', desc: true }],
+      },
+      {
+        name: 'emulator',
+        children: [{ icon: 'mdi-cow', name: '11nimmt' }],
       },
     ],
 

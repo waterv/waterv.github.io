@@ -1,13 +1,5 @@
 <template>
   <div class="home">
-    <v-alert v-model="showLightandnight" color="green" outlined dismissible>
-      <i18n path="tips.lightandnight">
-        <v-link href="//lightandnight.vercel.app" external>
-          {{ $t('_.here') }}
-        </v-link>
-      </i18n>
-    </v-alert>
-
     <v-editor
       v-model="value"
       ref="editor"
@@ -114,7 +106,6 @@
 </template>
 
 <script>
-import VLink from '@/components/VLink.vue'
 import VEditor from '@/components/VEditor.vue'
 import BrailleKey from '@/components/BrailleKey.vue'
 let misc = require('@/data/misc.json')
@@ -122,7 +113,6 @@ let misc = require('@/data/misc.json')
 export default {
   name: 'HomeView',
   components: {
-    VLink,
     VEditor,
     BrailleKey,
   },
@@ -141,14 +131,6 @@ export default {
     ],
   }),
   computed: {
-    showLightandnight: {
-      get() {
-        return !(localStorage?.getItem('showLightandnight') === 'false')
-      },
-      set(v) {
-        localStorage?.setItem('showLightandnight', !!v)
-      },
-    },
     codePointRule() {
       return [
         v => v.length <= 6 || this.$t('home.rule.long'),

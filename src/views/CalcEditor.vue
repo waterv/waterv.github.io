@@ -26,11 +26,8 @@
             <v-btn
               v-for="(key, j) in row"
               :key="j"
-              :class="[
-                'calc',
-                models[model].class,
-                key.length > 1 ? 'small' : '',
-              ]"
+              class="calc"
+              :class="{ small: key.length > 1 }"
               icon
               large
               :disabled="!key"
@@ -126,19 +123,19 @@ export default {
   font-size: 0.6em;
 }
 
-.calc.hp-prime,
+.calc-editor.hp-prime .calc,
 .calc-editor.hp-prime textarea {
   font-family: HpPrime, monospace;
   text-transform: none !important;
 }
 
-.calc.casio-classwiz,
+.calc-editor.casio-classwiz .calc,
 .calc-editor.casio-classwiz textarea {
   font-family: CasioClassWiz, monospace;
   text-transform: none !important;
 }
 
-.calc.casio-classwiz-cw01,
+.calc-editor.casio-classwiz-cw01 .calc,
 .calc-editor.casio-classwiz-cw01 textarea {
   font-family: CasioClassWizCW01, monospace;
   text-transform: none !important;

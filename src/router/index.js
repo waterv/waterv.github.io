@@ -40,6 +40,11 @@ const routes = [
     name: 'KeepTalking',
     component: () => import('../views/KeepTalking.vue'),
   },
+  {
+    path: '/emulator/11nimmt',
+    name: '11Nimmt',
+    component: () => import('../views/11Nimmt.vue'),
+  },
 ]
 
 const router = new VueRouter({
