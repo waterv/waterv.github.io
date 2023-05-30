@@ -40,13 +40,13 @@
     >
       <!-- Random Slogan -->
       <template #prepend>
-        <v-list-item class="random-slogan" three-line @click="randomSlogan">
-          <v-list-item-content>
-            <v-list-item-title class="text-h6">
+        <v-list-item class="random-slogan" @click="randomSlogan">
+          <v-list-item-content class="random-slogan-content">
+            <v-list-item-title class="text-h6 random-slogan-title">
               <v-icon v-text="'mdi-wrench'" />
-              {{ $t('app.name') }}
+              {{ sloganTitle }}
             </v-list-item-title>
-            <v-list-item-subtitle>
+            <v-list-item-subtitle class="random-slogan-subtitle">
               {{ slogan[sloganNo] }}
             </v-list-item-subtitle>
           </v-list-item-content>
@@ -158,14 +158,14 @@
                 <v-text-field
                   v-model="diceMin"
                   :disabled="!diceCustom"
-                  :label="$t('dice.min')"
+                  :label="$t('settings.dice.min')"
                   type="number"
                   dense
                 />
                 <v-text-field
                   v-model="diceMax"
                   :disabled="!diceCustom"
-                  :label="$t('dice.max')"
+                  :label="$t('settings.dice.max')"
                   type="number"
                   dense
                 />
@@ -307,6 +307,15 @@
       </template>
     </v-navigation-drawer>
 
+    <v-snackbar v-model="sloganSnackbar" class="safe-bottom">
+      {{
+        $t(
+          `settings.sloganSnackbar.${sloganSnackbarNo}`,
+          sloganData[sloganSnackbarNo]
+        )
+      }}
+    </v-snackbar>
+
     <v-snackbar v-model="$root.copyError" class="safe-bottom">
       {{ $t('clipboard.error') }}
     </v-snackbar>
@@ -331,6 +340,10 @@ export default {
 
     slogan,
     sloganNo: 0,
+    sloganCount: -1,
+    sloganData: { 242: [0], 448: [0] },
+    sloganSnackbar: false,
+    sloganSnackbarNo: -1,
 
     items: [
       { icon: 'mdi-home', name: 'home', to: '/' },
@@ -346,6 +359,10 @@ export default {
       {
         name: 'converter',
         children: [{ icon: 'mdi-format-font', name: 'font' }],
+      },
+      {
+        name: 'calculator',
+        children: [{ icon: 'mdi-cash-multiple', name: 'splitbill' }],
       },
       {
         name: 'helper',
@@ -391,6 +408,15 @@ export default {
     },
   }),
   computed: {
+    sloganTitle() {
+      switch (this.sloganNo) {
+        default:
+          return this.$t('app.name')
+        // #458 "你的电脑遇到问题，需要重新启动。我们只收集某些错误信息，然后你可以重新启动。"
+        case 458:
+          return ':('
+      }
+    },
     title() {
       if (this.$route.fullPath == '/') return this.$t('app.name')
       return this.$t('route' + this.$route.fullPath.replaceAll('/', '.'))
@@ -428,6 +454,27 @@ export default {
   methods: {
     randomSlogan() {
       this.sloganNo = Math.floor(Math.random() * slogan.length)
+      this.sloganCount += 1
+      let temp
+      switch (this.sloganNo) {
+        default:
+          break
+        // #242 "猜猜看，你还要点几次才能再看到这条标语？"
+        case 242:
+          temp = this.sloganData[242][0]
+          this.sloganData[242][0] = this.sloganCount - temp
+          if (temp == 0) break
+          this.sloganSnackbar = true
+          this.sloganSnackbarNo = 242
+          break
+        // #448 "你会记得你点过多少次随机语录吗？"
+        case 448:
+          if (this.sloganCount == 0) break
+          this.sloganData[448][0] = this.sloganCount
+          this.sloganSnackbar = true
+          this.sloganSnackbarNo = 448
+          break
+      }
     },
     diceSelect(v, i) {
       if (!v)
@@ -451,7 +498,6 @@ export default {
       if (this.diceHistory.length > 10) this.diceHistory.shift()
       console.log('[dice]', min, max, value)
     },
-    increaseMerit() {},
     setPrimaryColor() {
       this.$root.primaryColor = this.paletteValue.slice(0, 7)
       this.paletteMenu = false
@@ -477,3 +523,21 @@ export default {
   },
 }
 </script>
+
+<style>
+.random-slogan-content {
+  height: 112px;
+}
+
+.random-slogan-title {
+  align-self: first baseline;
+}
+
+.random-slogan-subtitle {
+  height: calc(0.875rem * 1.2 * 3);
+  line-clamp: 3 !important;
+  -webkit-line-clamp: 3 !important;
+  white-space: normal;
+  align-self: first baseline;
+}
+</style>

@@ -15,6 +15,10 @@
       "_": "Converters",
       "font": "Font Converter"
     },
+    "calculator": {
+      "_": "Calculators",
+      "splitbill": "Split Bill Calculator"
+    },
     "helper": {
       "_": "Helpers",
       "keeptalking": "Defuse Helper",
@@ -47,6 +51,10 @@
     "logout": "Logout"
   },
   "settings": {
+    "dice": {
+      "min": "Minimum",
+      "max": "Maximum"
+    },
     "merit": "Merit: ",
     "themes": {
       "light": "Light",
@@ -55,10 +63,6 @@
     },
     "clearLocalStorageHint": "Are you sure to clear localStorage? This will reset all the settings.",
     "version": "Last updated: {0}"
-  },
-  "dice": {
-    "min": "Minimum",
-    "max": "Maximum"
   },
   "editor": {
     "readonly": "Readonly (disable mobile phone input methods)",
@@ -615,6 +619,13 @@
     "capital": "The font has only capital letters",
     "rtl": "The language is RTL",
     "without": "The font doesn't have {0}"
+  },
+  "split": {
+    "item": "Item",
+    "original": "Original Cost",
+    "actual": "Actual Cost",
+    "sum": "Sum",
+    "average": "Average"
   },
   "kt": {
     "wire": "Wires",

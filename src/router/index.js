@@ -36,6 +36,11 @@ const routes = [
     component: () => import('../views/FontConverter.vue'),
   },
   {
+    path: '/calculator/splitbill',
+    name: 'SplitBillCalc',
+    component: () => import('../views/SplitBillCalc.vue'),
+  },
+  {
     path: '/helper/keeptalking',
     name: 'KeepTalking',
     component: () => import('../views/KeepTalking.vue'),

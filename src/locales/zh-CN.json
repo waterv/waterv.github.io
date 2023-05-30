@@ -15,6 +15,10 @@
       "_": "转换器",
       "font": "字体转换器"
     },
+    "calculator": {
+      "_": "计算器",
+      "splitbill": "收款计算器"
+    },
     "helper": {
       "_": "辅助器",
       "keeptalking": "拆弹辅助器",
@@ -47,6 +51,15 @@
     "logout": "注销"
   },
   "settings": {
+    "sloganSnackbar": {
+      "-1": "你永远不会看到这句话……至少在正常情况下",
+      "242": "答案是 {0} 次！",
+      "447": "答案是 {0} 条！……据不完全统计"
+    },
+    "dice": {
+      "min": "最小值",
+      "max": "最大值"
+    },
     "merit": "功德：",
     "themes": {
       "light": "浅色",
@@ -55,10 +68,6 @@
     },
     "clearLocalStorageHint": "确定要清除 localStorage 吗？这将重置所有的设置项。",
     "version": "最近更新时间：{0}"
-  },
-  "dice": {
-    "min": "最小值",
-    "max": "最大值"
   },
   "editor": {
     "readonly": "只读模式 (禁用手机输入法)",
@@ -615,6 +624,13 @@
     "capital": "该字体只包含大写字母",
     "rtl": "该文字从右到左书写",
     "without": "该字体缺少 {0}"
+  },
+  "split": {
+    "item": "项目",
+    "original": "原价",
+    "actual": "实付",
+    "sum": "总价",
+    "average": "均价"
   },
   "kt": {
     "wire": "线路模块",
