@@ -46,6 +46,11 @@ const routes = [
     component: () => import('../views/KeepTalking.vue'),
   },
   {
+    path: '/helper/arc',
+    name: 'ArcHelper',
+    component: () => import('../views/Arc.vue'),
+  },
+  {
     path: '/emulator/11nimmt',
     name: '11Nimmt',
     component: () => import('../views/11Nimmt.vue'),

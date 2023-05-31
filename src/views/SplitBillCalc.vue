@@ -21,12 +21,7 @@
                 <v-text-field v-model="items[i].name" dense hide-details />
               </td>
               <td>
-                <v-text-field
-                  v-model.number="items[i].cost"
-                  type="number"
-                  dense
-                  hide-details
-                />
+                <v-number-field v-model="items[i].cost" dense hide-details />
               </td>
               <td class="monospace">{{ actualCost(v.cost).toFixed(2) }}</td>
               <td>
@@ -40,12 +35,7 @@
               <td>{{ $t('split.sum') }}</td>
               <td class="monospace">{{ sum.toFixed(2) }}</td>
               <td>
-                <v-text-field
-                  v-model.number="actualSum"
-                  type="number"
-                  dense
-                  hide-details
-                />
+                <v-number-field v-model="actualSum" dense hide-details />
               </td>
               <td>
                 <v-btn icon @click="clearItems">
@@ -68,9 +58,11 @@
 </template>
 
 <script>
+import VNumberField from '@/components/VNumberField.vue'
+
 export default {
   name: 'SpentBillCalc',
-  components: {},
+  components: { VNumberField },
   data() {
     return {
       items: [{ name: '', cost: null }],

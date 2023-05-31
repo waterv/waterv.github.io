@@ -22,7 +22,8 @@
     "helper": {
       "_": "Helpers",
       "keeptalking": "Defuse Helper",
-      "keeptalking_": "v. 1 (241)"
+      "keeptalking_": "v. 1 (241)",
+      "arc": "World Mode Helper"
     },
     "emulator": {
       "_": "Emulators",
@@ -48,13 +49,11 @@
     "players": "Players",
     "ready": "Ready",
     "unready": "Unready",
-    "logout": "Logout"
+    "logout": "Logout",
+    "min": "Minimum",
+    "max": "Maximum"
   },
   "settings": {
-    "dice": {
-      "min": "Minimum",
-      "max": "Maximum"
-    },
     "merit": "Merit: ",
     "themes": {
       "light": "Light",
@@ -673,6 +672,44 @@
     "rule": {
       "notchar": "Only letters / spaces are allowed."
     }
+  },
+  "arc": {
+    "constScoreTo": "Find Result From Score",
+    "step": "Main Chapter Options",
+    "over": "Chapter: Beyond Options",
+    "stepToConstScore": "Find Score From Step Range",
+    "overToConstScore": "Find Score From Over Range",
+    "theads": [
+      "Item",
+      "Options",
+      "Multiplier"
+    ],
+    "rangeTheads": [
+      "Constant",
+      "Min Score",
+      "Max Score"
+    ],
+    "chartConstant": "Chart Constant",
+    "chartScore": "Score",
+    "chartPotential": "Play Rating",
+    "experience": "Partner Experience",
+    "stepResult": "Steps Gained",
+    "overResult": "Beyond Percentage Gained",
+    "beyondResult": "Beyond Boost Progress Gained",
+    "property": "Partner's {0} Stat",
+    "stepPlay": "Play Result",
+    "stepPartner": "Partner Progress",
+    "stepStamina": "Play+ Stamina",
+    "stepFragment": "Play+ Fragment",
+    "memoryBoost": "Memory Boost",
+    "range": "Target Range",
+    "beyondBoost": "Beyond Boost",
+    "fantastic": "Performance",
+    "beyondChallenge": "Beyond Challenge",
+    "overPartner": "Partner",
+    "affinity": "Affinity",
+    "overFragment": "Frag Boost",
+    "mapFactor": "Map Factor"
   },
   "nimmt": {
     "pile": "Piles",

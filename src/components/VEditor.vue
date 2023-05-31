@@ -148,7 +148,7 @@ export default {
   },
   model: {
     prop: 'value',
-    event: 'updateValue',
+    event: 'update-value',
   },
   data() {
     return {
@@ -255,7 +255,7 @@ export default {
     },
     update(str) {
       this.toggleSelect(true)
-      this.$emit('updateValue', str)
+      this.$emit('update-value', str)
     },
   },
 }

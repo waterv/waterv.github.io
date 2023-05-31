@@ -22,7 +22,8 @@
     "helper": {
       "_": "辅助器",
       "keeptalking": "拆弹辅助器",
-      "keeptalking_": "v. 1-zh-CN (931)"
+      "keeptalking_": "v. 1-zh-CN (931)",
+      "arc": "爬梯辅助器"
     },
     "emulator": {
       "_": "模拟器",
@@ -48,17 +49,15 @@
     "players": "玩家",
     "ready": "就绪",
     "unready": "取消就绪",
-    "logout": "注销"
+    "logout": "注销",
+    "min": "最小值",
+    "max": "最大值"
   },
   "settings": {
     "sloganSnackbar": {
       "-1": "你永远不会看到这句话……至少在正常情况下",
       "242": "答案是 {0} 次！",
       "447": "答案是 {0} 条！……据不完全统计"
-    },
-    "dice": {
-      "min": "最小值",
-      "max": "最大值"
     },
     "merit": "功德：",
     "themes": {
@@ -681,6 +680,44 @@
       "notmorse": "只允许输入 [.]，[-]，[/] 和空格",
       "notchar": "只允许输入字母和空格"
     }
+  },
+  "arc": {
+    "constScoreTo": "由成绩求结果",
+    "step": "一般章节选项",
+    "over": "Beyond 章节选项",
+    "stepToConstScore": "由 Step 范围求成绩",
+    "overToConstScore": "由 Over 范围求成绩",
+    "theads": [
+      "项目",
+      "选项",
+      "倍率"
+    ],
+    "rangeTheads": [
+      "定数",
+      "最低得分",
+      "最高得分"
+    ],
+    "chartConstant": "谱面定数",
+    "chartScore": "得分",
+    "chartPotential": "单曲潜力值",
+    "experience": "搭档经验值",
+    "stepResult": "一般章节行进步数",
+    "overResult": "Beyond 章节获得进度",
+    "beyondResult": "Beyond 强化获得进度",
+    "property": "搭档 {0} 值",
+    "stepPlay": "游玩结果",
+    "stepPartner": "搭档加成",
+    "stepStamina": "Play+ 体力",
+    "stepFragment": "Play+ 残片",
+    "memoryBoost": "源韵强化",
+    "range": "期望范围",
+    "beyondBoost": "Beyond 强化",
+    "fantastic": "精彩程度",
+    "beyondChallenge": "Beyond Challenge",
+    "overPartner": "搭档加成",
+    "affinity": "相性契合",
+    "overFragment": "残片深化",
+    "mapFactor": "地图系数"
   },
   "nimmt": {
     "pile": "牌堆",

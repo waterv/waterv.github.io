@@ -158,14 +158,14 @@
                 <v-text-field
                   v-model="diceMin"
                   :disabled="!diceCustom"
-                  :label="$t('settings.dice.min')"
+                  :label="$t('_.min')"
                   type="number"
                   dense
                 />
                 <v-text-field
                   v-model="diceMax"
                   :disabled="!diceCustom"
-                  :label="$t('settings.dice.max')"
+                  :label="$t('_.max')"
                   type="number"
                   dense
                 />
@@ -366,7 +366,10 @@ export default {
       },
       {
         name: 'helper',
-        children: [{ icon: 'mdi-bomb', name: 'keeptalking', desc: true }],
+        children: [
+          { icon: 'mdi-bomb', name: 'keeptalking', desc: true },
+          { icon: 'mdi-hexagon-multiple-outline', name: 'arc' },
+        ],
       },
       {
         name: 'emulator',
