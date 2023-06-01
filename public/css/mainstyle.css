@@ -3,6 +3,8 @@ body .v-application {
   font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Helvetica Neue',
     Helvetica, 'Segoe UI', Arial, Roboto, 'PingFang SC', miui,
     'Hiragino Sans GB', 'Microsoft Yahei', sans-serif;
+  touch-action: manipulation;
+  -ms-touch-action: manipulation;
 }
 
 input::-webkit-outer-spin-button,

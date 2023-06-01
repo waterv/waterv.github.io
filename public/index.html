@@ -14,27 +14,6 @@
     <noscript>
       <strong>很抱歉，<%= htmlWebpackPlugin.options.title %>需要 JavaScript 才能正常工作。请在浏览器的设置中<strong>启用 JavaScript</strong> 以继续。</strong>
     </noscript>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-    <script>
-      let agent = navigator.userAgent.toLowerCase()
-      let lastTouchEnd = null
-      if (agent.indexOf('iphone') >= 0 || agent.indexOf('ipad') >= 0) {
-        document.body.addEventListener(
-          'touchend',
-          e => {
-            let a = new Date().getTime()
-            lastTouchEnd = lastTouchEnd || a + 1
-            let c = a - lastTouchEnd
-            if (c < 500 && c > 0) {
-              e.preventDefault()
-              return false
-            }
-            lastTouchEnd = a
-          },
-          false
-        )
-      }
-    </script>
+    <div id="app" />
   </body>
 </html>

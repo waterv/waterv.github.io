@@ -82,7 +82,6 @@ export default {
   },
   methods: {
     press(i, j) {
-      console.log(this.models)
       let d = this.models[this.model]
       let isShift = d.keys[i][j] == d.shiftKey
       let isAlpha = d.keys[i][j] == d.alphaKey

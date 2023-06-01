@@ -490,6 +490,7 @@ export default {
           max: Math.floor(max[constant] ?? 10_000_000),
         }
         if (range.min > range.max) continue
+        if (constant < 80 && constant % 5 != 0) continue // 8 级以下谱面按 0.5 细分定数
         if (range.min == 9_800_000 && range.max == 10_000_000) {
           result.exMinConst = Math.min(result.exMinConst, constant)
           result.exMaxConst = Math.max(result.exMaxConst, constant)
