@@ -25,8 +25,12 @@
                 <td>{{ chartPotential.toFixed(2) }}</td>
               </tr>
               <tr>
-                <td>{{ $t('arc.experience') }}</td>
-                <td>{{ experience.toFixed(2) }}</td>
+                <td>{{ $t('arc.stepExperience') }}</td>
+                <td>{{ stepExperience.toFixed(2) }}</td>
+              </tr>
+              <tr>
+                <td>{{ $t('arc.overExperience') }}</td>
+                <td>{{ overExperience.toFixed(2) }}</td>
               </tr>
               <tr>
                 <td>{{ $t('arc.stepResult') }}</td>
@@ -361,8 +365,13 @@ export default {
         0
       )
     },
-    experience() {
-      return 6 * this.chartPotential
+    stepExperience() {
+      return (
+        6 * this.chartPotential * this.stepStamina * (this.stepBoost ? 4 : 1)
+      )
+    },
+    overExperience() {
+      return 6 * this.chartPotential * (this.overBoost ? 4 : 1)
     },
     stepPlay() {
       return 2.5 + 2.45 * Math.sqrt(this.chartPotential)
