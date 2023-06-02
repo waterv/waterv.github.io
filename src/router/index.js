@@ -11,6 +11,11 @@ const routes = [
     component: HomeView,
   },
   {
+    path: '/draftbox',
+    name: 'DraftBox',
+    component: () => import('../views/DraftBox.vue'),
+  },
+  {
     path: '/editor/regexp',
     name: 'RegexpEditor',
     component: () => import('../views/RegexpEditor.vue'),

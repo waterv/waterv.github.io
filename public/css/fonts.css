@@ -22,9 +22,20 @@
   src: url(../fonts/CharisSIL-BoldItalic.woff2);
 }
 
+.charis-sil,
+.charis-sil textarea {
+  font-family: CharisSIL, sans-serif;
+}
+
 @font-face {
   font-family: HpPrime;
   src: url(../fonts/HPPrime.ttf);
+}
+
+.hp-prime,
+.hp-prime textarea {
+  font-family: HpPrime;
+  text-transform: none !important;
 }
 
 @font-face {
@@ -32,7 +43,19 @@
   src: url(../fonts/CASIO\ ClassWiz.ttf);
 }
 
+.casio-classwiz,
+.casio-classwiz textarea {
+  font-family: CasioClassWiz;
+  text-transform: none !important;
+}
+
 @font-face {
   font-family: CasioClassWizCW01;
   src: url(../fonts/CW01.ttf);
+}
+
+.casio-classwiz-cw01,
+.casio-classwiz-cw01 textarea {
+  font-family: CasioClassWizCW01;
+  text-transform: none !important;
 }

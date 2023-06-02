@@ -155,28 +155,24 @@
                     <v-icon v-text="'mdi-help-circle'" />
                   </v-btn>
                 </v-btn-toggle>
-                <v-text-field
+                <v-number-field
                   v-model="diceMin"
-                  :disabled="!diceCustom"
                   :label="$t('_.min')"
-                  type="number"
+                  :disabled="!diceCustom"
                   dense
                 />
-                <v-text-field
+                <v-number-field
                   v-model="diceMax"
-                  :disabled="!diceCustom"
                   :label="$t('_.max')"
-                  type="number"
+                  :disabled="!diceCustom"
                   dense
+                  hide-details
                 />
               </v-card-text>
               <v-card-actions>
-                <v-btn
-                  color="primary"
-                  text
-                  @click="diceMenu = false"
-                  v-text="$t('_.confirm')"
-                />
+                <v-btn color="primary" text @click="diceMenu = false">
+                  {{ $t('_.confirm') }}
+                </v-btn>
               </v-card-actions>
             </v-card>
           </v-menu>
@@ -187,17 +183,18 @@
                 <v-icon v-text="'mdi-dice-5'" />
               </v-btn>
             </template>
-            <span v-text="dice || '-'" />
+            <span v-text="dice ?? '-'" />
           </v-tooltip>
 
           <!-- Cyber Wooden Fish -->
           <v-tooltip top :open-on-focus="false">
             <template v-slot:activator="{ on, attrs }">
-              <v-btn icon v-bind="attrs" v-on="on" @click="merit++">
+              <v-btn icon v-bind="attrs" v-on="on" @click="addMerit">
                 <v-icon v-text="'mdi-fish'" />
               </v-btn>
             </template>
-            <span v-text="`${$t('settings.merit')}${merit}`" />
+            {{ $t('settings.merit') }}{{ merit }}<br />
+            {{ $t('settings.cps') }}{{ (clicks.length / 5).toFixed(1) }}
           </v-tooltip>
 
           <!-- Locale Settings -->
@@ -277,7 +274,7 @@
             </v-card>
           </v-menu>
 
-          <!-- Clear LocalStorage -->
+          <!-- Clear Web Storage -->
           <v-menu v-model="localStorageMenu" offset-y>
             <template #activator="{ on, attrs }">
               <v-btn icon v-bind="attrs" v-on="on">
@@ -286,16 +283,29 @@
             </template>
             <v-card>
               <v-card-text>
-                {{ $t('settings.clearLocalStorageHint') }}
+                <v-list>
+                  <v-list-item @click="clearLocalStorage">
+                    <v-list-item-content>
+                      <v-list-item-title>
+                        {{ $t('settings.clear', ['localStorage']) }}
+                      </v-list-item-title>
+                      <v-list-item-subtitle>
+                        {{ $t('settings.clearLocalStorageHint') }}
+                      </v-list-item-subtitle>
+                    </v-list-item-content>
+                  </v-list-item>
+                  <v-list-item @click="clearIndexedDB">
+                    <v-list-item-content>
+                      <v-list-item-title>
+                        {{ $t('settings.clear', ['IndexedDB']) }}
+                      </v-list-item-title>
+                      <v-list-item-subtitle>
+                        {{ $t('settings.clearIndexedDBHint') }}
+                      </v-list-item-subtitle>
+                    </v-list-item-content>
+                  </v-list-item>
+                </v-list>
               </v-card-text>
-              <v-card-actions>
-                <v-btn
-                  color="primary"
-                  text
-                  @click="clearLocalStorage"
-                  v-text="$t('_.confirm')"
-                />
-              </v-card-actions>
             </v-card>
           </v-menu>
 
@@ -328,10 +338,12 @@
 
 <script>
 import VConsole from 'vconsole'
+import VNumberField from '@/components/VNumberField.vue'
 let slogan = require('@/data/slogan.json')
 
 export default {
   name: 'App',
+  components: { VNumberField },
   data: () => ({
     dayjs: require('dayjs'),
     version: require('@/data/time.json'),
@@ -347,6 +359,7 @@ export default {
 
     items: [
       { icon: 'mdi-home', name: 'home', to: '/' },
+      { icon: 'mdi-inbox-full', name: 'draftbox' },
       {
         name: 'editor',
         children: [
@@ -386,6 +399,7 @@ export default {
     diceHistory: [0],
 
     merit: Number(localStorage.getItem('merit')) || 0,
+    clicks: [],
 
     locales: [
       { text: '简体中文', value: 'zh-CN' },
@@ -421,8 +435,7 @@ export default {
       }
     },
     title() {
-      if (this.$route.fullPath == '/') return this.$t('app.name')
-      return this.$t('route' + this.$route.fullPath.replaceAll('/', '.'))
+      return this.$root.getTitle(this.$route.fullPath)
     },
     themes() {
       return ['system', 'light', 'dark'].map(value => ({
@@ -501,6 +514,12 @@ export default {
       if (this.diceHistory.length > 10) this.diceHistory.shift()
       console.log('[dice]', min, max, value)
     },
+    addMerit() {
+      this.merit++
+      let now = new Date().getTime()
+      this.clicks.push(now)
+      this.clicks = this.clicks.filter(time => time >= now - 5000)
+    },
     setPrimaryColor() {
       this.$root.primaryColor = this.paletteValue.slice(0, 7)
       this.paletteMenu = false
@@ -522,6 +541,10 @@ export default {
       this.$root.selectTheme = 'system'
       this.paletteValue = '#1976D2'
       this.setPrimaryColor()
+    },
+    clearIndexedDB() {
+      this.$root.db.delete()
+      this.$root.initDB()
     },
   },
 }

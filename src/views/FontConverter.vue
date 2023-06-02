@@ -1,12 +1,6 @@
 <template>
   <div class="font-converter">
-    <v-editor
-      v-model="value"
-      ref="editor"
-      no-readonly
-      no-jump
-      :label="$t('font.source')"
-    >
+    <v-editor v-model="$root.editorValue" ref="editor" no-readonly no-jump>
       <v-dialog v-model="dialog">
         <template v-slot:activator="{ on, attrs }">
           <v-btn color="primary" v-bind="attrs" v-on="on">
@@ -18,7 +12,12 @@
             {{ $t('font.result') }}
           </v-card-title>
           <v-card-text>
-            <v-textarea v-model="converted" outlined hide-details />
+            <v-textarea
+              v-model="converted"
+              ref="result"
+              outlined
+              hide-details
+            />
           </v-card-text>
           <v-card-actions>
             <v-btn color="primary" text @click="dialog = false">
@@ -81,7 +80,6 @@ export default {
   data() {
     return {
       ...font,
-      value: '',
       converted: '',
 
       dialog: false,
@@ -108,7 +106,7 @@ export default {
   watch: {
     dialog(v) {
       if (!v) return
-      let value = this.value
+      let value = this.$root.editorValue
       let converted = ''
       for (let lang of this.langs) {
         let origin = this[lang.key][lang.from]
@@ -120,6 +118,9 @@ export default {
         ;[value, converted] = [converted, '']
       }
       this.converted = value
+      this.$nextTick(() => {
+        this.$refs.result.$refs.input.setSelectionRange(0, value.length)
+      })
     },
   },
   methods: {

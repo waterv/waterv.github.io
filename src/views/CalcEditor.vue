@@ -1,10 +1,10 @@
 <template>
-  <div class="calc-editor" :class="models[model].class">
+  <div class="calc-editor">
     <v-editor
-      v-model="value"
+      v-model="$root.editorValue"
+      :font="models[model].class"
       ref="editor"
       no-jump
-      :label="$t('calc.name')"
       @focus="focused = true"
     />
 
@@ -26,8 +26,8 @@
             <v-btn
               v-for="(key, j) in row"
               :key="j"
-              class="calc"
-              :class="{ small: key.length > 1 }"
+              :class="models[model].class"
+              :style="{ fontSize: key.length > 1 ? '0.6em' : '' }"
               icon
               large
               :disabled="!key"
@@ -58,7 +58,6 @@ export default {
   data() {
     return {
       ...calc,
-      value: '',
 
       focused: false,
       shifted: false,
@@ -116,27 +115,3 @@ export default {
   },
 }
 </script>
-
-<style>
-.calc.small {
-  font-size: 0.6em;
-}
-
-.calc-editor.hp-prime .calc,
-.calc-editor.hp-prime textarea {
-  font-family: HpPrime, monospace;
-  text-transform: none !important;
-}
-
-.calc-editor.casio-classwiz .calc,
-.calc-editor.casio-classwiz textarea {
-  font-family: CasioClassWiz, monospace;
-  text-transform: none !important;
-}
-
-.calc-editor.casio-classwiz-cw01 .calc,
-.calc-editor.casio-classwiz-cw01 textarea {
-  font-family: CasioClassWizCW01, monospace;
-  text-transform: none !important;
-}
-</style>

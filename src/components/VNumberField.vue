@@ -3,6 +3,7 @@
     v-model="str"
     type="number"
     :label="label"
+    :disabled="disabled"
     :dense="dense"
     :hide-details="hideDetails"
     :rules="rules"
@@ -16,6 +17,7 @@ export default {
   name: 'VNumberField',
   props: {
     dense: Boolean,
+    disabled: Boolean,
     hideDetails: Boolean,
     label: String,
     value: Number,

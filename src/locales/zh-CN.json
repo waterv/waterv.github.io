@@ -4,6 +4,7 @@
   },
   "route": {
     "home": "首页",
+    "draftbox": "草稿箱",
     "editor": {
       "_": "编辑器",
       "regexp": "正则编辑器",
@@ -60,12 +61,15 @@
       "448": "答案是 {0} 条！……据不完全统计"
     },
     "merit": "功德：",
+    "cps": "五秒内秒均点击：",
     "themes": {
       "light": "浅色",
       "dark": "深色",
       "system": "跟随系统"
     },
-    "clearLocalStorageHint": "确定要清除 localStorage 吗？这将重置所有的设置项。",
+    "clear": "清除 {0}",
+    "clearLocalStorageHint": "将重置所有的设置项",
+    "clearIndexedDBHint": "将清空草稿箱等数据",
     "version": "最近更新时间：{0}"
   },
   "editor": {
@@ -73,7 +77,10 @@
     "cursor": "移动光标",
     "placeholder": "选中最近的占位符",
     "selection": "选择文字范围",
-    "selectAll": "全选"
+    "selectAll": "全选",
+    "deleteAll": "清空",
+    "addDraft": "添加到草稿箱",
+    "saveDraft": "保存草稿"
   },
   "clipboard": {
     "tooltip": "复制到剪切板",
@@ -107,8 +114,13 @@
     ],
     "braille": "盲文点字"
   },
+  "draftbox": {
+    "editorValue": "当前编辑中文本",
+    "allPath": "不限来源",
+    "select": "批量选择",
+    "delete": "删除选中"
+  },
   "regexp": {
-    "name": "正则表达式",
     "metachars": [
       [
         "占位符",
@@ -262,7 +274,6 @@
     ]
   },
   "tex": {
-    "name": "TeX 数学公式",
     "search": "搜索",
     "frequent": "常用",
     "environment": "环境",
@@ -276,7 +287,6 @@
     "recentMax": "搜索记录最大数目"
   },
   "ipa": {
-    "name": "国际音标",
     "consonant": "肺部气流音",
     "consonantRow": [
       "鼻音",
@@ -523,11 +533,7 @@
     ],
     "tips": "显示符号含义"
   },
-  "calc": {
-    "name": "计算器操作过程"
-  },
   "font": {
-    "source": "原文本",
     "convert": "转换",
     "result": "转换结果",
     "latins": [

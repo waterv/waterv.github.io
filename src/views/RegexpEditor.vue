@@ -1,9 +1,9 @@
 <template>
   <div class="regexp-editor">
     <v-editor
-      v-model="value"
+      v-model="$root.editorValue"
+      font="monospace"
       ref="editor"
-      :label="$t('regexp.name')"
       :copy="copyValue"
       @focus="focused = true"
     />
@@ -175,13 +175,12 @@ export default {
   },
   data: () => ({
     ...regexp,
-    value: '',
     focused: false,
 
     tab: null,
     panel: 0,
 
-    tips: true,
+    tips: localStorage.getItem('regexpTips') != 'false',
     copyType: 0,
 
     inlineFlagAlu: '',
@@ -196,6 +195,11 @@ export default {
       'hide-details': true,
     },
   }),
+  watch: {
+    tips(v) {
+      localStorage.setItem('regexpTips', v)
+    },
+  },
   computed: {
     aLu() {
       return regexp.inlineFlags.aLu.map((flag, i) => ({

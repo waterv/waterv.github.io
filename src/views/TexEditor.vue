@@ -7,9 +7,9 @@
       </v-card-text>
     </v-card>
     <v-editor
-      v-model="value"
+      v-model="$root.editorValue"
+      font="monospace"
       ref="editor"
-      :label="$t('tex.name')"
       placeholder="¥"
       @focus="focused = true"
     />
@@ -158,13 +158,12 @@ export default {
   data() {
     return {
       ...tex,
-      value: '',
 
       func: '',
       recent: [],
-      recentMax: 20,
+      recentMax: Number(localStorage.getItem('texRecentMax')) || 20,
 
-      displayMode: true,
+      displayMode: localStorage.getItem('texDisplayMode') != 'false',
       macros_: [
         ['\\d', '\\mathrm d'],
         ['\\e', '\\mathrm e'],
@@ -184,7 +183,7 @@ export default {
   },
   computed: {
     renderedValue() {
-      return katex.renderToString(this.value, {
+      return katex.renderToString(this.$root.editorValue, {
         displayMode: this.displayMode,
         throwOnError: false,
         errorColor: this.$vuetify.theme.themes.light.error,
@@ -202,10 +201,22 @@ export default {
     recentMax(v) {
       let length = this.recent.length
       if (length > v) this.recent = this.recent.slice(length - v)
+      localStorage.setItem('texRecentMax', v)
+    },
+    displayMode(v) {
+      localStorage.setItem('texDisplayMode', v)
     },
     dialog(v) {
       if (v) this.macroJson = JSON.stringify(this.macros)
     },
+    macros_(v) {
+      this.$root.db.data.put({ key: 'texMacros', value: v })
+    },
+  },
+  async mounted() {
+    this.$root.db.data.get('texMacros').then(res => {
+      if (res) this.macros_ = res.value
+    })
   },
   methods: {
     appendFunc() {

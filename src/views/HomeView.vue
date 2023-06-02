@@ -1,10 +1,9 @@
 <template>
   <div class="home">
     <v-editor
-      v-model="value"
+      v-model="$root.editorValue"
       ref="editor"
       :label="$t('home.name')"
-      no-monospaced
       no-jump
       @focus="focused = true"
     />
@@ -118,7 +117,6 @@ export default {
   },
   data: () => ({
     ...misc,
-    value: '',
 
     focused: false,
     tab: 0,

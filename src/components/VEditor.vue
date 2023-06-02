@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ editor: !noMonospaced }">
+  <div :class="font">
     <v-textarea
       outlined
       :label="label"
@@ -95,10 +95,18 @@
           </v-btn>
         </template>
 
-        <v-tooltip top>
+        <v-tooltip v-if="!noSelectAll" top>
+          <template #activator="{ on, attrs }">
+            <v-btn icon @click="selectAll()" v-bind="attrs" v-on="on">
+              <v-icon v-text="'mdi-select-all'" />
+            </v-btn>
+          </template>
+          <span v-text="$t('editor.selectAll')" />
+        </v-tooltip>
+
+        <v-tooltip v-if="!noCopy" top>
           <template #activator="{ on, attrs }">
             <v-btn
-              v-if="!noCopy"
               icon
               @click="$root.doCopy(copyValue)"
               v-bind="attrs"
@@ -112,17 +120,41 @@
 
         <v-tooltip top>
           <template #activator="{ on, attrs }">
+            <v-btn icon @click="deleteAll" v-bind="attrs" v-on="on">
+              <v-icon v-text="'mdi-delete'" />
+            </v-btn>
+          </template>
+          <span v-text="$t('editor.deleteAll')" />
+        </v-tooltip>
+
+        <v-tooltip top>
+          <template #activator="{ on, attrs }">
             <v-btn
-              v-if="!noSelectAll"
               icon
-              @click="selectAll()"
+              :disabled="value == ''"
+              @click="addDraft"
               v-bind="attrs"
               v-on="on"
             >
-              <v-icon v-text="'mdi-select-all'" />
+              <v-icon v-text="'mdi-inbox-arrow-down'" />
             </v-btn>
           </template>
-          <span v-text="$t('editor.selectAll')" />
+          <span v-text="$t('editor.addDraft')" />
+        </v-tooltip>
+
+        <v-tooltip top>
+          <template #activator="{ on, attrs }">
+            <v-btn
+              icon
+              :disabled="$root.currentDraft == 0 || value == ''"
+              @click="saveDraft"
+              v-bind="attrs"
+              v-on="on"
+            >
+              <v-icon v-text="'mdi-content-save'" />
+            </v-btn>
+          </template>
+          <span v-text="$t('editor.saveDraft')" />
         </v-tooltip>
       </div>
     </v-expand-transition>
@@ -137,7 +169,6 @@ export default {
     hint: { type: String, default: '' },
     value: String,
     placeholder: { type: String, default: '_' },
-    noMonospaced: { type: Boolean, default: false },
     noReadonly: { type: Boolean, default: false },
     noMove: { type: Boolean, default: false },
     noJump: { type: Boolean, default: false },
@@ -145,6 +176,7 @@ export default {
     noCopy: { type: Boolean, default: false },
     noSelectAll: { type: Boolean, default: false },
     copy: { type: String, default: '' },
+    font: String,
   },
   model: {
     prop: 'value',
@@ -256,6 +288,33 @@ export default {
     update(str) {
       this.toggleSelect(true)
       this.$emit('update-value', str)
+    },
+    deleteAll() {
+      this.$emit('update-value', '')
+      this.dom.focus()
+    },
+    async addDraft() {
+      await this.$root.db.drafts
+        .add({
+          text: this.value,
+          time: new Date().getTime(),
+          path: this.$route.fullPath,
+          font: this.font,
+        })
+        .then(id => {
+          this.$root.currentDraft = id
+        })
+      this.$emit('save')
+    },
+    async saveDraft() {
+      await this.$root.db.drafts.put({
+        id: this.$root.currentDraft,
+        text: this.value,
+        time: new Date().getTime(),
+        path: this.$route.fullPath,
+        font: this.font,
+      })
+      this.$emit('save')
     },
   },
 }

@@ -1,10 +1,9 @@
 <template>
   <div class="ipa-editor">
     <v-editor
-      v-model="value"
+      v-model="$root.editorValue"
+      font="charis-sil"
       ref="editor"
-      class="ipa-editor"
-      :label="$t('ipa.name')"
       placeholder="◌"
       @focus="focused = true"
     />
@@ -60,7 +59,7 @@
                         v-else
                         :key="j"
                         v-ripple
-                        class="ipa text-center"
+                        class="charis-sil text-center"
                         :class="{
                           'grey--text': unicodeLength(char) > 1,
                         }"
@@ -85,7 +84,7 @@
                   <span v-show="tips || !char">
                     {{ $t(`ipa.${cate}s[${i}]`) }}
                   </span>
-                  <span v-show="char" class="ipa ml-1" v-text="char" />
+                  <span v-show="char" class="charis-sil ml-1" v-text="char" />
                 </v-chip>
               </v-chip-group>
             </v-tab-item>
@@ -122,16 +121,19 @@ export default {
   },
   data: () => ({
     ...ipa,
-    value: '',
 
     focused: false,
-    readonly: false,
 
     tab: 0,
     panel: 0,
 
-    tips: true,
+    tips: localStorage.getItem('ipaTips') != 'false',
   }),
+  watch: {
+    tips(v) {
+      localStorage.setItem('ipaTips', v)
+    },
+  },
   methods: {
     unicodeLength(str) {
       /* eslint-disable */
@@ -146,10 +148,3 @@ export default {
   },
 }
 </script>
-
-<style>
-.ipa,
-.ipa-editor textarea {
-  font-family: CharisSIL, sans-serif;
-}
-</style>

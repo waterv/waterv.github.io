@@ -70,6 +70,6 @@ input[type='number'] {
 }
 
 .monospace,
-.editor textarea {
+.monospace textarea {
   font-family: monospace;
 }

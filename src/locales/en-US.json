@@ -4,6 +4,7 @@
   },
   "route": {
     "home": "Home",
+    "draftbox": "Draft Box",
     "editor": {
       "_": "Editors",
       "regexp": "RegExp Editor",
@@ -55,6 +56,7 @@
   },
   "settings": {
     "merit": "Merit: ",
+    "cps": "CPS in 5 seconds: ",
     "themes": {
       "light": "Light",
       "dark": "Dark",
@@ -68,7 +70,10 @@
     "cursor": "Move cursor",
     "placeholder": "Select the nearest placeholder",
     "selection": "Select a range",
-    "selectAll": "Select all"
+    "selectAll": "Select all",
+    "deleteAll": "Clear",
+    "addDraft": "Add to Draft Box",
+    "saveDraft": "Save Draft"
   },
   "clipboard": {
     "tooltip": "Copy to clipboard",
@@ -102,8 +107,12 @@
     ],
     "braille": "Braille"
   },
+  "draftbox": {
+    "editorValue": "Editing Text",
+    "select": "Bulk Select",
+    "delete": "Delete Selection"
+  },
   "regexp": {
-    "name": "Regular Expression",
     "metachars": [
       [
         "Placeholder",
@@ -257,7 +266,6 @@
     ]
   },
   "tex": {
-    "name": "TeX Math Formula",
     "search": "Search",
     "frequent": "Frequent",
     "environment": "Environments",
@@ -271,7 +279,6 @@
     "recentMax": "Maximum number of search records"
   },
   "ipa": {
-    "name": "International Phonetic Alphabet",
     "consonant": "Pulmonics",
     "consonantRow": [
       "Nasal",
@@ -518,11 +525,7 @@
     ],
     "tips": "Show the meaning of symbols"
   },
-  "calc": {
-    "name": "Calculator Operation Process"
-  },
   "font": {
-    "source": "Source Text",
     "convert": "Convert",
     "result": "Convert Result",
     "latins": [
