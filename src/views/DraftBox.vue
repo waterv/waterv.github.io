@@ -73,32 +73,27 @@ import VEditor from '@/components/VEditor.vue'
 export default {
   name: 'DraftBox',
   components: { VEditor },
-  data() {
-    return {
-      dayjs: require('dayjs'),
-      fromPath: '',
-      pathes: [
-        '',
-        '/',
-        '/draftbox',
-        '/editor/regexp',
-        '/editor/tex',
-        '/editor/ipa',
-        '/editor/calc',
-        '/converter/font',
-      ],
-      items: [],
-      page: 1,
-      pages: 1,
-      select: this.$root.currentDraft,
-      selecting: false,
-    }
-  },
+  data: that => ({
+    dayjs: require('dayjs'),
+    fromPath: '',
+    pathes: [
+      '',
+      '/',
+      '/draftbox',
+      '/editor/regexp',
+      '/editor/tex',
+      '/editor/ipa',
+      '/editor/calc',
+      '/converter/font',
+    ],
+    items: [],
+    page: 1,
+    pages: 1,
+    select: that.$root.currentDraft,
+    selecting: false,
+  }),
   watch: {
     page() {
-      this.getDrafts()
-    },
-    '$root.db': function () {
       this.getDrafts()
     },
   },

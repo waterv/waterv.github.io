@@ -63,12 +63,10 @@ import VNumberField from '@/components/VNumberField.vue'
 export default {
   name: 'SpentBillCalc',
   components: { VNumberField },
-  data() {
-    return {
-      items: [{ name: '', cost: null }],
-      actualSum: null,
-    }
-  },
+  data: () => ({
+    items: [{ name: '', cost: null }],
+    actualSum: null,
+  }),
   computed: {
     sum() {
       return this.items.reduce(

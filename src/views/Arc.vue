@@ -325,36 +325,34 @@ let arc = require('@/data/arc.json')
 export default {
   name: 'ArcHelper',
   components: { VNumberField, TutorialList },
-  data() {
-    return {
-      ...arc,
-      panel: 0,
+  data: () => ({
+    ...arc,
+    panel: 0,
 
-      chartConst: null,
-      chartScore: null,
+    chartConst: null,
+    chartScore: null,
 
-      step: 50,
-      stepStamina: 1,
-      stepFrag: 0,
-      stepBoost: false,
-      stepMin: null,
-      stepMax: null,
+    step: 50,
+    stepStamina: 1,
+    stepFrag: 0,
+    stepBoost: false,
+    stepMin: null,
+    stepMax: null,
 
-      beyondChallenge: true,
-      over: 50,
-      affinity: 1,
-      overFrag: 0,
-      beyondBoost: 1,
-      overBoost: false,
-      overMin: null,
-      overMax: null,
+    beyondChallenge: true,
+    over: 50,
+    affinity: 1,
+    overFrag: 0,
+    beyondBoost: 1,
+    overBoost: false,
+    overMin: null,
+    overMax: null,
 
-      staminas: [1, 2, 4, 6],
-      frags: [0, 100, 250, 500],
-      beyondBoosts: [1, 2, 3],
-      mapFactor: 2.8,
-    }
-  },
+    staminas: [1, 2, 4, 6],
+    frags: [0, 100, 250, 500],
+    beyondBoosts: [1, 2, 3],
+    mapFactor: 2.8,
+  }),
   computed: {
     chartPotential() {
       if (this.chartScore >= 10_000_000) return this.chartConst + 2

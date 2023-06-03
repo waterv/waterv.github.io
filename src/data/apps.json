@@ -1,0 +1,92 @@
+[
+  {
+    "name": "",
+    "apps": [
+      {
+        "icon": "mdi-home",
+        "path": "",
+        "version": 1685769171115
+      },
+      {
+        "icon": "mdi-apps",
+        "path": "apps",
+        "version": 1685769171115
+      },
+      {
+        "icon": "mdi-inbox-full",
+        "path": "draftbox",
+        "version": 1685769171115
+      }
+    ]
+  },
+  {
+    "name": "editor",
+    "apps": [
+      {
+        "icon": "mdi-regex",
+        "path": "regexp",
+        "version": 1685769171115
+      },
+      {
+        "icon": "mdi-calculator-variant",
+        "path": "tex",
+        "version": 1685769171115
+      },
+      {
+        "icon": "mdi-code-array",
+        "path": "ipa",
+        "version": 1685769171115
+      },
+      {
+        "icon": "mdi-calculator",
+        "path": "calc",
+        "version": 1685769171115
+      }
+    ]
+  },
+  {
+    "name": "converter",
+    "apps": [
+      {
+        "icon": "mdi-format-font",
+        "path": "font",
+        "version": 1685769171115
+      }
+    ]
+  },
+  {
+    "name": "calculator",
+    "apps": [
+      {
+        "icon": "mdi-cash-multiple",
+        "path": "splitbill",
+        "version": 1685769171115
+      }
+    ]
+  },
+  {
+    "name": "helper",
+    "apps": [
+      {
+        "icon": "mdi-bomb",
+        "path": "keeptalking",
+        "version": 1685769171115
+      },
+      {
+        "icon": "mdi-hexagon-multiple-outline",
+        "path": "arc",
+        "version": 1685769171115
+      }
+    ]
+  },
+  {
+    "name": "emulator",
+    "apps": [
+      {
+        "icon": "mdi-cow",
+        "path": "11nimmt",
+        "version": 1685769171115
+      }
+    ]
+  }
+]

@@ -4,7 +4,14 @@
   },
   "route": {
     "home": "Home",
+    "apps": "Applications",
     "draftbox": "Draft Box",
+    "all": {
+      "_": "All"
+    },
+    "favor": {
+      "_": "Favorites"
+    },
     "editor": {
       "_": "Editors",
       "regexp": "RegExp Editor",
@@ -23,12 +30,22 @@
     "helper": {
       "_": "Helpers",
       "keeptalking": "Defuse Helper",
-      "keeptalking_": "v. 1 (241)",
       "arc": "World Mode Helper"
     },
     "emulator": {
       "_": "Emulators",
       "11nimmt": "11 Nimmt! Emulator"
+    },
+    "widget": {
+      "_": "Sidebar Widgets",
+      "randomSlogan": "Random Slogan",
+      "dice": "Dice",
+      "woodenFish": "Cyber Wooden Fish",
+      "locale": "Localization Settings",
+      "theme": "Theme Settings",
+      "palette": "Palette Settings",
+      "clear": "Clear Cache",
+      "vconsole": "vConsole"
     }
   },
   "_": {

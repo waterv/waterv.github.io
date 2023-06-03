@@ -182,16 +182,14 @@ export default {
     prop: 'value',
     event: 'update-value',
   },
-  data() {
-    return {
-      selectionStart: this.value.length,
-      selectionEnd: this.value.length,
-      selectionSource: null,
-      selectionSink: null,
-      dom: undefined,
-      readonly: false,
-    }
-  },
+  data: that => ({
+    selectionStart: that.value.length,
+    selectionEnd: that.value.length,
+    selectionSource: null,
+    selectionSink: null,
+    dom: undefined,
+    readonly: false,
+  }),
   computed: {
     left() {
       return Math.min(this.selectionStart, this.selectionEnd)

@@ -155,32 +155,30 @@ export default {
     VEditor,
     TutorialList,
   },
-  data() {
-    return {
-      ...tex,
+  data: () => ({
+    ...tex,
 
-      func: '',
-      recent: [],
-      recentMax: Number(localStorage.getItem('texRecentMax')) || 20,
+    func: '',
+    recent: [],
+    recentMax: Number(localStorage.getItem('texRecentMax')) || 20,
 
-      displayMode: localStorage.getItem('texDisplayMode') != 'false',
-      macros_: [
-        ['\\d', '\\mathrm d'],
-        ['\\e', '\\mathrm e'],
-      ],
+    displayMode: localStorage.getItem('texDisplayMode') != 'false',
+    macros_: [
+      ['\\d', '\\mathrm d'],
+      ['\\e', '\\mathrm e'],
+    ],
 
-      focused: false,
-      tab: 0,
-      panel: 0,
-      dialog: false,
-      macroJson: '',
+    focused: false,
+    tab: 0,
+    panel: 0,
+    dialog: false,
+    macroJson: '',
 
-      chip: {
-        class: 'monospace',
-        label: true,
-      },
-    }
-  },
+    chip: {
+      class: 'monospace',
+      label: true,
+    },
+  }),
   computed: {
     renderedValue() {
       return katex.renderToString(this.$root.editorValue, {
@@ -198,6 +196,9 @@ export default {
     },
   },
   watch: {
+    recent(v) {
+      this.$root.db.data.put({ key: 'texRecent', value: v })
+    },
     recentMax(v) {
       let length = this.recent.length
       if (length > v) this.recent = this.recent.slice(length - v)
@@ -214,6 +215,9 @@ export default {
     },
   },
   async mounted() {
+    this.$root.db.data.get('texRecent').then(res => {
+      if (res) this.recent = res.value
+    })
     this.$root.db.data.get('texMacros').then(res => {
       if (res) this.macros_ = res.value
     })

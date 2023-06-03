@@ -26,15 +26,13 @@ export default {
     prop: 'value',
     event: 'update-value',
   },
-  data() {
-    return {
-      str:
-        this.value === null || this.value === undefined
-          ? undefined
-          : `${this.value}`,
-      rules: [() => !isNaN(parseFloat(this.str))],
-    }
-  },
+  data: that => ({
+    str:
+      that.value === null || that.value === undefined
+        ? undefined
+        : `${that.value}`,
+    rules: [() => !isNaN(parseFloat(that.str))],
+  }),
   methods: {
     update(v) {
       this.$emit('update-value', parseFloat(v))

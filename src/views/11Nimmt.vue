@@ -202,94 +202,45 @@
 import TutorialList from '@/components/TutorialList.vue'
 import NimmtPile from '@/components/NimmtPile.vue'
 
-const STATE = {
-  CONNECT_SUCCESS: 200,
-  REGIS_SUCCESS: 201,
-  LOGIN_SUCCESS: 202,
-  LOGOUT_SUCCESS: 203,
-  FETCH_SUCCESS: 204,
-
-  BROADCAST_GAME_START: 100,
-  BROADCAST_GAME_BASIC: 101,
-  BROADCAST_GAME_STATUS: 102,
-  BROADCAST_GAME_END: 103,
-
-  USER_NOT_EXIST: 0,
-
-  REGIS_FAIL_USER_EXISTED: 1,
-  REGIS_FAIL_GAME_STARTED: 2,
-  REGIS_FAIL_ROOM_FULL: 3,
-
-  READY_FAIL_GAME_STARTED: 10,
-
-  ACT_FAIL_GAME_NOT_START: 20,
-  ACT_FAIL_NOT_TURN: 21,
-  ACT_FAIL_PILE_EXCEED: 22,
-  ACT_FAIL_CARD_EXCEED: 23,
-  ACT_FAIL_PILE_NOT_EXIST: 24,
-  ACT_FAIL_CARD_NOT_EXIST: 25,
-  ACT_FAIL_CARD_CANNOT_PUSH: 26,
-  ACT_FAIL_PUSH_PICK_TOGETHER: 27,
-  ACT_FAIL_TARGET_NOT_EXIST: 28,
-  ACT_FAIL_TARGET_NO_BULL: 29,
-  ACT_FAIL_BOTH_NOT_MAX_BULL: 30,
-
-  LOGOUT_FAIL_GAME_STARTED: 40,
-
-  ACT_LOCAL_FAIL_NO_ACTION: 50,
-}
+let nimmt = require('@/data/nimmt.json')
+const STATE = nimmt.states
 
 export default {
   name: 'ElevenNimmt',
   components: { TutorialList, NimmtPile },
-  data() {
-    return {
-      snackbar: false,
-      snackbarTip: '',
-      showHint: true,
+  data: that => ({
+    snackbar: false,
+    snackbarTip: '',
+    showHint: true,
 
-      server: 'localhost',
-      port: '1234',
-      id: ('0000' + Math.floor(Math.random() * 10000).toString()).slice(-4),
-      nickname: this.$t('_.defaultNickname'),
+    server: 'localhost',
+    port: '1234',
+    id: ('0000' + Math.floor(Math.random() * 10000).toString()).slice(-4),
+    nickname: that.$t('_.defaultNickname'),
 
-      ws: undefined,
+    ws: undefined,
 
-      connected: false,
-      logged: false,
-      ready: false,
-      readying: false,
-      started: false,
+    connected: false,
+    logged: false,
+    ready: false,
+    readying: false,
+    started: false,
 
-      turn: undefined,
-      round: undefined,
-      freeBull: undefined,
-      players: [],
-      piles: [],
-      player: { no: undefined, hand: [], bull: 0 },
+    turn: undefined,
+    round: undefined,
+    freeBull: undefined,
+    players: [],
+    piles: [],
+    player: { no: undefined, hand: [], bull: 0 },
 
-      selectedPile: undefined,
-      selectedCards: {},
-      isPickPile: false,
-      targetNo: undefined,
-      diff: {},
+    selectedPile: undefined,
+    selectedCards: {},
+    isPickPile: false,
+    targetNo: undefined,
+    diff: {},
 
-      tutorials: [
-        [
-          '11 nimmt! Game Rules',
-          'https://ultraboardgames.com/11-nimmt/game-rules.php',
-          'en-US',
-        ],
-        [
-          '《谁是牛头王？》中文规则',
-          'https://www.zhuoyou.com/Web/detail?news_id=863',
-          'zh-CN',
-        ],
-        ['Server Program', 'https://github.com/waterv/board-game', 'en-US'],
-        ['服务端程序', 'https://github.com/waterv/board-game', 'zh-CN'],
-      ],
-    }
-  },
+    tutorials: nimmt.tutorials,
+  }),
   computed: {
     score() {
       return this.player.hand.reduce(

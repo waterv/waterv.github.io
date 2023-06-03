@@ -1,0 +1,34 @@
+[
+  {
+    "icon": "mdi-chat-processing",
+    "name": "randomSlogan"
+  },
+  {
+    "icon": "mdi-dice-5",
+    "name": "dice"
+  },
+  {
+    "icon": "mdi-fish",
+    "name": "woodenFish"
+  },
+  {
+    "icon": "mdi-translate",
+    "name": "locale"
+  },
+  {
+    "icon": "mdi-theme-light-dark",
+    "name": "theme"
+  },
+  {
+    "icon": "mdi-palette",
+    "name": "palette"
+  },
+  {
+    "icon": "mdi-broom",
+    "name": "clear"
+  },
+  {
+    "icon": "mdi-console",
+    "name": "vconsole"
+  }
+]

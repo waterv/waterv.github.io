@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import AppsView from '../views/Apps.vue'
+import DraftBox from '../views/DraftBox.vue'
 
 Vue.use(VueRouter)
 
@@ -11,9 +13,14 @@ const routes = [
     component: HomeView,
   },
   {
+    path: '/apps',
+    name: 'AppsView',
+    component: AppsView,
+  },
+  {
     path: '/draftbox',
     name: 'DraftBox',
-    component: () => import('../views/DraftBox.vue'),
+    component: DraftBox,
   },
   {
     path: '/editor/regexp',

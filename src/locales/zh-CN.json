@@ -4,7 +4,14 @@
   },
   "route": {
     "home": "首页",
+    "apps": "应用",
     "draftbox": "草稿箱",
+    "all": {
+      "_": "全部"
+    },
+    "favor": {
+      "_": "收藏"
+    },
     "editor": {
       "_": "编辑器",
       "regexp": "正则编辑器",
@@ -23,12 +30,22 @@
     "helper": {
       "_": "辅助器",
       "keeptalking": "拆弹辅助器",
-      "keeptalking_": "v. 1-zh-CN (931)",
       "arc": "爬梯辅助器"
     },
     "emulator": {
       "_": "模拟器",
       "11nimmt": "牛头王模拟器"
+    },
+    "widget": {
+      "_": "边栏小工具",
+      "randomSlogan": "随机标语",
+      "dice": "骰子",
+      "woodenFish": "电子木鱼",
+      "locale": "本地化设置",
+      "theme": "主题设置",
+      "palette": "主题色设置",
+      "clear": "清除缓存",
+      "vconsole": "vConsole"
     }
   },
   "_": {

@@ -55,17 +55,15 @@ export default {
     VEditor,
     TutorialList,
   },
-  data() {
-    return {
-      ...calc,
+  data: () => ({
+    ...calc,
 
-      focused: false,
-      shifted: false,
-      alphaed: false,
+    focused: false,
+    shifted: false,
+    alphaed: false,
 
-      model: 'CASIO fx-991/999CN CW',
-    }
-  },
+    model: 'CASIO fx-991/999CN CW',
+  }),
   computed: {
     keys() {
       let d = this.models[this.model]

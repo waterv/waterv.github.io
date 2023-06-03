@@ -77,21 +77,19 @@ export default {
   components: {
     VEditor,
   },
-  data() {
-    return {
-      ...font,
-      converted: '',
+  data: () => ({
+    ...font,
+    converted: '',
 
-      dialog: false,
-      panel: 0,
+    dialog: false,
+    panel: 0,
 
-      langs: [
-        { icon: 'mdi-alphabet-latin', key: 'latin', from: 0, to: 1 },
-        { icon: 'mdi-numeric', key: 'digit', from: 0, to: 1 },
-        { icon: 'mdi-alphabet-greek', key: 'greek', from: 0, to: 1 },
-      ],
-    }
-  },
+    langs: [
+      { icon: 'mdi-alphabet-latin', key: 'latin', from: 0, to: 1 },
+      { icon: 'mdi-numeric', key: 'digit', from: 0, to: 1 },
+      { icon: 'mdi-alphabet-greek', key: 'greek', from: 0, to: 1 },
+    ],
+  }),
   computed: {
     latinFonts() {
       return this.getFonts('latin', [0, 1, 2, 26, 27, 28])
