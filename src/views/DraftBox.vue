@@ -48,7 +48,7 @@
           :color="selecting ? 'primary' : ''"
           @click="toggleSelecting()"
         >
-          <v-icon v-text="'mdi-select'" />
+          <v-icon left v-text="'mdi-select'" />
           {{ $t('draftbox.select') }}
         </v-btn>
 
@@ -59,7 +59,7 @@
           :disabled="deleteDisabled"
           @click="deleteSelectedDrafts"
         >
-          <v-icon v-text="'mdi-delete'" />
+          <v-icon left v-text="'mdi-delete'" />
           {{ $t('draftbox.delete') }}
         </v-btn>
       </v-card-actions>

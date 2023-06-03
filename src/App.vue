@@ -13,7 +13,7 @@
 
     <v-main
       :class="{
-        'app-main': 'xsmd'.indexOf($vuetify.breakpoint.name) != -1,
+        'app-main': ['xs', 'sm', 'md'].includes($vuetify.breakpoint.name),
       }"
     >
       <v-container>

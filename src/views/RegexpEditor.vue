@@ -225,15 +225,15 @@ export default {
       let lang = 'python'
       switch (this.copyType) {
         default:
-          return this.value
+          return this.$root.editorValue
         case 0: // Javascript RegExp
-          return `/${this.value}/${this.flagsSelected
+          return `/${this.$root.editorValue}/${this.flagsSelected
             .map(i => this.flags.javascript[i])
             .join('')}`
         case 2: // Python / Java String
           return `"(?${this.flagsSelected
             .map(i => this.flags.inline[i])
-            .join('')})${this.value.replaceAll('\\', '\\\\')}"`
+            .join('')})${this.$root.editorValue.replaceAll('\\', '\\\\')}"`
         case 3: // Python re.compile()
           break
         case 4: // Java Pattern.compile() Simplified
@@ -244,7 +244,7 @@ export default {
           lang = 'java'
           break
       }
-      return `${prefix}("${this.value.replaceAll('\\', '\\\\')}"${
+      return `${prefix}("${this.$root.editorValue.replaceAll('\\', '\\\\')}"${
         this.flagsSelected.length
           ? ', ' +
             this.flagsSelected

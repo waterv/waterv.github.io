@@ -62,7 +62,9 @@
       "dark": "Dark",
       "system": "System"
     },
-    "clearLocalStorageHint": "Are you sure to clear localStorage? This will reset all the settings.",
+    "clear": "Clear {0}",
+    "clearLocalStorageHint": "Will reset all the settings",
+    "clearIndexedDBHint": "Will clear all data (Draft Box, etc.)",
     "version": "Last updated: {0}"
   },
   "editor": {
@@ -109,6 +111,7 @@
   },
   "draftbox": {
     "editorValue": "Editing Text",
+    "allPath": "All Sources",
     "select": "Bulk Select",
     "delete": "Delete Selection"
   },

@@ -153,6 +153,7 @@
   "tutorials": [
     ["CASIO Worldwide Education Website > 字体集", "https://edu.casio.com/cn/forteachers/er/fontsets/", "zh-CN"],
     ["CASIO Worldwide Education Website > Font Sets", "https://edu.casio.com/forteachers/er/fontsets/", "en-US"],
-    ["hpcalc.org > HP Prime Font", "https://www.hpcalc.org/details/7522", ""]
+    ["hpcalc.org > HP Prime Font [ENG]", "https://www.hpcalc.org/details/7522", "zh-CN"],
+    ["hpcalc.org > HP Prime Font", "https://www.hpcalc.org/details/7522", "en-US"]
   ]
 }
