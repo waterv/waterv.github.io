@@ -12,11 +12,7 @@ import 'katex/dist/katex.min.css'
 
 Vue.config.productionTip = false
 Vue.use(VueClipboard)
-Vue.prototype.$range = cnt => {
-  let arr = []
-  for (let i = 0; i < cnt; i++) arr.push(i)
-  return arr
-}
+Vue.prototype.$range = cnt => new Array(cnt).fill(0).map((v, i) => i)
 
 new Vue({
   router,
@@ -46,7 +42,11 @@ new Vue({
   computed: {
     sortedApps() {
       return this.apps
-        .filter(cate => this.hasCateFavorApp(cate.name))
+        .filter(
+          cate =>
+            cate.name === '' ||
+            this.favorApps.filter(v => v.startsWith(`/${cate.name}`)).length > 0
+        )
         .map(cate => ({
           ...cate,
           apps: cate.apps
@@ -66,7 +66,7 @@ new Vue({
   },
   watch: {
     $route(to) {
-      this.filterNewApp(to.path)
+      this.newApps = this.newApps.filter(v => v != to.path)
       console.log('[route]', to.path)
     },
     newApps(v) {
@@ -127,7 +127,6 @@ new Vue({
           )
             newApps.push(fullPath)
 
-        console.log(allApps, currentApps, newApps)
         this.newApps = newApps.filter(v => v != this.$route.fullPath)
       })
 
@@ -147,9 +146,6 @@ new Vue({
         data: 'key',
       })
     },
-    filterNewApp(fullPath) {
-      this.newApps = this.newApps.filter(v => v != fullPath)
-    },
     isAppNew(fullPath) {
       if (fullPath == '/apps') return this.newApps.length > 0
       return this.newApps.includes(fullPath)
@@ -158,12 +154,6 @@ new Vue({
       return (
         fullPath?.lastIndexOf('/') == 0 ||
         this.favorApps.indexOf(fullPath) != -1
-      )
-    },
-    hasCateFavorApp(cate) {
-      return (
-        cate === '' ||
-        this.favorApps.filter(v => v.startsWith(`/${cate}`)).length > 0
       )
     },
     toggleAppFavor(fullPath) {

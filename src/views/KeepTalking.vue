@@ -1,9 +1,3 @@
-<!--
-  mazes 字段中:
-  - 迷宫编号格式为 xyxy (1 <= x, y <= 6).
-  - 迷宫格子用 2 位整数表示, 高位表示能否向右, 低位表示能否向下.
--->
-
 <template>
   <div class="keep-talking">
     <v-expansion-panels v-model="panel" class="mt-4">
@@ -407,6 +401,9 @@ export default {
     step: 1,
     pos: ['01', '52', '44', '45'],
     maze: kt.mazes[1263],
+    // mazes 字段中:
+    // - 迷宫编号格式为 xyxy (1 <= x, y <= 6).
+    // - 迷宫格子用 2 位整数表示, 高位表示能否向右, 低位表示能否向下.
     path: [],
     dirs: [],
     mazeDirs: [

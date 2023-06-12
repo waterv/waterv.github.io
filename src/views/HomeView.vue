@@ -34,6 +34,21 @@
               />
             </v-tab-item>
 
+            <!-- Technical -->
+            <v-tab-item>
+              <v-chip-group column mandatory>
+                <v-chip
+                  v-for="char in tech"
+                  :key="char"
+                  label
+                  outlined
+                  @click="append(char)"
+                >
+                  <span v-text="char" />
+                </v-chip>
+              </v-chip-group>
+            </v-tab-item>
+
             <!-- IDC -->
             <v-tab-item>
               <v-chip-group column mandatory>
@@ -96,11 +111,6 @@
         </v-card-text>
       </v-card>
     </v-expand-transition>
-
-    <!-- <v-btn class="ml-4" color="error" dark @click="clearLocalStorage">
-      <v-icon left v-text="'mdi-delete'" />
-      {{ $t('settings.clearLocalStorage') }}
-    </v-btn> -->
   </div>
 </template>
 

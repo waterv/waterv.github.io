@@ -7,7 +7,11 @@
       app
       dark
     >
-      <v-app-bar-nav-icon @click="drawer = !drawer" />
+      <v-app-bar-nav-icon @click="drawer = !drawer">
+        <v-badge :value="$root.isAppNew('/apps')" color="white" dot>
+          <v-icon v-text="'mdi-menu'" />
+        </v-badge>
+      </v-app-bar-nav-icon>
       <v-toolbar-title>{{ title }}</v-toolbar-title>
       <v-spacer />
       <v-btn icon @click="$root.toggleAppFavor($route.fullPath)">
@@ -205,7 +209,7 @@
               </v-btn>
             </template>
             {{ $t('settings.merit') }}{{ merit }}<br />
-            {{ $t('settings.cps') }}{{ (clicks.length / 5).toFixed(1) }}
+            {{ $t('settings.cps') }}{{ cps.toFixed(1) }}
           </v-tooltip>
 
           <!-- Locale Settings -->
@@ -460,6 +464,12 @@ export default {
       if (this.diceCustom) return 'mdi-help-circle'
       return `mdi-dice-d${this.diceMax}`
     },
+    cps() {
+      let clickTimes = this.clicks.length
+      let clickPeriod = this.clicks[clickTimes - 1] - this.clicks[0]
+      let cps = clickTimes / (clickPeriod / 1000)
+      return isFinite(cps) ? cps : 0
+    },
   },
   watch: {
     merit(v) {
@@ -522,7 +532,7 @@ export default {
       this.merit++
       let now = new Date().getTime()
       this.clicks.push(now)
-      this.clicks = this.clicks.filter(time => time >= now - 5000)
+      this.clicks = this.clicks.filter(time => time >= now - 10_000)
     },
     setPrimaryColor() {
       this.$root.primaryColor = this.paletteValue.slice(0, 7)
