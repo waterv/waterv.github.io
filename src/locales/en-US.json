@@ -72,8 +72,8 @@
     "max": "Maximum"
   },
   "settings": {
-    "merit": "Merit: ",
-    "cps": "CPS in 10 seconds: ",
+    "merit": "Merit: {0}",
+    "cps": "CPS in 10 seconds: {0}",
     "themes": {
       "light": "Light",
       "dark": "Dark",

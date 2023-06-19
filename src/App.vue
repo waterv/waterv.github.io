@@ -12,7 +12,9 @@
           <v-icon v-text="'mdi-menu'" />
         </v-badge>
       </v-app-bar-nav-icon>
-      <v-toolbar-title>{{ title }}</v-toolbar-title>
+      <v-toolbar-title>
+        {{ $root.getTitle(this.$route.fullPath) }}
+      </v-toolbar-title>
       <v-spacer />
       <v-btn icon @click="$root.toggleAppFavor($route.fullPath)">
         <v-icon
@@ -46,25 +48,8 @@
       clipped
       class="no-select padding-safe-left"
     >
-      <!-- Random Slogan -->
       <template #prepend>
-        <v-list-item
-          class="random-slogan"
-          :class="{
-            'random-slogan-disabled': !$root.isWidgetFavor('randomSlogan'),
-          }"
-          @click="randomSlogan"
-        >
-          <v-list-item-content class="random-slogan-content">
-            <v-list-item-title class="text-h6 random-slogan-title">
-              <v-icon v-text="'mdi-wrench'" />
-              {{ sloganTitle }}
-            </v-list-item-title>
-            <v-list-item-subtitle class="random-slogan-subtitle">
-              {{ slogan[sloganNo] }}
-            </v-list-item-subtitle>
-          </v-list-item-content>
-        </v-list-item>
+        <random-slogan @snackbar="arg => (sloganSnackbar = arg)" />
         <v-divider />
       </template>
 
@@ -105,19 +90,6 @@
             ])
           }}
         </v-subheader>
-
-        <v-sparkline
-          v-show="$root.isWidgetFavor('dice')"
-          :value="diceHistory"
-          :color="$root.primaryColor"
-          height="100"
-          stroke-linecap="round"
-          smooth
-        >
-          <template v-slot:label="item">
-            {{ item.value }}
-          </template>
-        </v-sparkline>
       </v-list>
 
       <template #append>
@@ -125,224 +97,12 @@
         <div
           class="px-4 mt-3 overflow-x-auto overflow-y-hidden navigation-operations"
         >
-          <!-- Dice -->
-          <v-menu v-model="diceMenu" offset-y :close-on-content-click="false">
-            <template v-slot:activator="{ on, attrs }">
-              <v-btn
-                v-show="$root.isWidgetFavor('dice')"
-                icon
-                v-bind="attrs"
-                v-on="on"
-              >
-                <v-icon v-text="diceIcon" />
-              </v-btn>
-            </template>
-            <v-card>
-              <v-card-text>
-                <v-btn-toggle
-                  v-model="diceToggle"
-                  class="mb-8"
-                  mandatory
-                  rounded
-                  dense
-                  borderless
-                >
-                  <v-btn
-                    v-for="(v, i) in [4, 6, 10, 12, 20]"
-                    :key="v"
-                    @click="diceSelect(v, i)"
-                  >
-                    <v-icon v-text="`mdi-dice-d${v}`" />
-                  </v-btn>
-                  <v-btn @click="diceSelect(0)">
-                    <v-icon v-text="'mdi-help-circle'" />
-                  </v-btn>
-                </v-btn-toggle>
-                <v-number-field
-                  v-model="diceMin"
-                  :label="$t('_.min')"
-                  :disabled="!diceCustom"
-                  dense
-                />
-                <v-number-field
-                  v-model="diceMax"
-                  :label="$t('_.max')"
-                  :disabled="!diceCustom"
-                  dense
-                  hide-details
-                />
-              </v-card-text>
-              <v-card-actions>
-                <v-btn color="primary" text @click="diceMenu = false">
-                  {{ $t('_.confirm') }}
-                </v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-menu>
-
-          <v-tooltip top :open-on-focus="false">
-            <template v-slot:activator="{ on, attrs }">
-              <v-btn
-                v-show="$root.isWidgetFavor('dice')"
-                icon
-                v-bind="attrs"
-                v-on="on"
-                @click="random"
-              >
-                <v-icon v-text="'mdi-dice-5'" />
-              </v-btn>
-            </template>
-            <span v-text="dice ?? '-'" />
-          </v-tooltip>
-
-          <!-- Cyber Wooden Fish -->
-          <v-tooltip top :open-on-focus="false">
-            <template v-slot:activator="{ on, attrs }">
-              <v-btn
-                v-show="$root.isWidgetFavor('woodenFish')"
-                icon
-                v-bind="attrs"
-                v-on="on"
-                @click="addMerit"
-              >
-                <v-icon v-text="'mdi-fish'" />
-              </v-btn>
-            </template>
-            {{ $t('settings.merit') }}{{ merit }}<br />
-            {{ $t('settings.cps') }}{{ cps.toFixed(1) }}
-          </v-tooltip>
-
-          <!-- Locale Settings -->
-          <v-menu offset-y>
-            <template v-slot:activator="{ on, attrs }">
-              <v-btn
-                v-show="$root.isWidgetFavor('locale')"
-                icon
-                v-bind="attrs"
-                v-on="on"
-              >
-                <v-icon v-text="'mdi-translate'" />
-              </v-btn>
-            </template>
-            <v-list nav dense>
-              <v-list-item
-                v-for="lang in locales"
-                :key="lang.text"
-                :input-value="$root.locale == lang.value"
-                color="primary"
-                @click="$root.locale = lang.value"
-              >
-                <v-list-item-title v-text="lang.text" />
-              </v-list-item>
-            </v-list>
-          </v-menu>
-
-          <!-- Theme Settings -->
-          <v-menu offset-y>
-            <template v-slot:activator="{ on, attrs }">
-              <v-btn
-                v-show="$root.isWidgetFavor('theme')"
-                icon
-                v-bind="attrs"
-                v-on="on"
-              >
-                <v-icon v-text="themeIcon" />
-              </v-btn>
-            </template>
-            <v-list nav dense>
-              <v-list-item
-                v-for="theme in themes"
-                :key="theme.text"
-                :input-value="$root.selectTheme == theme.value"
-                color="primary"
-                @click="$root.selectTheme = theme.value"
-              >
-                <v-list-item-title v-text="theme.text" />
-              </v-list-item>
-            </v-list>
-          </v-menu>
-
-          <!-- Palette -->
-          <v-menu
-            v-model="paletteMenu"
-            :close-on-content-click="false"
-            offset-y
-          >
-            <template #activator="{ on, attrs }">
-              <v-btn
-                v-show="$root.isWidgetFavor('palette')"
-                icon
-                v-bind="attrs"
-                v-on="on"
-              >
-                <v-icon v-text="'mdi-palette'" />
-              </v-btn>
-            </template>
-            <v-card>
-              <v-color-picker
-                v-model="paletteValue"
-                :mode="paletteMode"
-                show-swatches
-                swatches-max-height="100"
-              />
-              <v-card-actions>
-                <v-btn
-                  color="primary"
-                  text
-                  @click="setPrimaryColor"
-                  v-text="$t('_.confirm')"
-                />
-                <v-btn-toggle v-model="paletteMode" dense group>
-                  <v-btn
-                    v-for="mode in paletteModes"
-                    :key="mode"
-                    :value="mode"
-                    v-text="mode"
-                  />
-                </v-btn-toggle>
-              </v-card-actions>
-            </v-card>
-          </v-menu>
-
-          <!-- Clear Web Storage -->
-          <v-menu v-model="localStorageMenu" offset-y>
-            <template #activator="{ on, attrs }">
-              <v-btn
-                v-show="$root.isWidgetFavor('clear')"
-                icon
-                v-bind="attrs"
-                v-on="on"
-              >
-                <v-icon v-text="'mdi-broom'" />
-              </v-btn>
-            </template>
-            <v-card>
-              <v-card-text>
-                <v-list>
-                  <v-list-item @click="clearLocalStorage">
-                    <v-list-item-content>
-                      <v-list-item-title>
-                        {{ $t('settings.clear', ['localStorage']) }}
-                      </v-list-item-title>
-                      <v-list-item-subtitle>
-                        {{ $t('settings.clearLocalStorageHint') }}
-                      </v-list-item-subtitle>
-                    </v-list-item-content>
-                  </v-list-item>
-                  <v-list-item @click="clearIndexedDB">
-                    <v-list-item-content>
-                      <v-list-item-title>
-                        {{ $t('settings.clear', ['IndexedDB']) }}
-                      </v-list-item-title>
-                      <v-list-item-subtitle>
-                        {{ $t('settings.clearIndexedDBHint') }}
-                      </v-list-item-subtitle>
-                    </v-list-item-content>
-                  </v-list-item>
-                </v-list>
-              </v-card-text>
-            </v-card>
-          </v-menu>
+          <dice-widget v-if="$root.isWidgetFavor('dice')" />
+          <wooden-fish v-if="$root.isWidgetFavor('woodenFish')" />
+          <locale-setting v-if="$root.isWidgetFavor('locale')" />
+          <theme-setting v-if="$root.isWidgetFavor('theme')" />
+          <palette-setting v-if="$root.isWidgetFavor('palette')" />
+          <cache-setting v-if="$root.isWidgetFavor('clear')" />
 
           <!-- VConsole -->
           <v-btn
@@ -356,12 +116,9 @@
       </template>
     </v-navigation-drawer>
 
-    <v-snackbar v-model="sloganSnackbar" class="safe-bottom">
+    <v-snackbar v-model="sloganSnackbar.open" class="safe-bottom">
       {{
-        $t(
-          `settings.sloganSnackbar.${sloganSnackbarNo}`,
-          sloganData[sloganSnackbarNo]
-        )
+        $t(`settings.sloganSnackbar[${sloganSnackbar.no}]`, sloganSnackbar.data)
       }}
     </v-snackbar>
 
@@ -377,47 +134,35 @@
 
 <script>
 import VConsole from 'vconsole'
-import VNumberField from '@/components/VNumberField.vue'
-let slogan = require('@/data/slogan.json')
+import RandomSlogan from '@/components/widgets/RandomSlogan.vue'
+import DiceWidget from '@/components/widgets/DiceWidget.vue'
+import WoodenFish from '@/components/widgets/WoodenFish.vue'
+import LocaleSetting from '@/components/widgets/LocaleSetting.vue'
+import ThemeSetting from '@/components/widgets/ThemeSetting.vue'
+import PaletteSetting from '@/components/widgets/PaletteSetting.vue'
+import CacheSetting from '@/components/widgets/CacheSetting.vue'
 
 export default {
   name: 'App',
-  components: { VNumberField },
+  components: {
+    RandomSlogan,
+    WoodenFish,
+    LocaleSetting,
+    ThemeSetting,
+    PaletteSetting,
+    CacheSetting,
+    DiceWidget,
+  },
   data: () => ({
     dayjs: require('dayjs'),
     version: require('@/data/time.json'),
 
     drawer: false,
-
-    slogan,
-    sloganNo: 0,
-    sloganCount: -1,
-    sloganData: { 242: [0], 448: [0] },
-    sloganSnackbar: false,
-    sloganSnackbarNo: -1,
-
-    diceMin: 1,
-    diceMax: 6,
-    diceCustom: false,
-    diceToggle: 1,
-    diceMenu: false,
-    dice: undefined,
-    diceHistory: [0],
-
-    merit: Number(localStorage.getItem('merit')) || 0,
-    clicks: [],
-
-    locales: [
-      { text: '简体中文', value: 'zh-CN' },
-      { text: 'English', value: 'en-US' },
-    ],
-
-    paletteMenu: false,
-    paletteValue: undefined, // mounted
-    paletteMode: 'rgba',
-    paletteModes: ['rgba', 'hsla', 'hexa'],
-
-    localStorageMenu: false,
+    sloganSnackbar: {
+      open: false,
+      no: -1,
+      data: [],
+    },
 
     vConsole: undefined,
     fabButton: {
@@ -431,113 +176,7 @@ export default {
       color: 'primary',
     },
   }),
-  computed: {
-    sloganTitle() {
-      switch (this.sloganNo) {
-        default:
-          return this.$t('app.name')
-        // #458 "你的电脑遇到问题，需要重新启动。我们只收集某些错误信息，然后你可以重新启动。"
-        case 458:
-          return ':('
-      }
-    },
-    title() {
-      return this.$root.getTitle(this.$route.fullPath)
-    },
-    themes() {
-      return ['system', 'light', 'dark'].map(value => ({
-        text: this.$t(`settings.themes.${value}`),
-        value,
-      }))
-    },
-    themeIcon() {
-      switch (this.$root.selectTheme) {
-        case 'system':
-          return 'mdi-brightness-auto'
-        case 'light':
-          return 'mdi-white-balance-sunny'
-        default:
-          return 'mdi-weather-night'
-      }
-    },
-    diceIcon() {
-      if (this.diceCustom) return 'mdi-help-circle'
-      return `mdi-dice-d${this.diceMax}`
-    },
-    cps() {
-      let clickTimes = this.clicks.length
-      let clickPeriod = this.clicks[clickTimes - 1] - this.clicks[0]
-      let cps = clickTimes / (clickPeriod / 1000)
-      return isFinite(cps) ? cps : 0
-    },
-  },
-  watch: {
-    merit(v) {
-      localStorage.setItem('merit', v)
-    },
-  },
-  mounted() {
-    this.randomSlogan()
-    this.paletteValue = this.$root.primaryColor + 'FF'
-  },
   methods: {
-    randomSlogan() {
-      this.sloganNo = Math.floor(Math.random() * slogan.length)
-      this.sloganCount += 1
-      if (!this.$root.isWidgetFavor('randomSlogan')) return
-      let temp
-      switch (this.sloganNo) {
-        default:
-          break
-        // #242 "猜猜看，你还要点几次才能再看到这条标语？"
-        case 242:
-          temp = this.sloganData[242][0]
-          this.sloganData[242][0] = this.sloganCount - temp
-          if (temp == 0) break
-          this.sloganSnackbar = true
-          this.sloganSnackbarNo = 242
-          break
-        // #448 "你会记得你点过多少次随机语录吗？"
-        case 448:
-          if (this.sloganCount == 0) break
-          this.sloganData[448][0] = this.sloganCount
-          this.sloganSnackbar = true
-          this.sloganSnackbarNo = 448
-          break
-      }
-    },
-    diceSelect(v, i) {
-      if (!v)
-        return Object.assign(this, {
-          diceCustom: true,
-          diceToggle: 5,
-        })
-      return Object.assign(this, {
-        diceMin: 1,
-        diceMax: v,
-        diceCustom: false,
-        diceToggle: i,
-      })
-    },
-    random() {
-      let min = Number(this.diceMin) || 0
-      let max = Number(this.diceMax) || 0
-      let value = Math.floor(min + Math.random() * (max - min + 1))
-      this.dice = value
-      this.diceHistory.push(value)
-      if (this.diceHistory.length > 10) this.diceHistory.shift()
-      console.log('[dice]', min, max, value)
-    },
-    addMerit() {
-      this.merit++
-      let now = new Date().getTime()
-      this.clicks.push(now)
-      this.clicks = this.clicks.filter(time => time >= now - 10_000)
-    },
-    setPrimaryColor() {
-      this.$root.primaryColor = this.paletteValue.slice(0, 7)
-      this.paletteMenu = false
-    },
     toggleVConsole() {
       if (this.vConsole) {
         this.vConsole.destroy()
@@ -549,40 +188,6 @@ export default {
         this.vConsole.hideSwitch()
       }
     },
-    clearLocalStorage() {
-      localStorage.clear()
-      this.$router.go(0)
-    },
-    clearIndexedDB() {
-      this.$root.db.delete()
-      this.$router.go(0)
-    },
   },
 }
 </script>
-
-<style>
-.random-slogan-content {
-  height: 112px;
-}
-
-.random-slogan-disabled .random-slogan-content {
-  height: calc(112px - calc(0.875rem * 1.2 * 3));
-}
-
-.random-slogan-title {
-  align-self: first baseline;
-}
-
-.random-slogan-subtitle {
-  height: calc(0.875rem * 1.2 * 3);
-  line-clamp: 3 !important;
-  -webkit-line-clamp: 3 !important;
-  white-space: normal;
-  align-self: first baseline;
-}
-
-.random-slogan-disabled .random-slogan-subtitle {
-  display: none;
-}
-</style>

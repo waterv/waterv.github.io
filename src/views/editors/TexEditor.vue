@@ -155,14 +155,13 @@ export default {
     VEditor,
     TutorialList,
   },
-  data: () => ({
+  data: that => ({
     ...tex,
 
     func: '',
     recent: [],
-    recentMax: Number(localStorage.getItem('texRecentMax')) || 20,
-
-    displayMode: localStorage.getItem('texDisplayMode') != 'false',
+    recentMax: that.$ls.data('number', 'texRecentMax', 20),
+    displayMode: that.$ls.data('boolean', 'texDisplayMode', true),
     macros_: [
       ['\\d', '\\mathrm d'],
       ['\\e', '\\mathrm e'],
@@ -202,10 +201,10 @@ export default {
     recentMax(v) {
       let length = this.recent.length
       if (length > v) this.recent = this.recent.slice(length - v)
-      localStorage.setItem('texRecentMax', v)
+      this.$ls.watch('number', 'texRecentMax', v)
     },
     displayMode(v) {
-      localStorage.setItem('texDisplayMode', v)
+      this.$ls.watch('boolean', 'texDisplayMode', v)
     },
     dialog(v) {
       if (v) this.macroJson = JSON.stringify(this.macros)

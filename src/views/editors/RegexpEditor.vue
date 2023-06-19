@@ -173,14 +173,14 @@ export default {
     VEditor,
     TutorialList,
   },
-  data: () => ({
+  data: that => ({
     ...regexp,
     focused: false,
 
     tab: null,
     panel: 0,
 
-    tips: localStorage.getItem('regexpTips') != 'false',
+    tips: that.$ls.data('boolean', 'regexpTips', true),
     copyType: 0,
 
     inlineFlagAlu: '',
@@ -197,7 +197,7 @@ export default {
   }),
   watch: {
     tips(v) {
-      localStorage.setItem('regexpTips', v)
+      this.$ls.watch('boolean', 'regexpTips', v)
     },
   },
   computed: {

@@ -13,6 +13,32 @@ import 'katex/dist/katex.min.css'
 Vue.config.productionTip = false
 Vue.use(VueClipboard)
 Vue.prototype.$range = cnt => new Array(cnt).fill(0).map((v, i) => i)
+Vue.prototype.$ls = {
+  data: (type, key, defaultValue) => {
+    switch (type) {
+      case 'number':
+        return Number(localStorage?.getItem(key) ?? defaultValue)
+      case 'boolean':
+        if (defaultValue) return localStorage?.getItem(key) != 'false'
+        else return localStorage?.getItem(key) == 'true'
+      default:
+      case 'string':
+        return localStorage?.getItem(key) ?? defaultValue
+      case 'object':
+        return JSON.parse(localStorage?.getItem(key) ?? defaultValue)
+    }
+  },
+  watch: (type, key, value) => {
+    switch (type) {
+      case 'object':
+        localStorage?.setItem(key, JSON.stringify(value))
+        break
+      default:
+        localStorage?.setItem(key, value)
+        break
+    }
+  },
+}
 
 new Vue({
   router,
@@ -30,8 +56,8 @@ new Vue({
 
     locale: that.$i18n.locale,
     systemTheme: window.matchMedia('(prefers-color-scheme: dark)').matches,
-    selectTheme: localStorage.getItem('theme') || 'system',
-    primaryColor: localStorage.getItem('primary') || '#1976D2',
+    selectTheme: that.$ls.data('string', 'theme', 'system'),
+    primaryColor: that.$ls.data('string', 'primary', '#1976D2'),
 
     copyError: false,
     copySuccess: false,
@@ -80,18 +106,18 @@ new Vue({
     },
     locale(v) {
       this.$i18n.locale = v
-      localStorage.setItem('locale', v)
+      this.$ls.watch('string', 'locale', v)
     },
     systemTheme() {
       this.refreshTheme()
     },
     selectTheme(v) {
       this.refreshTheme()
-      localStorage.setItem('theme', v)
+      this.$ls.watch('string', 'theme', v)
     },
     primaryColor(v) {
       this.refreshTheme()
-      localStorage.setItem('primary', v)
+      this.$ls.watch('string', 'primary', v)
     },
   },
   mounted() {

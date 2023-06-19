@@ -119,19 +119,16 @@ export default {
     VEditor,
     TutorialList,
   },
-  data: () => ({
+  data: that => ({
     ...ipa,
-
     focused: false,
-
     tab: 0,
     panel: 0,
-
-    tips: localStorage.getItem('ipaTips') != 'false',
+    tips: that.$ls.data('boolean', 'ipaTips', true),
   }),
   watch: {
     tips(v) {
-      localStorage.setItem('ipaTips', v)
+      this.$ls.watch('boolean', 'ipaTips', v)
     },
   },
   methods: {
