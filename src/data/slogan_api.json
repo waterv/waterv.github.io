@@ -1,0 +1,86 @@
+[
+  {
+    "name": "",
+    "home": "",
+    "url": "",
+    "format": ""
+  },
+  {
+    "name": "Advice Slip JSON API",
+    "home": "https://api.adviceslip.com",
+    "url": "https://api.adviceslip.com/advice",
+    "format": "${data.slip.advice}"
+  },
+  {
+    "name": "Binary Jazz genrenator",
+    "home": "https://binaryjazz.us/genrenator-api",
+    "url": "https://binaryjazz.us/wp-json/genrenator/v1/story",
+    "format": "${data}"
+  },
+  {
+    "name": "Corporate Buzzword Generator API",
+    "home": "https://github.com/sameerkumar18/corporate-bs-generator-api",
+    "url": "https://corporatebs-generator.sameerkumar.website",
+    "format": "${data.phrase}"
+  },
+  {
+    "name": "icanhazdadjoke.com",
+    "home": "https://icanhazdadjoke.com/api",
+    "url": "https://icanhazdadjoke.com",
+    "format": "${data.joke}"
+  },
+  {
+    "name": "Numbers API - Date",
+    "home": "http://numbersapi.com",
+    "url": "http://numbersapi.com/random/date",
+    "format": "${data}"
+  },
+  {
+    "name": "Numbers API - Math",
+    "home": "http://numbersapi.com",
+    "url": "http://numbersapi.com/random/math",
+    "format": "${data}"
+  },
+  {
+    "name": "Numbers API - Trivia",
+    "home": "http://numbersapi.com",
+    "url": "http://numbersapi.com/random/trivia",
+    "format": "${data}"
+  },
+  {
+    "name": "Numbers API - Year",
+    "home": "http://numbersapi.com",
+    "url": "http://numbersapi.com/random/year",
+    "format": "${data}"
+  },
+  {
+    "name": "Quotable",
+    "home": "https://github.com/lukePeavey/quotable",
+    "url": "https://api.quotable.io/quotes/random",
+    "format": "${data[0].content} - ${data[0].author}"
+  },
+  {
+    "name": "QuoteGarden",
+    "home": "https://github.com/pprathameshmore/QuoteGarden",
+    "url": "https://quote-garden.onrender.com/api/v3/quotes/random",
+    "format": "${data.data[0].quoteText} - ${data.data[0].quoteAuthor}"
+  },
+  {
+    "name": "Stoicism Quote API",
+    "home": "https://github.com/tlcheah2/stoic-quote-lambda-public-api",
+    "url": "https://api.themotivate365.com/stoic-quote",
+    "format": "${data.quote} - ${data.author}"
+  },
+  {
+    "name": "Trivia API",
+    "home": "https://opentdb.com",
+    "url": "https://opentdb.com/api.php?amount=1",
+    "format": "${data.results[0].question} (${data.results[0].correct_answer})"
+  },
+  {
+    "name": "uselessfacts",
+    "home": "https://uselessfacts.jsph.pl",
+    "url": "https://uselessfacts.jsph.pl/api/v2/facts/random?lang=en",
+    "format": "${data.text}"
+  }
+]

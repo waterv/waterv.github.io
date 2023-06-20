@@ -6,12 +6,15 @@ import vuetify from './plugins/vuetify'
 import i18n from './i18n'
 import VueClipboard from 'vue-clipboard2'
 import { Dexie } from 'dexie'
+import axios from 'axios'
 
 import '@mdi/font/css/materialdesignicons.css'
 import 'katex/dist/katex.min.css'
 
 Vue.config.productionTip = false
 Vue.use(VueClipboard)
+Vue.prototype.$day = require('dayjs')
+Vue.prototype.$axios = axios
 Vue.prototype.$range = cnt => new Array(cnt).fill(0).map((v, i) => i)
 Vue.prototype.$ls = {
   data: (type, key, defaultValue) => {
@@ -21,21 +24,18 @@ Vue.prototype.$ls = {
       case 'boolean':
         if (defaultValue) return localStorage?.getItem(key) != 'false'
         else return localStorage?.getItem(key) == 'true'
-      default:
-      case 'string':
-        return localStorage?.getItem(key) ?? defaultValue
       case 'object':
         return JSON.parse(localStorage?.getItem(key) ?? defaultValue)
+      default:
+        return localStorage?.getItem(key) ?? defaultValue
     }
   },
   watch: (type, key, value) => {
     switch (type) {
       case 'object':
-        localStorage?.setItem(key, JSON.stringify(value))
-        break
+        return localStorage?.setItem(key, JSON.stringify(value))
       default:
-        localStorage?.setItem(key, value)
-        break
+        return localStorage?.setItem(key, value)
     }
   },
 }
@@ -58,6 +58,10 @@ new Vue({
     systemTheme: window.matchMedia('(prefers-color-scheme: dark)').matches,
     selectTheme: that.$ls.data('string', 'theme', 'system'),
     primaryColor: that.$ls.data('string', 'primary', '#1976D2'),
+
+    sloganApiName: that.$ls.data('string', 'sloganApiName', ''),
+    sloganApiUrl: that.$ls.data('string', 'sloganApiUrl', ''),
+    sloganApiFormat: that.$ls.data('string', 'sloganApiFormat', ''),
 
     copyError: false,
     copySuccess: false,
@@ -104,6 +108,7 @@ new Vue({
     unfavorWidgets(v) {
       this.db.data.put({ key: 'unfavorWidgets', value: v })
     },
+
     locale(v) {
       this.$i18n.locale = v
       this.$ls.watch('string', 'locale', v)
@@ -118,6 +123,16 @@ new Vue({
     primaryColor(v) {
       this.refreshTheme()
       this.$ls.watch('string', 'primary', v)
+    },
+
+    sloganApiName(v) {
+      this.$ls.watch('string', 'sloganApiName', v)
+    },
+    sloganApiUrl(v) {
+      this.$ls.watch('string', 'sloganApiUrl', v)
+    },
+    sloganApiFormat(v) {
+      this.$ls.watch('string', 'sloganApiFormat', v)
     },
   },
   mounted() {

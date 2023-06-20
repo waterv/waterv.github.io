@@ -87,7 +87,14 @@
                 no-gutters
                 class="justify-center"
               >
-                <braille-key v-for="(u, j) in v" :key="j" v-model="v[j]" />
+                <v-toggle
+                  v-for="(u, j) in v"
+                  :key="j"
+                  v-model="v[j]"
+                  unchecked-color="grey"
+                  unchecked-icon="mdi-circle-outline"
+                  icon="mdi-circle-slice-8"
+                />
                 <v-btn
                   v-if="i == 3"
                   icon
@@ -116,14 +123,14 @@
 
 <script>
 import VEditor from '@/components/VEditor.vue'
-import BrailleKey from '@/components/BrailleKey.vue'
+import VToggle from '@/components/VToggle.vue'
 let misc = require('@/data/misc.json')
 
 export default {
   name: 'HomeView',
   components: {
     VEditor,
-    BrailleKey,
+    VToggle,
   },
   data: () => ({
     ...misc,

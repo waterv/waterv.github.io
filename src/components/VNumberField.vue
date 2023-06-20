@@ -4,6 +4,7 @@
     type="number"
     :label="label"
     :disabled="disabled"
+    :outlined="outlined"
     :dense="dense"
     :hide-details="hideDetails"
     :rules="rules"
@@ -16,10 +17,11 @@
 export default {
   name: 'VNumberField',
   props: {
-    dense: Boolean,
-    disabled: Boolean,
-    hideDetails: Boolean,
     label: String,
+    disabled: Boolean,
+    outlined: Boolean,
+    dense: Boolean,
+    hideDetails: Boolean,
     value: Number,
   },
   model: {

@@ -24,11 +24,11 @@
     "name": "palette"
   },
   {
-    "icon": "mdi-broom",
-    "name": "clear"
-  },
-  {
     "icon": "mdi-console",
     "name": "vconsole"
+  },
+  {
+    "icon": "mdi-cog",
+    "name": "settings"
   }
 ]

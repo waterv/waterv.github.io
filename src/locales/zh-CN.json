@@ -6,6 +6,7 @@
     "home": "首页",
     "apps": "应用",
     "draftbox": "草稿箱",
+    "settings": "设置",
     "all": {
       "_": "全部"
     },
@@ -44,8 +45,8 @@
       "locale": "本地化设置",
       "theme": "主题设置",
       "palette": "主题色设置",
-      "clear": "清除缓存",
-      "vconsole": "vConsole"
+      "vconsole": "vConsole",
+      "settings": "其他设置"
     }
   },
   "_": {
@@ -84,9 +85,17 @@
       "dark": "深色",
       "system": "跟随系统"
     },
+    "sloganApi": "标语来源",
+    "sloganApiName": "API 名称",
+    "sloganApiUrl": "请求地址",
+    "sloganApiFormat": "显示格式",
+    "clearCache": "清除缓存",
+    "clearValid": "输入 {0} 的计算结果以确认",
     "clear": "清除 {0}",
-    "clearLocalStorageHint": "将重置所有的设置项",
-    "clearIndexedDBHint": "将清空草稿箱等数据",
+    "clearHint": {
+      "localStorage": "将重置所有的设置项",
+      "IndexedDB": "将清空草稿箱等数据"
+    },
     "version": "最近更新时间：{0}"
   },
   "editor": {

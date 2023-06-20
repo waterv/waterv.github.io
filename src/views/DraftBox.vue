@@ -32,7 +32,7 @@
                   {{ v.text }}
                 </v-list-item-title>
                 <v-list-item-subtitle>
-                  {{ dayjs(v.time).format('YYYY-MM-DD HH:mm:ss') }} @
+                  {{ $day(v.time).format('YYYY-MM-DD HH:mm:ss') }} @
                   {{ $root.getTitle(v.path) }}
                 </v-list-item-subtitle>
               </v-list-item-content>
@@ -74,7 +74,6 @@ export default {
   name: 'DraftBox',
   components: { VEditor },
   data: that => ({
-    dayjs: require('dayjs'),
     fromPath: '',
     pathes: [
       '',

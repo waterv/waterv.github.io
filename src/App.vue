@@ -16,14 +16,14 @@
         {{ $root.getTitle(this.$route.fullPath) }}
       </v-toolbar-title>
       <v-spacer />
-      <v-btn icon @click="$root.toggleAppFavor($route.fullPath)">
-        <v-icon
-          v-if="$route.fullPath.lastIndexOf('/') != 0"
-          v-text="
-            $root.isAppFavor($route.fullPath) ? 'mdi-star' : 'mdi-star-outline'
-          "
-        />
-      </v-btn>
+      <v-toggle
+        v-if="$route.fullPath.lastIndexOf('/') != 0"
+        :checked="$root.isAppFavor($route.fullPath)"
+        @change="$root.toggleAppFavor($route.fullPath)"
+        color=""
+        icon="mdi-star"
+        unchecked-icon="mdi-star-outline"
+      />
     </v-app-bar>
 
     <v-main
@@ -86,7 +86,7 @@
         <v-subheader>
           {{
             $t('settings.version', [
-              dayjs(version.time).format('YYYY-MM-DD HH:mm:ss'),
+              $day(version.time).format('YYYY-MM-DD HH:mm:ss'),
             ])
           }}
         </v-subheader>
@@ -102,15 +102,24 @@
           <locale-setting v-if="$root.isWidgetFavor('locale')" />
           <theme-setting v-if="$root.isWidgetFavor('theme')" />
           <palette-setting v-if="$root.isWidgetFavor('palette')" />
-          <cache-setting v-if="$root.isWidgetFavor('clear')" />
 
           <!-- VConsole -->
+          <v-toggle
+            v-if="$root.isWidgetFavor('vconsole')"
+            :checked="!!vConsole"
+            icon="mdi-console"
+            @change="toggleVConsole"
+          />
+
+          <!-- Settings -->
           <v-btn
-            v-show="$root.isWidgetFavor('vconsole')"
+            v-if="$root.isWidgetFavor('settings')"
+            active-class="primary--text"
             icon
-            @click="toggleVConsole"
+            to="/settings"
+            replace
           >
-            <v-icon v-text="'mdi-console'" :color="vConsole ? 'primary' : ''" />
+            <v-icon v-text="'mdi-cog'" />
           </v-btn>
         </div>
       </template>
@@ -134,27 +143,26 @@
 
 <script>
 import VConsole from 'vconsole'
+import VToggle from '@/components/VToggle.vue'
 import RandomSlogan from '@/components/widgets/RandomSlogan.vue'
 import DiceWidget from '@/components/widgets/DiceWidget.vue'
 import WoodenFish from '@/components/widgets/WoodenFish.vue'
 import LocaleSetting from '@/components/widgets/LocaleSetting.vue'
 import ThemeSetting from '@/components/widgets/ThemeSetting.vue'
 import PaletteSetting from '@/components/widgets/PaletteSetting.vue'
-import CacheSetting from '@/components/widgets/CacheSetting.vue'
 
 export default {
   name: 'App',
   components: {
+    VToggle,
     RandomSlogan,
+    DiceWidget,
     WoodenFish,
     LocaleSetting,
     ThemeSetting,
     PaletteSetting,
-    CacheSetting,
-    DiceWidget,
   },
   data: () => ({
-    dayjs: require('dayjs'),
     version: require('@/data/time.json'),
 
     drawer: false,

@@ -6,6 +6,7 @@
     "home": "Home",
     "apps": "Applications",
     "draftbox": "Draft Box",
+    "settings": "Settings",
     "all": {
       "_": "All"
     },
@@ -44,8 +45,8 @@
       "locale": "Localization Settings",
       "theme": "Theme Settings",
       "palette": "Palette Settings",
-      "clear": "Clear Cache",
-      "vconsole": "vConsole"
+      "vconsole": "vConsole",
+      "settings": "Misc. Settings"
     }
   },
   "_": {
@@ -79,9 +80,17 @@
       "dark": "Dark",
       "system": "System"
     },
+    "sloganApi": "Slogan Source",
+    "sloganApiName": "API Name",
+    "sloganApiUrl": "Request URL",
+    "sloganApiFormat": "Display Format",
+    "clearCache": "Clear Cache",
+    "clearValid": "Input result of {0} to confirm",
     "clear": "Clear {0}",
-    "clearLocalStorageHint": "Will reset all the settings",
-    "clearIndexedDBHint": "Will clear all data (Draft Box, etc.)",
+    "clearHint": {
+      "localStorage": "This will reset all the settings.",
+      "IndexedDB": "This will clear all the data, e.g. Draft Box."
+    },
     "version": "Last updated: {0}"
   },
   "editor": {
