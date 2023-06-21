@@ -1,12 +1,6 @@
 <template>
   <v-app id="v-app" class="safe-top" @touchstart.stop.prevent>
-    <v-app-bar
-      class="app-bar padding-safe-left"
-      color="primary"
-      clipped-left
-      app
-      dark
-    >
+    <v-app-bar class="app-bar padding-safe-left" color="primary" app dark short>
       <v-app-bar-nav-icon @click="drawer = !drawer">
         <v-badge :value="$root.isAppNew('/apps')" color="white" dot>
           <v-icon v-text="'mdi-menu'" />
@@ -45,7 +39,6 @@
     <v-navigation-drawer
       v-model="drawer"
       app
-      clipped
       class="no-select padding-safe-left"
     >
       <template #prepend>

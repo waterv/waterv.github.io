@@ -69,6 +69,11 @@ const routes = [
     component: () => import('../views/helpers/Arc.vue'),
   },
   {
+    path: '/emulator/brainfuck',
+    name: 'BrainFuck',
+    component: () => import('../views/emulators/BrainFuck.vue'),
+  },
+  {
     path: '/emulator/11nimmt',
     name: '11Nimmt',
     component: () => import('../views/emulators/11Nimmt.vue'),

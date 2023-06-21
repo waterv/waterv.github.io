@@ -156,6 +156,7 @@ export default {
               ('a' <= c && c <= 'f') ||
               ('A' <= c && c <= 'F')
           ) || this.$t('home.rule.nothex'),
+        v => parseInt(v, 16) <= 0x10ffff || this.$t('home.rule.long'),
       ]
     },
   },
@@ -170,7 +171,8 @@ export default {
       for (let func of this.codePointRule) if (func(code) !== true) return
 
       code = `0000${code}`.slice(-Math.max(4, code.length))
-      this.append(eval(`'\\u{${code}}'`))
+      // this.append(eval(`'\\u{${code}}'`))
+      this.append(String.fromCodePoint(parseInt(code, 16)))
     },
     clearBraille() {
       this.brailles = [
@@ -185,7 +187,8 @@ export default {
       for (let i in this.brailles)
         for (let j in this.brailles[i])
           result |= Number(this.brailles[i][j]) << this.braille[i][j]
-      this.append(eval(`'\\u${(0x2800 + result).toString(16)}'`))
+      // this.append(eval(`'\\u${(0x2800 + result).toString(16)}'`))
+      this.append(String.fromCodePoint(0x2800 + result))
     },
   },
 }

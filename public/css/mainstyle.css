@@ -32,8 +32,8 @@ input[type='number'] {
 }
 
 .app-bar {
-  height: calc(constant(safe-area-inset-top) + 64px) !important;
-  height: calc(env(safe-area-inset-top) + 64px) !important;
+  height: calc(constant(safe-area-inset-top) + 56px) !important;
+  height: calc(env(safe-area-inset-top) + 56px) !important;
   padding-top: constant(safe-area-inset-top);
   padding-top: env(safe-area-inset-top);
 }

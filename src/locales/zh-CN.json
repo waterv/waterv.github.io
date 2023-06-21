@@ -35,6 +35,7 @@
     },
     "emulator": {
       "_": "模拟器",
+      "brainfuck": "Brainfuck 模拟器",
       "11nimmt": "牛头王模拟器"
     },
     "widget": {
@@ -752,6 +753,20 @@
     "affinity": "相性契合",
     "overFragment": "残片深化",
     "mapFactor": "地图系数"
+  },
+  "bf": {
+    "code": "代码",
+    "input": "输入",
+    "symbols": "符号",
+    "memory": "内存",
+    "output": "输出",
+    "maxCell": "数组长度",
+    "maxLoop": "最多循环次数",
+    "speed": "执行速度",
+    "byte": "数组单元存储一个字节",
+    "bracketError": "括号不匹配，解析失败。",
+    "infiniteLoop": "发生无限循环，无法继续执行。",
+    "programEnd": "程序执行完毕。"
   },
   "nimmt": {
     "pile": "牌堆",

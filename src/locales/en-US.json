@@ -35,6 +35,7 @@
     },
     "emulator": {
       "_": "Emulators",
+      "brainfuck": "Brainfuck Emulator",
       "11nimmt": "11 Nimmt! Emulator"
     },
     "widget": {
@@ -744,6 +745,20 @@
     "affinity": "Affinity",
     "overFragment": "Frag Boost",
     "mapFactor": "Map Factor"
+  },
+  "bf": {
+    "code": "Code",
+    "input": "Input",
+    "symbols": "Symbols",
+    "memory": "Memory",
+    "output": "Output",
+    "maxCell": "Array length",
+    "maxLoop": "Maximum number of loops",
+    "speed": "Execution speed",
+    "byte": "Array unit stores one byte",
+    "bracketError": "The bracket do not match, parsing failed.",
+    "infiniteLoop": "An infinite loop has occurred, executing failed.",
+    "programEnd": "Execution completed."
   },
   "nimmt": {
     "pile": "Piles",

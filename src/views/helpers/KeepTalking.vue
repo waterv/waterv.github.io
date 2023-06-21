@@ -631,7 +631,8 @@ export default {
     },
     toggleCompState(i) {
       this.compState[this.compIndices[i]] = !this.compState[this.compIndices[i]]
-      this.compStateInteger = eval('0b' + this.compState.map(Number).join(''))
+      // this.compStateInteger = eval('0b' + this.compState.map(Number).join(''))
+      this.compStateInteger = parseInt(this.compState.map(Number).join(''), 2)
     },
     seqNext(i) {
       this.seqState[i] = (this.seqState[i] + 1) % 9

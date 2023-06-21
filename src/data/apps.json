@@ -83,6 +83,11 @@
     "name": "emulator",
     "apps": [
       {
+        "icon": "mdi-brain",
+        "path": "brainfuck",
+        "version": 1687281830175
+      },
+      {
         "icon": "mdi-cow",
         "path": "11nimmt",
         "version": 1685769171115

@@ -40,7 +40,7 @@
           </v-list-item-group>
         </v-list>
 
-        <v-pagination v-model="page" :length="pages" />
+        <v-pagination v-model="page" :length="pages" total-visible="7" />
       </v-card-text>
       <v-card-actions>
         <v-btn
@@ -84,6 +84,7 @@ export default {
       '/editor/ipa',
       '/editor/calc',
       '/converter/font',
+      '/emulator/brainfuck',
     ],
     items: [],
     page: 1,

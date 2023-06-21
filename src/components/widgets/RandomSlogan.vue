@@ -119,7 +119,7 @@ export default {
           })
           .catch(err => {
             this.loading = false
-            console.log('[slogan]', err.message)
+            console.error('[slogan]', err.message)
           })
       }
     },
