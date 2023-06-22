@@ -1,6 +1,6 @@
 <template>
   <div class="arc-helper">
-    <v-expansion-panels v-model="panel" class="mt-4">
+    <v-expansion-panels v-model="panel">
       <v-expansion-panel>
         <v-expansion-panel-header>
           {{ $t('arc.constScoreTo') }}

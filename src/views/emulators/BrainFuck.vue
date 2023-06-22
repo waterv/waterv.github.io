@@ -283,7 +283,10 @@ export default {
         .map((v, i) => ({
           index: this.cellsPerPage * (this.cellPage - 1) + i,
           value: this.cellValue(v),
-          char: v >= 0 && v <= 0x10ffff ? String.fromCodePoint(v) : '',
+          char:
+            v >= 0 && v <= 0x10ffff
+              ? String.fromCodePoint(this.cellValue(v))
+              : '',
           current: this.pointer == this.cellsPerPage * (this.cellPage - 1) + i,
         }))
     },

@@ -1,6 +1,6 @@
 <template>
   <div class="keep-talking">
-    <v-expansion-panels v-model="panel" class="mt-4">
+    <v-expansion-panels v-model="panel">
       <!-- Wire -->
       <v-expansion-panel>
         <v-expansion-panel-header>
